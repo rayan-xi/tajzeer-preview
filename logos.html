@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — الشعار والأيقونات</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--ink:#141414;--paper:#F5EFE6;--support:#8A5A2B;
+    --paper-2:#EFE7D9;--line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-ar);line-height:1.7}
+  header{padding:24px 40px;border-block-end:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;inset-block-start:0;z-index:10}
+  header img{height:32px}
+  header a.home{color:var(--brand);font-weight:600;font-size:14px}
+  main{max-width:1200px;margin:56px auto 120px;padding-inline:32px}
+  .kicker{font-size:13px;font-family:var(--font-en);color:#666;letter-spacing:2px;text-transform:uppercase;margin-block-end:12px}
+  h1{font-size:clamp(38px,5vw,60px);font-weight:700;letter-spacing:-0.02em;margin:0 0 12px;color:var(--brand)}
+  h2{font-size:26px;font-weight:700;color:var(--brand);margin:56px 0 20px;padding-block-end:12px;border-block-end:1px solid var(--line)}
+  h3{font-size:18px;font-weight:600;color:var(--brand);margin:0 0 8px}
+  p{margin:0 0 12px}
+  .lead{font-size:18px;color:#333;max-width:660px;margin:12px 0 32px}
+
+  .lockups{display:grid;grid-template-columns:1fr;gap:20px}
+  .lockup{background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .lockup .art{flex:1;display:flex;align-items:center;justify-content:center}
+  .lockup .art img{max-height:80px;max-width:100%}
+  .lockup.dark{background:var(--brand)}
+  .lockup.dark img{filter:brightness(0) invert(1)}
+  .lockup .desc{max-width:260px;font-size:13px;color:#555;font-family:var(--font-en);letter-spacing:.5px;line-height:1.5}
+  .lockup.dark .desc{color:rgba(255,255,255,0.85)}
+  .lockup .desc strong{display:block;font-size:14px;color:var(--brand);margin-block-end:4px;letter-spacing:2px;text-transform:uppercase}
+  .lockup.dark .desc strong{color:var(--paper)}
+
+  .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-block-start:24px}
+  .sizes .box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+  .sizes .box img{max-width:100%}
+  .sizes .box .label{font-size:12px;color:#666;font-family:var(--font-en);letter-spacing:1px}
+  .sizes .box.p16 img{width:16px}
+  .sizes .box.p24 img{width:24px}
+  .sizes .box.p32 img{width:32px}
+  .sizes .box.p48 img{width:48px}
+  .sizes .box.p64 img{width:64px}
+  .sizes .box.p96 img{width:96px}
+
+  .grid-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+  .icon-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--brand)}
+  .icon-card img{width:32px;height:32px}
+  .icon-card .name{font-size:12px;color:#555;font-family:var(--font-en);letter-spacing:.5px}
+
+  .og-wrap{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+  .og-wrap img{width:100%;display:block;border-radius:10px}
+
+  .favicons{display:flex;gap:14px;align-items:end;flex-wrap:wrap}
+  .fav{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .fav img{display:block}
+  .fav .l{font-size:11px;color:#666;font-family:var(--font-en);letter-spacing:.5px}
+
+  footer{padding:32px 40px;border-block-start:1px solid var(--line);text-align:center;color:#666;font-size:14px}
+
+  @media (max-width:720px){
+    .sizes{grid-template-columns:repeat(3,1fr)}
+    .lockup{flex-direction:column;text-align:center}
+    .lockup .desc{max-width:100%}
+  }
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/brand/logo-bilingual.svg" alt="تجذير" />
+  <a href="index.html" class="home">← رجوع للمعاينة</a>
+</header>
+
+<main>
+  <p class="kicker">02 · Logo &amp; Marks</p>
+  <h1>الشعار والأيقونات</h1>
+  <p class="lead">اتجاه <strong>Root Network</strong> — علامة تربط الجذر بمنظومة الفروع. تعمل على الفاتح والداكن، تحتفظ بوضوحها من 16 بكسل حتى الطباعة الكبيرة، وتتصرّف بشكل صحيح في العربية والإنجليزية.</p>
+
+  <h2>الأشكال الرئيسية (Lockups)</h2>
+  <div class="lockups">
+    <div class="lockup">
+      <div class="art"><img src="assets/brand/logo-bilingual.svg" alt="ثنائي اللغة"></div>
+      <div class="desc"><strong>Bilingual · الاستخدام الأساسي</strong>للموقع، المستندات الرسمية، البروفايل، توقيع البريد الثنائي.</div>
+    </div>
+    <div class="lockup dark">
+      <div class="art"><img src="assets/brand/logo-bilingual.svg" alt="ثنائي اللغة داكن"></div>
+      <div class="desc"><strong>Bilingual on Dark</strong>الأخضر الجذري كخلفية، الشعار بلون الورق. مسموح فقط عبر شعار مقلوب (لا نتف الحواف).</div>
+    </div>
+    <div class="lockup">
+      <div class="art"><img src="assets/brand/logo-horizontal-ar.svg" alt="عربي أفقي"></div>
+      <div class="desc"><strong>Arabic Lockup</strong>مواد عربية بحتة: مقالات، إعلانات محلية، بروفايل عربي.</div>
+    </div>
+    <div class="lockup">
+      <div class="art"><img src="assets/brand/logo-horizontal-en.svg" alt="English horizontal"></div>
+      <div class="desc"><strong>English Lockup</strong>Investor decks, international outreach, English-only touchpoints.</div>
+    </div>
+    <div class="lockup" style="background:var(--paper-2)">
+      <div class="art"><img src="assets/brand/logo-mark.svg" alt="Icon only" style="max-height:96px"></div>
+      <div class="desc"><strong>Mark Only</strong>للأفاتار، الفافيكون، أختام PDF، الفيديو، وحين يكون الاسم مكتوباً بجانبه.</div>
+    </div>
+  </div>
+
+  <h2>سلوك التصغير</h2>
+  <p>الأيقونة تحافظ على وضوحها عبر المقاسات. أدنى استخدام مقبول: 20 بكسل مع مسافة حماية مساوية للـ mid-node.</p>
+  <div class="sizes">
+    <div class="box p16"><img src="assets/brand/logo-mark.svg" alt="16"><div class="label">16 px</div></div>
+    <div class="box p24"><img src="assets/brand/logo-mark.svg" alt="24"><div class="label">24 px</div></div>
+    <div class="box p32"><img src="assets/brand/logo-mark.svg" alt="32"><div class="label">32 px</div></div>
+    <div class="box p48"><img src="assets/brand/logo-mark.svg" alt="48"><div class="label">48 px</div></div>
+    <div class="box p64"><img src="assets/brand/logo-mark.svg" alt="64"><div class="label">64 px</div></div>
+    <div class="box p96"><img src="assets/brand/logo-mark.svg" alt="96"><div class="label">96 px</div></div>
+    <div class="box"><img src="assets/brand/logo-mark.svg" alt="128" style="width:128px"><div class="label">128 px</div></div>
+    <div class="box"><img src="assets/brand/logo-mark.svg" alt="192" style="width:192px"><div class="label">192 px</div></div>
+  </div>
+
+  <h2>الفافيكون وأيقونة التطبيق</h2>
+  <div class="favicons">
+    <div class="fav"><img src="assets/favicon.svg" alt="favicon" width="32" height="32"><div class="l">favicon.svg — 32×32</div></div>
+    <div class="fav"><img src="assets/favicon.svg" alt="favicon 64" width="64" height="64"><div class="l">favicon @ 64</div></div>
+    <div class="fav"><img src="assets/apple-touch-icon.svg" alt="apple" width="60" height="60"><div class="l">apple-touch @ 60</div></div>
+    <div class="fav"><img src="assets/apple-touch-icon.svg" alt="apple" width="90" height="90"><div class="l">apple-touch @ 90</div></div>
+    <div class="fav"><img src="assets/apple-touch-icon.svg" alt="apple" width="120" height="120"><div class="l">apple-touch @ 120</div></div>
+    <div class="fav"><img src="assets/apple-touch-icon.svg" alt="apple" width="180" height="180"><div class="l">apple-touch @ 180</div></div>
+  </div>
+
+  <h2>بطاقة LinkedIn / X (Open Graph)</h2>
+  <div class="og-wrap">
+    <img src="assets/brand/og-image.svg" alt="Open Graph Card">
+  </div>
+
+  <h2>مكتبة الأيقونات</h2>
+  <p>13 أيقونة خطية موحّدة السماكة (1.75px) — تخدم منتجات تجذير وواجهات الموقع. الأيقونات ذات الاتجاه (سهم، رابط خارجي) تنعكس تلقائياً في وضع RTL.</p>
+  <div class="grid-icons">
+    <div class="icon-card"><img src="assets/icons/diagnose.svg" alt=""><div class="name">diagnose</div></div>
+    <div class="icon-card"><img src="assets/icons/pilot.svg" alt=""><div class="name">pilot</div></div>
+    <div class="icon-card"><img src="assets/icons/academy.svg" alt=""><div class="name">academy</div></div>
+    <div class="icon-card"><img src="assets/icons/field.svg" alt=""><div class="name">field</div></div>
+    <div class="icon-card"><img src="assets/icons/leaders.svg" alt=""><div class="name">leaders</div></div>
+    <div class="icon-card"><img src="assets/icons/measure.svg" alt=""><div class="name">measure</div></div>
+    <div class="icon-card"><img src="assets/icons/scale.svg" alt=""><div class="name">scale</div></div>
+    <div class="icon-card"><img src="assets/icons/calendar.svg" alt=""><div class="name">calendar</div></div>
+    <div class="icon-card"><img src="assets/icons/check.svg" alt=""><div class="name">check</div></div>
+    <div class="icon-card"><img src="assets/icons/close.svg" alt=""><div class="name">close</div></div>
+    <div class="icon-card"><img src="assets/icons/arrow-right.svg" alt=""><div class="name">arrow-right</div></div>
+    <div class="icon-card"><img src="assets/icons/chevron-down.svg" alt=""><div class="name">chevron</div></div>
+    <div class="icon-card"><img src="assets/icons/external-link.svg" alt=""><div class="name">external-link</div></div>
+  </div>
+
+</main>
+<footer>© 2026 تجذير | TAJZEER — Preview</footer>
+</body>
+</html>

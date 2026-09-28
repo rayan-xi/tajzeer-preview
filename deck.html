@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — عرض تنفيذي</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--brand-2:#264a3a;--ink:#141414;--paper:#F5EFE6;
+    --paper-2:#EDE5D5;--support:#8A5A2B;--support-2:#A56B33;
+    --line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#1a1a1a;color:var(--ink);font-family:var(--font-ar);line-height:1.6;min-height:100vh}
+  ::selection{background:var(--support);color:var(--paper)}
+
+  /* Preview bar */
+  .preview-bar{background:var(--brand);color:var(--paper);text-align:center;font-size:12px;padding:10px;letter-spacing:1px;font-family:var(--font-en)}
+  .preview-bar a{color:var(--paper);text-decoration:underline}
+
+  /* Header */
+  header.nav{position:sticky;top:0;background:rgba(20,20,20,0.85);backdrop-filter:blur(12px);padding:14px 32px;z-index:50;display:flex;align-items:center;justify-content:space-between;color:var(--paper);border-block-end:1px solid rgba(245,239,230,0.08)}
+  header.nav img{height:26px;filter:brightness(0) invert(1)}
+  header.nav .counter{font-family:var(--font-en);font-size:13px;letter-spacing:1px;color:rgba(245,239,230,0.7)}
+  header.nav a.home{color:var(--paper);text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(245,239,230,0.2);padding:6px 12px;border-radius:6px}
+
+  /* Progress */
+  .progress{position:fixed;top:0;inset-inline:0;height:3px;background:var(--support);width:0%;z-index:200;transition:width 200ms cubic-bezier(.4,0,.2,1)}
+
+  /* Slides container */
+  .slides{max-width:1200px;margin:24px auto 120px;padding:0 24px;display:flex;flex-direction:column;gap:24px}
+
+  .slide{aspect-ratio:16/9;background:var(--paper);border-radius:20px;padding:64px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+  .slide.dark{background:var(--brand);color:var(--paper)}
+  .slide.tan{background:var(--paper-2)}
+
+  .slide-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-en);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;font-weight:600}
+  .slide.dark .slide-head{color:rgba(245,239,230,0.6)}
+  .slide-head img{height:16px}
+  .slide.dark .slide-head img{filter:brightness(0) invert(1)}
+
+  .slide-body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-en);font-size:13px;letter-spacing:3px;color:var(--support);text-transform:uppercase;font-weight:700}
+  .kicker::before{content:"";width:24px;height:2px;background:var(--support)}
+  .slide.dark .kicker{color:var(--support-2)}
+  .slide.dark .kicker::before{background:var(--support-2)}
+
+  h1.hero{font-size:88px;font-weight:700;color:var(--brand);letter-spacing:-0.03em;line-height:1;margin:0;max-width:16ch}
+  h2.big{font-size:56px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;line-height:1.1;margin:0;max-width:18ch}
+  .slide.dark h1.hero,.slide.dark h2.big{color:var(--paper)}
+
+  p.lede{font-size:22px;color:#333;max-width:640px;line-height:1.55;margin:0}
+  .slide.dark p.lede{color:rgba(245,239,230,0.9)}
+
+  .cta{display:inline-flex;align-items:center;gap:10px;background:var(--brand);color:var(--paper);padding:14px 24px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;margin-block-start:8px}
+  .slide.dark .cta{background:var(--paper);color:var(--brand)}
+
+  .slide-foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-en);font-size:11px;letter-spacing:1.5px;color:#888}
+  .slide.dark .slide-foot{color:rgba(245,239,230,0.5)}
+
+  /* Cover */
+  .cover .slide-body{align-items:flex-start;justify-content:space-between;gap:20px}
+  .cover img.mark{width:80px;height:80px;filter:brightness(0) invert(1)}
+
+  /* Two-col */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .slide.dark .card{background:rgba(255,255,255,0.06);border-color:rgba(245,239,230,0.15);color:var(--paper)}
+  .card h4{margin:0 0 8px;font-size:20px;color:var(--brand);font-weight:700}
+  .slide.dark .card h4{color:var(--paper)}
+  .card p{margin:0;font-size:15px;color:#444;line-height:1.55}
+  .slide.dark .card p{color:rgba(245,239,230,0.85)}
+
+  /* Three-col */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+  /* List */
+  ul.list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+  ul.list li{display:flex;align-items:start;gap:12px;font-size:19px;color:#333}
+  ul.list li::before{content:"";width:8px;height:8px;background:var(--support);border-radius:50%;margin-block-start:12px;flex-shrink:0}
+  .slide.dark ul.list li{color:rgba(245,239,230,0.9)}
+  .slide.dark ul.list li::before{background:var(--support-2)}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+  .kpi .n{font-family:var(--font-en);font-size:56px;font-weight:700;color:var(--brand);letter-spacing:-0.03em;line-height:1}
+  .kpi .n.ph{color:var(--support);font-weight:500}
+  .kpi .l{margin-block-start:10px;font-size:14px;color:#555}
+
+  /* Steps */
+  .steps{counter-reset:step;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .step{counter-increment:step;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .step::before{content:counter(step,decimal-leading-zero);font-family:var(--font-en);font-size:12px;color:var(--support);font-weight:700;letter-spacing:2px;display:block;margin-block-end:6px}
+  .step h4{margin:0 0 4px;font-size:17px;font-weight:700;color:var(--brand)}
+  .step p{font-size:13px;color:#444;line-height:1.5;margin:0}
+
+  /* Slide index/hint */
+  .slide-hint{text-align:center;color:rgba(245,239,230,0.4);font-family:var(--font-en);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-block-end:-8px}
+
+  /* Divider slide */
+  .divider .slide-body{align-items:center;justify-content:center;text-align:center;gap:16px}
+  .divider .label{color:var(--support-2);font-family:var(--font-en);letter-spacing:4px;font-size:14px;font-weight:700}
+  .divider h1{font-size:120px;font-weight:700;color:var(--paper);letter-spacing:-0.03em;line-height:1;margin:0}
+
+  /* Pull quote */
+  .pull{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:var(--paper);border-radius:16px;padding:36px;margin-block-start:12px}
+  .pull .mark{font-family:var(--font-en);font-size:80px;color:var(--support-2);line-height:0.5;font-weight:700}
+  .pull .q{font-size:26px;font-weight:600;color:var(--paper);margin:16px 0 20px;max-width:640px;line-height:1.5}
+  .pull .attr{font-size:13px;color:rgba(245,239,230,0.75);font-family:var(--font-en);letter-spacing:1px}
+
+  /* Speaker notes */
+  .notes{max-width:1200px;margin:-8px auto 24px;padding:16px 24px;color:rgba(245,239,230,0.55);font-size:13px;font-family:var(--font-en);letter-spacing:.3px;font-style:italic}
+
+  /* Print */
+  @media print{
+    body{background:#fff}
+    header.nav,.preview-bar,.progress,.slide-hint,.notes{display:none!important}
+    .slides{margin:0;padding:0;gap:0}
+    .slide{margin:0;box-shadow:none;page-break-after:always;border-radius:0;aspect-ratio:auto;width:100vw;height:100vh;padding:40px}
+  }
+
+  @media (max-width:820px){
+    .slide{padding:32px;aspect-ratio:auto;min-height:auto}
+    h1.hero{font-size:44px}
+    h2.big{font-size:32px}
+    p.lede{font-size:17px}
+    .two,.three,.kpis,.steps{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">Preview mode · <a href="index.html">رجوع للمعاينة</a> · اضغط Print للحصول على PDF</div>
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <img src="assets/brand/logo-bilingual.svg" alt="Tajzeer" />
+  <div class="counter" id="counter">Slide 1 / 15</div>
+  <a class="home" href="index.html">← رجوع</a>
+</header>
+
+<div class="slides">
+
+<!-- =============== 01 · Cover =============== -->
+<div class="slide-hint">01 · Cover</div>
+<section class="slide cover dark">
+  <div class="slide-head"><span>Executive Deck</span><span>2026</span></div>
+  <div class="slide-body">
+    <img class="mark" src="assets/brand/logo-mark.svg" alt="" />
+    <div>
+      <span class="kicker">تجذير · TAJZEER</span>
+      <h1 class="hero" style="margin-block-start:16px">نبني قدرة تبقى في فروعك.</h1>
+      <p class="lede" style="color:rgba(245,239,230,0.85);margin-block-start:20px">عرض تنفيذي · للرئيس التنفيذي، المدير التشغيلي، والمدير المالي</p>
+    </div>
+    <div style="width:120px;height:3px;background:var(--support-2)"></div>
+  </div>
+  <div class="slide-foot"><span>tajzeer.com</span><span>{{ presenter }}</span></div>
+</section>
+<div class="notes">Speaker notes: افتح العرض بدقيقة تعرّف. لا تدخل في المشكلة قبل ما توفر السياق. اذكر ما نحن فيه ومن نخاطب.</div>
+
+<!-- =============== 02 · ليش الآن =============== -->
+<div class="slide-hint">02 · ليش الآن</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>02 / 15 · Timing</span></div>
+  <div class="slide-body">
+    <span class="kicker">ليش الآن</span>
+    <h2 class="big">التوسع صار أسرع من قدرة الفريق.</h2>
+    <p class="lede">في السعودية، الشركات متعددة الفروع تفتح فروع أسرع من قبل. المشكلة إن الجودة ما تنمو بنفس السرعة.</p>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>02 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: اربط الشريحة برؤية 2030 والتوسع الاقتصادي. اذكر أرقام السوق فقط إذا معك مصدر.</div>
+
+<!-- =============== 03 · الألم =============== -->
+<div class="slide-hint">03 · الألم المشترك</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>03 / 15 · Pain</span></div>
+  <div class="slide-body">
+    <span class="kicker">المشكلة المشتركة</span>
+    <h2 class="big">فرع "نجم" وفرع "متعثّر"، وأنت ما تدري ليش.</h2>
+    <div class="two">
+      <div class="card"><h4>ما تشوفه في التقارير</h4><p>أرقام تختلف من فرع لفرع، شكاوى تتكرر في مواقع محددة، دوران موظفين مرتفع.</p></div>
+      <div class="card"><h4>السبب اللي تحته</h4><p>ما فيه نظام يربط الاستراتيجية بالميدان. كل مدير يجتهد لحاله، والنتائج تتشتّت.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>03 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: تكلّم بلغة الجمهور. مثال حقيقي من قطاعه (تجزئة/ضيافة/صحية) بلا كشف اسم.</div>
+
+<!-- =============== 04 · فجوة الميدان =============== -->
+<div class="slide-hint">04 · فجوة الميدان</div>
+<section class="slide tan">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>04 / 15 · Frontline Gap</span></div>
+  <div class="slide-body">
+    <span class="kicker">مفهوم رئيسي</span>
+    <h2 class="big">فجوة الميدان: المسافة بين خطتك والعمل الفعلي.</h2>
+    <ul class="list">
+      <li>ما تتوقّعه الإدارة من الفرع</li>
+      <li>ما يعرفه الموظف فعلاً</li>
+      <li>ما يطبّقه في يومه</li>
+      <li>ما يستطيع مدير الفرع توجيهه</li>
+    </ul>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>04 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: هذا العمود الفقري لكل العرض. اقض عليه دقيقتين على الأقل. لو الجمهور فهمها، بقية العرض يتلقّى بسلاسة.</div>
+
+<!-- =============== 05 · ليش التدريب ما يكفي =============== -->
+<div class="slide-hint">05 · التدريب وحده لا يحل</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>05 / 15 · Why training alone fails</span></div>
+  <div class="slide-body">
+    <span class="kicker">حقيقة صعبة</span>
+    <h2 class="big">التدريب لا يبقى، إذا ما فيه نظام يمسكه.</h2>
+    <div class="three">
+      <div class="card"><h4>محتوى جيد</h4><p>لا يوصل للعمل اليومي.</p></div>
+      <div class="card"><h4>منصة LMS</h4><p>لا يتبناها المستخدم.</p></div>
+      <div class="card"><h4>تقرير استشاري</h4><p>لا يتحول لتنفيذ.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>05 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: هذي شريحة "التمييز الاستراتيجي". هنا نظهر إننا مختلفون. لا تهاجم شركات ثانية.</div>
+
+<!-- =============== 06 · نموذجنا =============== -->
+<div class="slide-hint">06 · نموذج تجذير</div>
+<section class="slide dark">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>06 / 15 · Our model</span></div>
+  <div class="slide-body">
+    <span class="kicker">النموذج</span>
+    <h2 class="big" style="color:var(--paper)">نبدأ من الفرع، ونجذّر الحل داخل شركتك.</h2>
+    <p class="lede">لا نبيعك دورات، ولا نسلّمك تقرير ثم نمشي. نجرّب حل صغير، نتأكد إنه يشتغل، ونعلّم فريقك يكمل عليه.</p>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>06 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: قصة الحل. اسرد إياها بسلاسة، لا تقفز إلى الأسعار مباشرة.</div>
+
+<!-- =============== 07 · طريقتنا =============== -->
+<div class="slide-hint">07 · طريقتنا</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>07 / 15 · Method</span></div>
+  <div class="slide-body">
+    <span class="kicker">6 خطوات</span>
+    <h2 class="big" style="font-size:44px">من التشخيص إلى التوسّع.</h2>
+    <div class="steps">
+      <div class="step"><h4>نشخّص</h4><p>ننزل الفرع، نشوف اللي يصير فعلاً.</p></div>
+      <div class="step"><h4>نجرّب</h4><p>حل صغير، فرع أو اثنين، لفترة محددة.</p></div>
+      <div class="step"><h4>نطبّق</h4><p>ننقل الحل إلى الميدان بدعم مباشر.</p></div>
+      <div class="step"><h4>ندرّب المدراء</h4><p>مدير الفرع يقود بنفسه.</p></div>
+      <div class="step"><h4>نقيس</h4><p>لوحة مؤشرات تشوف فيها الأثر.</p></div>
+      <div class="step"><h4>نوسّع</h4><p>ننقل النظام لباقي الفروع.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>07 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: كل خطوة عندها بوابة قرار. أشر إلى أهم بوابتين: Diagnose→Pilot، وPilot→Scale.</div>
+
+<!-- =============== 08 · Diagnose =============== -->
+<div class="slide-hint">08 · Tajzeer Diagnose</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>08 / 15 · Diagnose</span></div>
+  <div class="slide-body">
+    <span class="kicker">المنتج 01</span>
+    <h2 class="big">Tajzeer Diagnose — تشخيص مركّز.</h2>
+    <p class="lede">لما تحس فيه مشكلة، بس ما تدري وين. 3 إلى 5 أسابيع.</p>
+    <div class="two">
+      <div class="card"><h4>ما يصير</h4><p>مقابلات، جولات ميدانية، تحليل بيانات، جلسة عرض.</p></div>
+      <div class="card"><h4>ما يطلع منه</h4><p>تقرير تنفيذي، خارطة أولويات، Business case، قرار.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>08 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: أوضح إن Diagnose هو منخفض المخاطرة. لا التزام طويل.</div>
+
+<!-- =============== 09 · Pilot =============== -->
+<div class="slide-hint">09 · Tajzeer Pilot</div>
+<section class="slide tan">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>09 / 15 · Pilot</span></div>
+  <div class="slide-body">
+    <span class="kicker">المنتج 02</span>
+    <h2 class="big">Tajzeer Pilot — تجربة قبل التوسّع.</h2>
+    <p class="lede">اختبار فعلي في فرع أو اثنين، 8 إلى 12 أسبوع. تتأكد إن الحل ينفع قبل ما تصرف على 30 فرع.</p>
+    <div class="two">
+      <div class="card"><h4>ما يصير</h4><p>تصميم، تنفيذ، تدريب، دعم، قياس أسبوعي.</p></div>
+      <div class="card"><h4>ما يطلع منه</h4><p>دليل موثّق أن الحل يشتغل، وقرار توسّع أو تعديل.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>09 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: هذي البوابة الوسط. المخاطرة أعلى قليلاً، لكن العائد يبدأ يظهر.</div>
+
+<!-- =============== 10 · Academy =============== -->
+<div class="slide-hint">10 · Tajzeer Academy</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>10 / 15 · Academy</span></div>
+  <div class="slide-body">
+    <span class="kicker">المنتج 03</span>
+    <h2 class="big">Tajzeer Academy — نظام يستمر.</h2>
+    <p class="lede">لما تبغى منظومة قدرات تدور بنفسها داخل شركتك، بدون ما نتدخل كل مرة. اشتراك سنوي.</p>
+    <div class="two">
+      <div class="card"><h4>ما يصير</h4><p>بناء محتوى، تشغيل المدربين الداخليين، لوحة قياس، مراجعة ربع سنوية.</p></div>
+      <div class="card"><h4>ما يطلع منه</h4><p>قدرة تدريبية داخلية، مدربون معتمدون، أداء متسق.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>10 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: أكّد أن Academy مناسب لمن اجتاز Diagnose+Pilot. لا نبيعه في اللقاء الأول.</div>
+
+<!-- =============== 11 · القطاعات =============== -->
+<div class="slide-hint">11 · القطاعات</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>11 / 15 · Sectors</span></div>
+  <div class="slide-body">
+    <span class="kicker">من نخدم</span>
+    <h2 class="big">حيث تظهر النتائج بأسرع.</h2>
+    <div class="steps" style="grid-template-columns:repeat(5,1fr);gap:12px">
+      <div class="step"><h4>تجزئة</h4><p>متعددة الفروع.</p></div>
+      <div class="step"><h4>ضيافة</h4><p>مطاعم وسلاسل.</p></div>
+      <div class="step"><h4>صحية</h4><p>عيادات متعددة.</p></div>
+      <div class="step"><h4>مراكز اتصال</h4><p>خدمة العملاء.</p></div>
+      <div class="step"><h4>خدمات ميدانية</h4><p>صيانة وتوصيل.</p></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>11 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: خذ 30 ثانية فقط. تحيل الجمهور لصفحة القطاعات على الموقع.</div>
+
+<!-- =============== 12 · القياس =============== -->
+<div class="slide-hint">12 · القياس</div>
+<section class="slide tan">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>12 / 15 · Measurement</span></div>
+  <div class="slide-body">
+    <span class="kicker">القياس والحوكمة</span>
+    <h2 class="big">أرقام حقيقية، لا حضور دورات.</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n ph">{{ kpi_1 }}</div><div class="l">تقليل زمن تأهيل الموظف الجديد</div></div>
+      <div class="kpi"><div class="n ph">{{ kpi_2 }}</div><div class="l">تقلّص تفاوت الفروع بعد Pilot</div></div>
+      <div class="kpi"><div class="n ph">{{ kpi_3 }}</div><div class="l">تبنّي أدوات Coaching بعد 90 يوم</div></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>12 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: أكد أن كل رقم له مصدر. لا نعد بنتائج مضمونة. هذي فرصة لبناء الثقة.</div>
+
+<!-- =============== 13 · الخصوصية =============== -->
+<div class="slide-hint">13 · الخصوصية والامتثال</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>13 / 15 · Privacy · PDPL</span></div>
+  <div class="slide-body">
+    <span class="kicker">الخصوصية</span>
+    <h2 class="big">التزام كامل بنظام PDPL السعودي.</h2>
+    <ul class="list">
+      <li>البيانات داخل المملكة</li>
+      <li>لا نستخدم بيانات عميل عند عميل ثاني</li>
+      <li>حذف كامل بعد انتهاء المشروع</li>
+      <li>مسؤول حماية بيانات معتمد</li>
+    </ul>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>13 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: بيك المؤسسي يسأل عن هذي. جهّز رد سريع لسؤال "أين تخزن البيانات؟" مع اسم الموفر.</div>
+
+<!-- =============== 14 · الاستثمار =============== -->
+<div class="slide-hint">14 · بوابات القرار والاستثمار</div>
+<section class="slide">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>14 / 15 · Investment</span></div>
+  <div class="slide-body">
+    <span class="kicker">الاستثمار</span>
+    <h2 class="big">ابدأ صغير، ووسّع مع الأثر.</h2>
+    <div class="three">
+      <div class="card"><h4>Diagnose</h4><p style="color:#666;margin-block-start:6px;font-size:13px">3–5 أسابيع</p><p style="color:var(--support);font-family:var(--font-en);font-weight:700;margin-block-start:8px">{{ diagnose_range }}</p></div>
+      <div class="card"><h4>Pilot</h4><p style="color:#666;margin-block-start:6px;font-size:13px">8–12 أسبوع</p><p style="color:var(--support);font-family:var(--font-en);font-weight:700;margin-block-start:8px">{{ pilot_range }}</p></div>
+      <div class="card"><h4>Academy</h4><p style="color:#666;margin-block-start:6px;font-size:13px">12 شهر</p><p style="color:var(--support);font-family:var(--font-en);font-weight:700;margin-block-start:8px">{{ academy_range }}</p></div>
+    </div>
+    <p style="color:#666;font-size:14px;margin-block-start:8px">*نطاقات إرشادية، تُخصّص بعد التشخيص.</p>
+  </div>
+  <div class="slide-foot"><span>Tajzeer · Executive Deck</span><span>14 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: لا تعطي رقم دقيق. الأرقام تُوثّق في العرض التجاري الرسمي.</div>
+
+<!-- =============== 15 · CTA =============== -->
+<div class="slide-hint">15 · الخطوة التالية</div>
+<section class="slide dark">
+  <div class="slide-head"><img src="assets/brand/logo-mark.svg" alt=""><span>15 / 15 · Next step</span></div>
+  <div class="slide-body">
+    <span class="kicker">لنبدأ</span>
+    <h2 class="big" style="color:var(--paper)">احجز مكالمة تشخيص مجانية. 30 دقيقة.</h2>
+    <p class="lede">نستمع، نطرح 3 أسئلة، ونقول لك بصراحة إذا كنا الجهة الصح لك.</p>
+    <div class="pull" style="background:rgba(255,255,255,0.06);margin-block-start:8px">
+      <div class="q" style="font-size:22px">"أفضل قرار سويناه أننا اتفقنا نجرّب صغير قبل ما نصرف كبير."</div>
+      <div class="attr">— {{ testimonial_role }} · {{ testimonial_company }}</div>
+    </div>
+    <a class="cta" href="#">احجز الآن</a>
+  </div>
+  <div class="slide-foot"><span>tajzeer.com · hello@tajzeer.com</span><span>15 / 15</span></div>
+</section>
+<div class="notes">Speaker notes: اختم بصمت 5 ثواني بعد الاقتباس. لا ترد على الأسئلة قبل ما تشوف رد فعل.</div>
+
+</div>
+
+<script>
+  const progress=document.getElementById('progress');
+  const counter=document.getElementById('counter');
+  const slides=document.querySelectorAll('.slide');
+  document.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const scrolled=h.scrollTop/(h.scrollHeight-h.clientHeight);
+    progress.style.width=(scrolled*100)+'%';
+    let idx=0;
+    slides.forEach((s,i)=>{
+      const r=s.getBoundingClientRect();
+      if(r.top<window.innerHeight*0.5 && r.bottom>window.innerHeight*0.2) idx=i;
+    });
+    counter.textContent='Slide '+(idx+1)+' / 15';
+  },{passive:true});
+</script>
+</body>
+</html>

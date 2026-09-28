@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — مركز المعاينة</title>
+<meta name="description" content="كل معاينات تجذير: الهوية، الشعار، البروفايل، الموقع، الصفحات الفرعية، والحجز." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--brand-2:#264a3a;--ink:#141414;--paper:#F5EFE6;
+    --paper-2:#EDE5D5;--support:#8A5A2B;--support-2:#A56B33;
+    --line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--font-ar);line-height:1.7}
+  a{color:var(--brand);text-decoration:none}
+  ::selection{background:var(--support);color:var(--paper)}
+
+  header{padding:24px 40px;border-block-end:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+  header img{height:32px}
+  header .tag{font-size:12px;font-family:var(--font-en);color:#666;letter-spacing:2px}
+
+  .hero{padding:80px 40px 40px;max-width:1200px;margin:0 auto}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-family:var(--font-en);color:var(--support);letter-spacing:3px;text-transform:uppercase;font-weight:700}
+  .kicker::before{content:"";width:24px;height:2px;background:var(--support)}
+  h1{font-size:clamp(44px,6vw,80px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin:16px 0 12px;color:var(--brand);max-width:16ch}
+  .lead{font-size:20px;max-width:640px;color:#333;margin:8px 0 8px;line-height:1.65}
+  .lead-small{font-size:14px;color:#666;font-family:var(--font-en);letter-spacing:.5px;margin:4px 0 32px}
+
+  main{max-width:1200px;margin:32px auto 120px;padding:0 40px}
+  h2{font-size:32px;color:var(--brand);letter-spacing:-0.02em;margin:64px 0 8px;font-weight:700}
+  .section-lead{color:#555;font-size:15px;margin:0 0 24px;max-width:600px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px;transition:all .28s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset-block-start:0;inset-inline-start:0;width:100%;height:3px;background:var(--support);transform:scaleX(0);transform-origin:right;transition:transform .28s cubic-bezier(.4,0,.2,1)}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,20,20,0.10)}
+  .card:hover::before{transform:scaleX(1)}
+  .card h3{margin:0;font-size:22px;font-weight:700;color:var(--brand)}
+  .card p{margin:0;color:#444;font-size:15px;line-height:1.6}
+  .card .meta{display:inline-flex;align-items:center;gap:10px;font-size:11px;color:#777;font-family:var(--font-en);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .card .meta .dot{width:6px;height:6px;background:var(--support);border-radius:50%}
+  .card .badge{position:absolute;top:20px;inset-inline-end:24px;font-family:var(--font-en);font-size:10px;font-weight:700;letter-spacing:2px;padding:3px 8px;border-radius:99px;text-transform:uppercase}
+  .card .badge.new{background:var(--brand);color:var(--paper)}
+  .card .badge.hot{background:var(--support);color:var(--paper)}
+  .card .cta{margin-block-start:auto;display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-weight:700;font-size:14px;padding-block-start:8px}
+  .card .cta svg{width:14px;height:14px;transform:scaleX(-1);transition:transform .3s}
+  .card:hover .cta svg{transform:scaleX(-1) translateX(-4px)}
+
+  .featured{grid-column:span 2;background:linear-gradient(135deg,var(--brand) 0%, var(--brand-2) 100%);color:var(--paper);padding:44px 40px}
+  .featured::before{background:var(--support)}
+  .featured h3{color:var(--paper);font-size:32px}
+  .featured p{color:rgba(245,239,230,0.85);font-size:17px}
+  .featured .meta{color:var(--support-2)}
+  .featured .cta{color:var(--paper)}
+  @media (max-width:720px){.featured{grid-column:span 1}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:40px 0}
+  .stat{background:var(--paper-2);border-radius:14px;padding:20px 22px}
+  .stat .n{font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;line-height:1}
+  .stat .l{font-size:12px;color:#666;margin-block-start:6px;font-family:var(--font-en);letter-spacing:1px;text-transform:uppercase}
+  @media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  footer{padding:36px 40px;border-block-start:1px solid var(--line);text-align:center;color:#666;font-size:13px;background:var(--paper);font-family:var(--font-en);letter-spacing:.5px}
+  footer .brand-line{color:var(--brand);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:14px">
+    <img src="assets/brand/logo-bilingual.svg" alt="تجذير TAJZEER" />
+  </div>
+  <div class="tag">PREVIEW · 2026</div>
+</header>
+
+<div class="hero">
+  <span class="kicker">مركز المعاينة</span>
+  <h1>كل شيء عن تجذير — في مكان واحد.</h1>
+  <p class="lead">هنا تشوف الهوية والشعار والبروفايل والموقع والصفحات الفرعية، بصيغة HTML جاهزة للفتح والعرض. لا تحتاج تثبيت شي.</p>
+  <p class="lead-small">TAJZEER · Preview Center — updated {{ 2026-09-28 }}</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">15</div><div class="l">HTML Preview</div></div>
+    <div class="stat"><div class="n">99</div><div class="l">Website Files</div></div>
+    <div class="stat"><div class="n">22</div><div class="l">Profile Pages</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">RTL Native</div></div>
+  </div>
+</div>
+
+<main>
+
+  <h2>الأصول الأساسية</h2>
+  <p class="section-lead">افتح أي واحد بضغطة. الإصدار v2 هو الأحدث بلغة سهلة ومعايير تصميم 2026.</p>
+  <div class="grid">
+
+    <a class="card featured" href="website-v2.html">
+      <span class="badge new">v2 جديد</span>
+      <div class="meta"><span class="dot"></span>04 · Website</div>
+      <h3>الموقع الإلكتروني</h3>
+      <p>الصفحة الرئيسية الجديدة بلغة سهلة ومعايير 2026 — Bento، Motion هادئ، Dark sections، وCTA واحد واضح.</p>
+      <span class="cta">افتح الموقع
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="brand-v2.html">
+      <span class="badge new">v2</span>
+      <div class="meta"><span class="dot"></span>01 · Brand</div>
+      <h3>الهوية البصرية</h3>
+      <p>الرسالة، الألوان، الطباعة، Motion، والنبرة اللفظية بلهجة بيضاء واضحة.</p>
+      <span class="cta">افتح الهوية
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="logos.html">
+      <div class="meta"><span class="dot"></span>02 · Logo</div>
+      <h3>الشعار والأيقونات</h3>
+      <p>الشعار بمتغيراته، Favicon، بطاقة OG لـLinkedIn وX، ومكتبة 13 أيقونة.</p>
+      <span class="cta">افتح الشعار
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="profile-v2.html">
+      <span class="badge new">v2</span>
+      <div class="meta"><span class="dot"></span>03 · Profile</div>
+      <h3>بروفايل الشركة (22 صفحة)</h3>
+      <p>بروفايل رقمي كامل بلغة صاحب مشروع — بدون كلام معقد ولا حشو.</p>
+      <span class="cta">افتح البروفايل
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+  </div>
+
+  <h2>صفحات الموقع الفرعية</h2>
+  <p class="section-lead">كل صفحة صممت بمعايير 2026 مع لغة بيضاء واضحة — الحلول، القطاعات، طريقتنا، من نحن، المقالات، والتواصل.</p>
+  <div class="grid">
+
+    <a class="card" href="solutions.html">
+      <div class="meta"><span class="dot"></span>Sub · 01</div>
+      <h3>الحلول</h3>
+      <p>Tajzeer Diagnose · Pilot · Academy — مع الأسعار الإرشادية وطريقة العمل.</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="sectors.html">
+      <div class="meta"><span class="dot"></span>Sub · 02</div>
+      <h3>القطاعات</h3>
+      <p>خمس قطاعات نخدمها. لكل قطاع 3 أوجاع نسمعها + 3 حلول نقدمها.</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="approach.html">
+      <div class="meta"><span class="dot"></span>Sub · 03</div>
+      <h3>طريقتنا</h3>
+      <p>ست خطوات: نشخّص، نجرّب، نطبّق، ندرّب المدراء، نقيس، نوسّع.</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="about.html">
+      <div class="meta"><span class="dot"></span>Sub · 04</div>
+      <h3>من نحن</h3>
+      <p>ليش أنشأنا تجذير، ما اللي يميّزنا، والفريق (placeholders).</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="insights.html">
+      <div class="meta"><span class="dot"></span>Sub · 05</div>
+      <h3>مقالات</h3>
+      <p>3 مقالات نافذة تشرح ألم المدير التنفيذي وكيف نحله.</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="contact.html">
+      <div class="meta"><span class="dot"></span>Sub · 06</div>
+      <h3>تواصل</h3>
+      <p>ثلاث قنوات مباشرة + خريطة + ساعات الرد.</p>
+      <span class="cta">افتح
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+  </div>
+
+  <h2>العرض التنفيذي</h2>
+  <p class="section-lead">15 شريحة موجّهة للـC-Suite. للعرض على الشاشة أو الطباعة PDF.</p>
+  <div class="grid">
+    <a class="card featured" href="deck.html">
+      <span class="badge hot">Deck</span>
+      <div class="meta"><span class="dot"></span>Executive · 15 Slides</div>
+      <h3>عرض المبيعات التنفيذي</h3>
+      <p>15 شريحة تعرض القصة كاملة على CEO/COO/CFO — من الألم للحل للاستثمار للقرار.</p>
+      <span class="cta">افتح العرض
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+  </div>
+
+  <h2>مسار الحجز</h2>
+  <p class="section-lead">صفحة حجز مصممة بمعايير CRO 2026: احتكاك أدنى، شفافية أعلى، وشكر إنساني.</p>
+  <div class="grid">
+
+    <a class="card" href="book.html">
+      <span class="badge hot">CRO</span>
+      <div class="meta"><span class="dot"></span>Funnel · 01</div>
+      <h3>احجز مكالمة تشخيص</h3>
+      <p>نموذج قصير + Timeslots + "ايش يصير في المكالمة؟" + شفافية كاملة.</p>
+      <span class="cta">افتح صفحة الحجز
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="thank-you.html">
+      <div class="meta"><span class="dot"></span>Funnel · 02</div>
+      <h3>صفحة الشكر</h3>
+      <p>تأكيد إنساني، ما اللي راح يصير، ومقترحات بعد الحجز.</p>
+      <span class="cta">افتح صفحة الشكر
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+      </span>
+    </a>
+
+  </div>
+
+  <h2>الإصدارات الأولى (v1)</h2>
+  <p class="section-lead">النسخ الأولى محفوظة كمرجع. الإصدار v2 أعلاه هو الأحدث.</p>
+  <div class="grid">
+    <a class="card" href="brand.html" style="opacity:.75"><div class="meta"><span class="dot"></span>v1</div><h3>الهوية v1</h3><p>النسخة السابقة من صفحة الهوية.</p><span class="cta">افتح</span></a>
+    <a class="card" href="profile.html" style="opacity:.75"><div class="meta"><span class="dot"></span>v1</div><h3>البروفايل v1</h3><p>النسخة السابقة من البروفايل.</p><span class="cta">افتح</span></a>
+    <a class="card" href="website.html" style="opacity:.75"><div class="meta"><span class="dot"></span>v1</div><h3>الموقع v1</h3><p>النسخة السابقة من الصفحة الرئيسية.</p><span class="cta">افتح</span></a>
+  </div>
+
+</main>
+
+<footer>
+  <p><span class="brand-line">© 2026 تجذير | TAJZEER</span> · Preview Center · جميع الأرقام والاقتباسات placeholders. الأصول الفعلية في مجلد المشروع.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — الموقع الإلكتروني (معاينة)</title>
+<meta name="description" content="نُجذّر ما يصنع الأداء. من تدخّل يمرّ إلى قدرة تبقى." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--ink:#141414;--paper:#F5EFE6;--support:#8A5A2B;
+    --paper-2:#EFE7D9;--brand-2:#264a3a;--line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-ar);line-height:1.7;font-size:16px}
+  ::selection{background:var(--support);color:var(--paper)}
+
+  .preview-bar{background:var(--brand);color:var(--paper);text-align:center;font-size:12px;padding:8px;letter-spacing:2px;font-family:var(--font-en)}
+  .preview-bar a{color:var(--paper);text-decoration:underline}
+
+  /* Header */
+  .site-header{position:sticky;inset-block-start:0;background:rgba(245,239,230,0.88);backdrop-filter:blur(10px);border-block-end:1px solid var(--line);z-index:100}
+  .nav-wrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
+  .nav-wrap .brand img{height:32px;display:block}
+  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  .nav-links a{color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;padding:6px 2px;border-block-end:2px solid transparent;transition:border-color .2s}
+  .nav-links a:hover{border-block-end-color:var(--brand)}
+  .btn-primary{background:var(--brand);color:var(--paper);border:none;padding:10px 20px;border-radius:10px;font-family:var(--font-ar);font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+  .btn-primary:hover{background:var(--brand-2)}
+  .btn-ghost{background:transparent;color:var(--brand);border:1px solid var(--brand);padding:9px 20px;border-radius:10px;font-family:var(--font-ar);font-weight:600;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+  .btn-ghost:hover{background:var(--brand);color:var(--paper)}
+
+  section{padding-block:96px;padding-inline:32px}
+  .container{max-width:1200px;margin:0 auto}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-family:var(--font-en);color:var(--support);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+  .kicker::before{content:"";width:20px;height:2px;background:var(--support)}
+
+  /* Hero */
+  .hero{padding-block:96px 80px;background:linear-gradient(180deg,var(--paper) 0%, var(--paper-2) 100%)}
+  .hero h1{font-size:clamp(42px,6vw,80px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin:20px 0 20px;color:var(--brand);max-width:12ch}
+  .hero .subtitle{font-size:22px;color:#333;max-width:560px;line-height:1.6;margin:0 0 32px}
+  .hero .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .hero .cta-meta{font-size:13px;color:#666;font-family:var(--font-en);letter-spacing:.5px}
+
+  /* Bento problem */
+  .bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:16px}
+  .bento .cell{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .bento .cell.tall{grid-row:span 2;background:var(--brand);color:var(--paper);position:relative;overflow:hidden}
+  .bento .cell h3{margin:0 0 10px;font-size:22px;font-weight:700;color:var(--brand)}
+  .bento .cell.tall h3{color:var(--paper)}
+  .bento .cell p{margin:0;font-size:15px;color:#444;line-height:1.65}
+  .bento .cell.tall p{color:rgba(245,239,230,0.85)}
+  .bento .cell.tall .art{position:absolute;inset-block-end:-40px;inset-inline-end:-40px;width:220px;height:220px;opacity:0.15}
+
+  /* Approach steps */
+  .approach{background:var(--paper-2)}
+  .approach h2{font-size:44px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;line-height:1.1;margin:14px 0 10px;max-width:16ch}
+  .approach .lede{font-size:18px;color:#333;max-width:520px;margin:0 0 40px}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .step .num{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--support);letter-spacing:2px;margin-block-end:12px}
+  .step .icon{width:36px;height:36px;color:var(--brand);margin-block-end:14px}
+  .step h4{font-size:18px;font-weight:700;color:var(--brand);margin:0 0 8px}
+  .step p{font-size:14px;color:#444;margin:0;line-height:1.6}
+
+  /* Products */
+  .products{}
+  .products h2{font-size:44px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;margin:14px 0 40px;max-width:16ch;line-height:1.1}
+  .prod-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+  .prod.feature{background:var(--brand);color:var(--paper)}
+  .prod .tag{font-size:11px;font-family:var(--font-en);letter-spacing:2px;color:var(--support);text-transform:uppercase;font-weight:600}
+  .prod.feature .tag{color:var(--paper);opacity:.75}
+  .prod h3{margin:8px 0 0;font-size:26px;font-weight:700;color:var(--brand);letter-spacing:-0.01em}
+  .prod.feature h3{color:var(--paper)}
+  .prod .desc{font-size:15px;color:#444;line-height:1.6;margin:0}
+  .prod.feature .desc{color:rgba(245,239,230,0.85)}
+  .prod .meta{margin-block-start:auto;padding-block-start:14px;border-block-start:1px solid var(--line);font-size:13px;color:#666;font-family:var(--font-en);letter-spacing:.5px}
+  .prod.feature .meta{border-block-start-color:rgba(245,239,230,0.2);color:rgba(245,239,230,0.75)}
+
+  /* Sectors */
+  .sectors{background:var(--paper-2)}
+  .sectors h2{font-size:44px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;margin:14px 0 40px;max-width:14ch;line-height:1.1}
+  .sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .sec-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;transition:transform .25s ease}
+  .sec-card:hover{transform:translateY(-3px)}
+  .sec-card .icon{width:28px;height:28px;color:var(--brand);margin-block-end:12px}
+  .sec-card h4{margin:0 0 6px;font-size:17px;color:var(--brand);font-weight:700}
+  .sec-card p{margin:0;font-size:14px;color:#555;line-height:1.55}
+
+  /* CTA */
+  .cta-band{background:var(--brand);color:var(--paper);padding-block:80px}
+  .cta-band .container{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+  .cta-band h2{font-size:40px;letter-spacing:-0.02em;margin:0;color:var(--paper);max-width:14ch;font-weight:700;line-height:1.15}
+  .cta-band p{margin:8px 0 0;color:rgba(245,239,230,0.8);max-width:440px}
+  .cta-band .btn-primary{background:var(--paper);color:var(--brand)}
+  .cta-band .btn-primary:hover{background:#fff}
+
+  /* Footer */
+  footer{background:var(--paper);border-block-start:1px solid var(--line);padding:56px 32px 32px}
+  footer .cols{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+  footer .brand-col img{height:32px;margin-block-end:14px}
+  footer .brand-col p{font-size:14px;color:#555;max-width:340px}
+  footer h5{font-size:12px;letter-spacing:2px;font-family:var(--font-en);text-transform:uppercase;color:#666;margin:0 0 12px;font-weight:600}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  footer ul a{color:var(--ink);text-decoration:none;font-size:14px}
+  footer ul a:hover{color:var(--brand)}
+  footer .legal{border-block-start:1px solid var(--line);margin-block-start:40px;padding-block-start:20px;max-width:1200px;margin-inline:auto;display:flex;justify-content:space-between;font-size:12px;color:#666;font-family:var(--font-en);letter-spacing:.5px}
+
+  /* Responsive */
+  @media (max-width:960px){
+    .nav-links{display:none}
+    .bento{grid-template-columns:1fr}
+    .bento .cell.tall{grid-row:span 1}
+    .prod-grid, .steps-grid{grid-template-columns:1fr}
+    footer .cols{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:520px){
+    section{padding-block:64px}
+    footer .cols{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">Preview mode · <a href="index.html">رجوع للمعاينة</a></div>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="#" class="brand"><img src="assets/brand/logo-bilingual.svg" alt="تجذير" /></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#solutions">الحلول</a></li>
+        <li><a href="#sectors">القطاعات</a></li>
+        <li><a href="#approach">المنهجية</a></li>
+        <li><a href="#insights">مقالات</a></li>
+        <li><a href="#about">من نحن</a></li>
+      </ul>
+    </nav>
+    <a href="#book" class="btn-primary">
+      <img src="assets/icons/calendar.svg" alt="" style="width:16px;filter:brightness(0) invert(1)" />
+      احجز تشخيصاً
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <span class="kicker">Frontline Performance &amp; Capability Rooting</span>
+    <h1>نُجذّر ما يصنع الأداء.</h1>
+    <p class="subtitle">شركة استشارات وتنفيذ سعودية تُحوّل فجوات الأداء الميداني في المؤسسات متعددة الفروع إلى قدرة مؤسسية قابلة للقياس — لا إلى دورة تنتهي بشهادة.</p>
+    <div class="cta-row">
+      <a href="#book" class="btn-primary">
+        <img src="assets/icons/calendar.svg" alt="" style="width:16px;filter:brightness(0) invert(1)" />
+        احجز مكالمة تشخيص أولية — 30 دقيقة
+      </a>
+      <a href="#approach" class="btn-ghost">اطّلع على منهجيتنا</a>
+    </div>
+    <p class="cta-meta" style="margin-block-start:20px">— لا نبيع تدريباً. نُجذّر قدرة تعمل بعد رحيلنا.</p>
+  </div>
+</section>
+
+<!-- Problem -->
+<section id="problem">
+  <div class="container">
+    <span class="kicker">المشكلة التي نركز عليها</span>
+    <h2 style="font-size:44px;color:var(--brand);letter-spacing:-0.02em;line-height:1.1;margin:14px 0 40px;max-width:14ch;font-weight:700">الفجوة الميدانية التي لا يراها التقرير.</h2>
+    <div class="bento">
+      <div class="cell tall">
+        <span class="kicker" style="color:var(--support)">Field Gap</span>
+        <h3>ما يحدث فعلاً في الفرع</h3>
+        <p>ما بين استراتيجية المكتب الرئيسي وواقع الميدان مسافة يومية غير مرئية. المعرفة تُنقل ولا تُطبَّق، والتدريب يُقدَّم ولا يُقاس أثره، والمديرون يُرقَّون قبل أن يُمكَّنوا.</p>
+        <img class="art" src="assets/brand/logo-mark.svg" alt="" />
+      </div>
+      <div class="cell">
+        <h3>تفاوت بين الفروع</h3>
+        <p>فرع نجم وفرع متعثر بلا سبب واضح لمالك العلامة.</p>
+      </div>
+      <div class="cell">
+        <h3>بطء الجاهزية</h3>
+        <p>موظف جديد يستغرق شهوراً حتى يصل لمستوى مقبول.</p>
+      </div>
+      <div class="cell">
+        <h3>مدير بلا Coaching</h3>
+        <p>يُرقَّى ثم يُترك دون أدوات قيادة يومية.</p>
+      </div>
+      <div class="cell">
+        <h3>تدريب لا يظهر في P&amp;L</h3>
+        <p>ميزانية L&amp;D تُصرف دون رابط واضح بمؤشرات العمل.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Approach -->
+<section id="approach" class="approach">
+  <div class="container">
+    <span class="kicker">المنهجية</span>
+    <h2>ست خطوات من الفجوة إلى القدرة.</h2>
+    <p class="lede">لا نبدأ من كتالوج دورات، بل من واقع الأداء. كل خطوة لها بوابة قرار، وكل مخرج له مصدر بيانات.</p>
+    <div class="steps-grid">
+      <div class="step"><div class="num">01</div><img src="assets/icons/diagnose.svg" class="icon" alt=""><h4>Diagnose</h4><p>خط الأساس، أولويات الفجوة، Business case أولي.</p></div>
+      <div class="step"><div class="num">02</div><img src="assets/icons/pilot.svg" class="icon" alt=""><h4>Pilot</h4><p>اختبار الحل في نطاق محدود قبل التوسع، وقرار توسع أو إعادة تصميم.</p></div>
+      <div class="step"><div class="num">03</div><img src="assets/icons/field.svg" class="icon" alt=""><h4>Field</h4><p>تفعيل ميداني ملتصق بواقع العمل، لا فصول دراسية معزولة.</p></div>
+      <div class="step"><div class="num">04</div><img src="assets/icons/leaders.svg" class="icon" alt=""><h4>Leaders</h4><p>تمكين المدير المباشر ليقود التغيير بنفسه بأدوات Coaching.</p></div>
+      <div class="step"><div class="num">05</div><img src="assets/icons/measure.svg" class="icon" alt=""><h4>Measure</h4><p>لوحات أداء تربط التطوير بمؤشرات العمل، لا بحضور الدورة.</p></div>
+      <div class="step"><div class="num">06</div><img src="assets/icons/scale.svg" class="icon" alt=""><h4>Scale</h4><p>تعميم ما نجح عبر الفروع مع الحفاظ على الاتساق.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="solutions" class="products">
+  <div class="container">
+    <span class="kicker">الحلول</span>
+    <h2>ثلاث بوابات دخول. كل واحدة تُغلق ملفها بقرار.</h2>
+    <div class="prod-grid">
+      <article class="prod feature">
+        <span class="tag">Tajzeer Diagnose</span>
+        <h3>تشخيص مركّز 3–5 أسابيع</h3>
+        <p class="desc">تحديد الفجوة الحقيقية، ترتيب الأولويات، وتصميم Business case أولي. المخرج: قرار موثّق للانتقال أو الانتظار.</p>
+        <div class="meta">Diagnostic Sprint · Fixed scope · Fixed fee</div>
+      </article>
+      <article class="prod">
+        <span class="tag">Tajzeer Pilot</span>
+        <h3>اختبار حل قابل للتعميم</h3>
+        <p class="desc">تصميم تدخل مضبوط في نطاق محدود يثبت أن الحل يعمل، ومن سيتحمل مسؤوليته بعدنا.</p>
+        <div class="meta">8–12 أسبوعاً · نطاق قابل للاختبار</div>
+      </article>
+      <article class="prod">
+        <span class="tag">Tajzeer Academy</span>
+        <h3>منظومة قدرات مستمرة</h3>
+        <p class="desc">بناء وتشغيل منظومة تنمية قدرات مربوطة بمؤشرات العمل، تُدار مع فريقك، وتنتقل ملكيتها إليكم.</p>
+        <div class="meta">12 شهراً قابلة للتجديد</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Sectors -->
+<section id="sectors" class="sectors">
+  <div class="container">
+    <span class="kicker">القطاعات</span>
+    <h2>حيث يظهر الفارق أوضح ما يكون.</h2>
+    <div class="sec-grid">
+      <div class="sec-card"><img src="assets/icons/field.svg" class="icon" alt=""><h4>التجزئة متعددة الفروع</h4><p>توحيد البيع والخدمة والمعرفة والقيادة عبر عشرات المتاجر.</p></div>
+      <div class="sec-card"><img src="assets/icons/academy.svg" class="icon" alt=""><h4>الضيافة والمطاعم</h4><p>معايير خدمة قابلة للتكرار أثناء النمو والتوسع.</p></div>
+      <div class="sec-card"><img src="assets/icons/measure.svg" class="icon" alt=""><h4>الصحية متعددة المواقع</h4><p>تجربة المراجع والمهارات غير السريرية عبر المواقع.</p></div>
+      <div class="sec-card"><img src="assets/icons/leaders.svg" class="icon" alt=""><h4>مراكز الاتصال</h4><p>تحويل الجودة والملاحظات إلى Coaching وأثر قابل للقياس.</p></div>
+      <div class="sec-card"><img src="assets/icons/scale.svg" class="icon" alt=""><h4>الخدمات الميدانية</h4><p>توحيد الإجراءات ورفع جودة التنفيذ وتمكين المشرفين.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<section id="book" class="cta-band">
+  <div class="container">
+    <div>
+      <span class="kicker" style="color:var(--support)">الخطوة التالية</span>
+      <h2>من تدخّل يمرّ، إلى قدرة تبقى.</h2>
+      <p>احجز مكالمة تشخيص أولية — 30 دقيقة. لا عرض تجاري في هذه المكالمة. نستمع، ونطرح ثلاثة أسئلة، ونحدد معك ما إذا كنا الجهة المناسبة.</p>
+    </div>
+    <a href="#" class="btn-primary">
+      <img src="assets/icons/calendar.svg" alt="" style="width:16px" />
+      احجز مكالمة تشخيص أولية
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="cols">
+    <div class="brand-col">
+      <img src="assets/brand/logo-bilingual.svg" alt="Tajzeer" />
+      <p>شركة استشارات وتنفيذ سعودية لتحويل فجوات الأداء الميداني إلى قدرة مؤسسية قابلة للقياس.</p>
+    </div>
+    <div>
+      <h5>الحلول</h5>
+      <ul>
+        <li><a href="#">Tajzeer Diagnose</a></li>
+        <li><a href="#">Tajzeer Pilot</a></li>
+        <li><a href="#">Tajzeer Academy</a></li>
+        <li><a href="#">Field / Leaders / Measure</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>الشركة</h5>
+      <ul>
+        <li><a href="#">من نحن</a></li>
+        <li><a href="#">المنهجية</a></li>
+        <li><a href="#">القطاعات</a></li>
+        <li><a href="#">مقالات</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>قانوني</h5>
+      <ul>
+        <li><a href="#">سياسة الخصوصية</a></li>
+        <li><a href="#">شروط الاستخدام</a></li>
+        <li><a href="#">سياسة Cookies</a></li>
+        <li><a href="#">DSAR — طلب حقوق</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 TAJZEER · Riyadh, KSA</span>
+    <span>Preview build · Placeholders visible</span>
+  </div>
+</footer>
+
+</body>
+</html>

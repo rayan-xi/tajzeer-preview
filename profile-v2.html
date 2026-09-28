@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — بروفايل الشركة</title>
+<meta name="description" content="نبني قدرة تبقى في فروعك. تجذير يساعدك تشغّل كل فرع بنفس الجودة." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--brand-2:#264a3a;--ink:#141414;--paper:#F5EFE6;
+    --paper-2:#EDE5D5;--support:#8A5A2B;--support-2:#A56B33;
+    --line:rgba(20,20,20,0.10);--line-strong:rgba(20,20,20,0.22);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#e5dfd4;color:var(--ink);font-family:var(--font-ar);line-height:1.75}
+  ::selection{background:var(--support);color:var(--paper)}
+
+  /* Preview bar */
+  .preview-bar{background:var(--brand);color:var(--paper);text-align:center;font-size:12px;padding:10px;letter-spacing:1px;font-family:var(--font-en)}
+  .preview-bar a{color:var(--paper);text-decoration:underline}
+
+  /* Progress bar */
+  .progress{position:fixed;top:0;inset-inline:0;height:3px;background:var(--support);width:0%;z-index:200;transition:width 120ms}
+
+  /* Sticky nav */
+  header.nav{position:sticky;top:0;background:rgba(245,239,230,0.9);backdrop-filter:blur(12px);border-block-end:1px solid var(--line);padding:14px 32px;z-index:50;display:flex;align-items:center;justify-content:space-between}
+  header.nav img{height:28px}
+  header.nav .meta{font-size:12px;font-family:var(--font-en);color:#666;letter-spacing:1px}
+  header.nav a.home{color:var(--brand);font-weight:600;font-size:14px;text-decoration:none}
+
+  /* Layout */
+  .stack{max-width:900px;margin:36px auto 120px;padding:0 24px;display:flex;flex-direction:column;gap:36px}
+  .page-hint{max-width:840px;margin:0 auto;text-align:center;color:#555;font-size:12px;font-family:var(--font-en);letter-spacing:2px;text-transform:uppercase}
+
+  /* A4 page */
+  .page{background:var(--paper);width:100%;max-width:840px;margin:0 auto;aspect-ratio:210/297;box-shadow:0 8px 32px rgba(20,20,20,0.14);position:relative;padding:64px 68px;display:flex;flex-direction:column;overflow:hidden}
+  .page.dark{background:var(--brand);color:var(--paper)}
+  .page.tan{background:var(--paper-2)}
+  .page .head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:var(--font-en);letter-spacing:2px;text-transform:uppercase;color:#666;padding-block-end:16px;border-block-end:1px solid var(--line)}
+  .page.dark .head{color:rgba(245,239,230,0.65);border-block-end-color:rgba(245,239,230,0.15)}
+  .page .head img{height:14px}
+  .page .foot{margin-block-start:auto;padding-block-start:16px;border-block-start:1px solid var(--line);font-size:11px;font-family:var(--font-en);letter-spacing:1.5px;color:#777;display:flex;justify-content:space-between}
+  .page.dark .foot{color:rgba(245,239,230,0.6);border-block-start-color:rgba(245,239,230,0.15)}
+  .page .body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;padding-block:24px}
+
+  /* Typography */
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-en);font-size:12px;letter-spacing:3px;color:var(--support);text-transform:uppercase;font-weight:700}
+  .kicker::before{content:"";width:24px;height:2px;background:var(--support);display:inline-block}
+  .page.dark .kicker{color:var(--support-2)}
+  .page.dark .kicker::before{background:var(--support-2)}
+  h1.title{font-size:60px;font-weight:700;color:var(--brand);letter-spacing:-0.03em;line-height:1.08;margin:0;max-width:14ch}
+  .page.dark h1.title{color:var(--paper)}
+  h2.title{font-size:44px;font-weight:700;color:var(--brand);letter-spacing:-0.02em;line-height:1.15;margin:0}
+  .page.dark h2.title{color:var(--paper)}
+  h3{font-size:20px;font-weight:700;color:var(--brand);margin:0 0 6px}
+  .page.dark h3{color:var(--paper)}
+  p.lede{font-size:19px;color:#333;max-width:600px;line-height:1.75;margin:0}
+  .page.dark p.lede{color:rgba(245,239,230,0.9)}
+  p{margin:0}
+
+  /* Cards */
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .page.dark .card{background:rgba(255,255,255,0.06);border-color:rgba(245,239,230,0.15);color:var(--paper)}
+  .card p.small{margin:6px 0 0;font-size:14px;color:#444;line-height:1.6}
+  .page.dark .card p.small{color:rgba(245,239,230,0.8)}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .list li{display:flex;align-items:start;gap:12px;font-size:15px;color:#333;line-height:1.6}
+  .list li::before{content:"";width:6px;height:6px;background:var(--support);border-radius:50%;margin-block-start:9px;flex-shrink:0}
+  .page.dark .list li{color:rgba(245,239,230,0.9)}
+  .page.dark .list li::before{background:var(--support-2)}
+
+  /* Cover */
+  .cover .body{align-items:flex-start;justify-content:space-between;gap:24px}
+  .cover .mark{width:80px;height:80px;color:var(--paper)}
+  .cover h1.title{font-size:72px;color:var(--paper);letter-spacing:-0.03em}
+  .cover .sub{color:rgba(245,239,230,0.85);font-size:20px;max-width:480px;line-height:1.65}
+  .cover .rule{width:120px;height:3px;background:var(--support-2)}
+
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .kpi .n{font-family:var(--font-en);font-size:48px;font-weight:700;color:var(--brand);letter-spacing:-0.03em;line-height:1}
+  .kpi .n.ph{color:var(--support);font-weight:500}
+  .kpi .l{margin-block-start:8px;font-size:13px;color:#555}
+
+  /* Steps */
+  .steps{counter-reset:step;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .step{counter-increment:step;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;position:relative}
+  .step::before{content:counter(step,decimal-leading-zero);font-family:var(--font-en);font-size:12px;color:var(--support);font-weight:700;letter-spacing:2px;display:block;margin-block-end:6px}
+  .step h4{margin:0 0 4px;font-size:16px;font-weight:700;color:var(--brand)}
+  .step p{font-size:13px;color:#444;line-height:1.55}
+
+  /* Sectors */
+  .sector-item{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px}
+  .sector-item strong{font-size:15px;color:var(--brand);font-weight:700}
+  .sector-item p{font-size:13px;color:#444;line-height:1.55;margin:4px 0 0}
+
+  /* Pull quote */
+  .pull{background:var(--brand);color:var(--paper);border-radius:16px;padding:32px 36px}
+  .pull .mark{font-family:var(--font-en);font-size:80px;color:var(--support-2);line-height:0.5;font-weight:700}
+  .pull .q{font-size:22px;line-height:1.6;font-weight:500;color:var(--paper);margin:12px 0 16px;max-width:560px}
+  .pull .attr{font-size:13px;color:rgba(245,239,230,0.75);font-family:var(--font-en);letter-spacing:1px}
+
+  /* Divider */
+  .divider .body{align-items:center;justify-content:center;text-align:center}
+  .divider h1{font-size:64px;color:var(--paper);letter-spacing:-0.03em;margin:0;font-weight:700}
+  .divider .lbl{font-family:var(--font-en);color:var(--support-2);letter-spacing:4px;font-size:12px;font-weight:700;margin-block-end:16px}
+  .divider p{color:rgba(245,239,230,0.85);font-size:16px;max-width:400px;margin:16px auto 0}
+
+  /* CTA */
+  .cta-block{background:var(--paper-2);border-radius:16px;padding:26px 28px}
+  .cta-block h3{margin:0 0 8px}
+  .cta-block p{color:#444;font-size:14px;margin:0 0 14px}
+  .btn{display:inline-block;background:var(--brand);color:var(--paper);padding:11px 20px;border-radius:10px;font-weight:600;font-size:14px;text-decoration:none;font-family:var(--font-ar)}
+  .btn:hover{background:var(--brand-2)}
+
+  /* Contact */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-block-start:16px}
+  .contact div{font-size:14px;color:#333}
+  .contact strong{display:block;color:var(--brand);margin-block-end:4px;font-size:13px}
+
+  /* Footer */
+  footer{padding:36px 40px;border-block-start:1px solid var(--line);text-align:center;color:#555;font-size:13px;background:var(--paper);font-family:var(--font-en);letter-spacing:.5px}
+
+  /* Print */
+  @media print{
+    body{background:#fff}
+    header.nav,.preview-bar,.progress,.page-hint,footer{display:none!important}
+    .stack{margin:0;padding:0;gap:0}
+    .page{margin:0;box-shadow:none;page-break-after:always;aspect-ratio:auto;width:210mm;height:297mm;padding:20mm}
+  }
+
+  @media (max-width:820px){
+    .page{padding:36px 32px;aspect-ratio:auto;min-height:calc(100vh - 200px)}
+    .cover h1.title{font-size:44px}
+    h1.title{font-size:40px}
+    h2.title{font-size:30px}
+    .two-col,.three-col,.steps,.kpi-grid{grid-template-columns:1fr}
+    .sector-item{grid-template-columns:1fr}
+    .contact{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">Preview mode · <a href="index.html">رجوع للمعاينة</a></div>
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <img src="assets/brand/logo-bilingual.svg" alt="تجذير" />
+  <div class="meta" id="pageMeta">01 / 22 · Cover</div>
+  <a href="index.html" class="home">← رجوع</a>
+</header>
+
+<div class="stack">
+
+  <!-- ============ 01 · COVER ============ -->
+  <div class="page-hint">01 · Cover</div>
+  <article class="page cover dark">
+    <div class="head"><span>Company Profile</span><span>{{ year }}</span></div>
+    <div class="body">
+      <img class="mark" src="assets/brand/logo-mark.svg" alt="" style="filter:brightness(0) invert(1)" />
+      <div>
+        <span class="kicker">تجذير · TAJZEER</span>
+        <h1 class="title">نبني قدرة تبقى في فروعك.</h1>
+        <p class="sub" style="margin-block-start:24px">شركة سعودية تساعد الشركات متعددة الفروع تشغّل كل فرع بنفس الجودة — حتى لو نحن ما كنا حاضرين.</p>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="foot"><span>tajzeer.com</span><span>الرياض · KSA</span></div>
+  </article>
+
+  <!-- ============ 02 · رسالة من المؤسس ============ -->
+  <div class="page-hint">02 · رسالة من المؤسس</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>02 / 22 — رسالة</span></div>
+    <div class="body">
+      <span class="kicker">رسالة من المؤسس</span>
+      <h2 class="title">أسسنا تجذير عشان مشكلة نراها كل يوم.</h2>
+      <p class="lede">شركات كثيرة تصرف على التدريب، تشغّل منصات، تعقد ورش. وبعدها لما تدخل الفرع تحس إنه ما تغيّر شي.</p>
+      <p class="lede">قررنا نشتغل بطريقة مختلفة: ننزل الميدان، نشوف اللي فعلاً يصير، نجرّب حل صغير، ونثبّته لغاية ما يصير جزء من عمل شركتك.</p>
+      <p class="lede" style="margin-block-start:12px">— {{ founder_name }}<br /><span style="color:#777;font-size:14px">{{ founder_role }}</span></p>
+    </div>
+    <div class="foot"><span>TAJZEER · Founder Note</span><span>2 / 22</span></div>
+  </article>
+
+  <!-- ============ 03 · من نحن ============ -->
+  <div class="page-hint">03 · من نحن</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>03 / 22 — من نحن</span></div>
+    <div class="body">
+      <span class="kicker">من نحن</span>
+      <h2 class="title">شركاء تشغيل، لا مقدمي تقارير.</h2>
+      <p class="lede">نحن فريق صغير من ناس اشتغلوا في التجزئة والضيافة والمراكز الطبية. نعرف الفرع من داخله، مو من تقرير.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card">
+          <h3>ايش نسوي</h3>
+          <p class="small">ننزل الفرع، نشوف اللي يعطّل الأداء، نصمّم حل، نجرّبه، ونعلّم فريقك ياخذه ويكمل عليه.</p>
+        </div>
+        <div class="card">
+          <h3>ايش ما نسوي</h3>
+          <p class="small">ما نبيعك دورات، ولا نسلّمك تقرير ونمشي. لو الحل ما يشتغل في الميدان، ما نسمّيه حل.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · About</span><span>3 / 22</span></div>
+  </article>
+
+  <!-- ============ 04 · ايش تخصصنا ============ -->
+  <div class="page-hint">04 · تخصصنا</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>04 / 22 — تخصصنا</span></div>
+    <div class="body">
+      <span class="kicker">تخصصنا</span>
+      <h2 class="title">أداء الميدان في الشركات متعددة الفروع.</h2>
+      <p class="lede">لو عندك أكثر من فرع، بتلاحظ إن كل فرع يشتغل بطريقة. جودة تختلف، سرعة تختلف، وحتى الأرقام تختلف.</p>
+      <p class="lede">تخصصنا نوحّد اللي يصير في الميدان، بدون ما نضيف تعقيد على مدرائك.</p>
+      <ul class="list" style="margin-block-start:16px">
+        <li>تحسين تجربة العميل داخل الفرع</li>
+        <li>تسريع تأهيل الموظف الجديد</li>
+        <li>تمكين مدير الفرع يقود بنفسه</li>
+        <li>ربط التدريب بأرقام حقيقية (مبيعات، جودة، تجربة)</li>
+        <li>بناء نظام يستمر بعد ما نمشي</li>
+      </ul>
+    </div>
+    <div class="foot"><span>TAJZEER · Focus</span><span>4 / 22</span></div>
+  </article>
+
+  <!-- ============ 05 · لمن نشتغل ============ -->
+  <div class="page-hint">05 · لمن نشتغل</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>05 / 22 — عملاؤنا</span></div>
+    <div class="body">
+      <span class="kicker">عملاؤنا</span>
+      <h2 class="title">شركات عندها فروع، وتبغى كل فرع يشغّل بنفس المستوى.</h2>
+      <div class="three-col" style="margin-block-start:12px">
+        <div class="card"><h3>الرئيس التنفيذي</h3><p class="small">يبغى يوسّع بأمان، بلا ما ينهار المستوى مع الفرع رقم 20.</p></div>
+        <div class="card"><h3>المدير التشغيلي</h3><p class="small">يشوف تفاوت كبير بين الفروع، ويبغى يوحّدها.</p></div>
+        <div class="card"><h3>مدير الموارد البشرية</h3><p class="small">يصرف على التدريب، لكن ما يقدر يثبّت إن التدريب أثّر فعلاً.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Buyers</span><span>5 / 22</span></div>
+  </article>
+
+  <!-- ============ 06 · المشكلة ============ -->
+  <div class="page-hint">06 · المشكلة اللي نحلها</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>06 / 22 — المشكلة</span></div>
+    <div class="body">
+      <span class="kicker">المشكلة الحقيقية</span>
+      <h2 class="title">فرع "نجم" وفرع "متعثّر"، وأنت ما تدري ليش.</h2>
+      <p class="lede">المشكلة مو في التدريب. المشكلة إن اللي تعلّمه الموظف ما ينزل على الأرض، والمدير المباشر ما عنده وقت أو أدوات يتابع.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card">
+          <h3>الأعراض</h3>
+          <p class="small">تفاوت الجودة بين الفروع، بطء تأهيل الموظف الجديد، فقدان الخبرة لما يستقيل شخص، مؤشرات ما تتحرك.</p>
+        </div>
+        <div class="card">
+          <h3>السبب</h3>
+          <p class="small">ما فيه نظام يوصل بين الاستراتيجية والفرع. كل فرع يجتهد لحاله، والنتيجة تختلف من مكان لمكان.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Problem</span><span>6 / 22</span></div>
+  </article>
+
+  <!-- ============ 07 · ايش يميزنا ============ -->
+  <div class="page-hint">07 · ايش يميزنا</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>07 / 22 — يميزنا</span></div>
+    <div class="body">
+      <span class="kicker">لماذا تجذير</span>
+      <h2 class="title">4 أشياء تفصلنا عن غيرنا.</h2>
+      <ul class="list" style="margin-block-start:16px">
+        <li><strong style="color:var(--brand)">ننزل الفرع.</strong> ما نشتغل من مكتب. الحل يصير مع الناس اللي بيطبقونه.</li>
+        <li><strong style="color:var(--brand)">نجرّب قبل ما نعمّم.</strong> Pilot صغير مضبوط، وبعده نقرر نوسّع أو نعدّل.</li>
+        <li><strong style="color:var(--brand)">نبني قدرة، ما نبيع اعتماد.</strong> هدفنا شركتك تكمل بدونا.</li>
+        <li><strong style="color:var(--brand)">نقيس نتائج، ما نبرّر ساعات.</strong> نربط شغلنا بأرقام تشوفها في تقاريرك.</li>
+      </ul>
+    </div>
+    <div class="foot"><span>TAJZEER · Differentiators</span><span>7 / 22</span></div>
+  </article>
+
+  <!-- ============ 08 · طريقتنا ============ -->
+  <div class="page-hint">08 · طريقتنا (6 خطوات)</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>08 / 22 — طريقتنا</span></div>
+    <div class="body">
+      <span class="kicker">كيف نشتغل</span>
+      <h2 class="title">6 خطوات. كل واحدة تنتهي بقرار واضح.</h2>
+      <div class="steps" style="margin-block-start:16px">
+        <div class="step"><h4>نشخّص</h4><p>ننزل الفرع نشوف اللي يصير فعلاً، ونحدد وين الفجوة الحقيقية.</p></div>
+        <div class="step"><h4>نجرّب</h4><p>نصمّم حل صغير ونجرّبه في فرع أو اثنين، لأسابيع محدودة.</p></div>
+        <div class="step"><h4>نطبّق</h4><p>لما نتأكد إنه يشتغل، ننقله للميدان مع دعم يومي.</p></div>
+        <div class="step"><h4>ندرّب المدراء</h4><p>مدير الفرع هو اللي يوصّل. ندرّبه، ونجهزه بأدوات يستخدمها في يومه.</p></div>
+        <div class="step"><h4>نقيس</h4><p>لوحة مؤشرات بسيطة، تشوف فيها الأثر أسبوعياً.</p></div>
+        <div class="step"><h4>نوسّع</h4><p>ننقل النظام لباقي الفروع بعد ما نتأكد إنه ثابت.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Method</span><span>8 / 22</span></div>
+  </article>
+
+  <!-- ============ 09 · Tajzeer Diagnose ============ -->
+  <div class="page-hint">09 · Tajzeer Diagnose</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>09 / 22 — Diagnose</span></div>
+    <div class="body">
+      <span class="kicker">Tajzeer Diagnose · تشخيص</span>
+      <h2 class="title">لما تحس إن فيه مشكلة، بس ما تدري وين.</h2>
+      <p class="lede">تشخيص مركّز، من 3 إلى 5 أسابيع. ننزل الفرع، نقابل الناس، نحلّل الأرقام، ونطلع لك بخطة واضحة.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card"><h3>ايش يصير</h3><p class="small">مقابلات مع مدرائك، جولات ميدانية، تحليل بيانات، جلسة عرض.</p></div>
+        <div class="card"><h3>ايش يطلع منه</h3><p class="small">تقرير تنفيذي، خارطة أولويات، Business case أولي، قرار موثّق.</p></div>
+      </div>
+      <p style="margin-block-start:16px;font-size:14px;color:#666">استثمار تقديري: {{ diagnose_price }} — تخصيص حسب حجم الشركة</p>
+    </div>
+    <div class="foot"><span>TAJZEER · Diagnose</span><span>9 / 22</span></div>
+  </article>
+
+  <!-- ============ 10 · Tajzeer Pilot ============ -->
+  <div class="page-hint">10 · Tajzeer Pilot</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>10 / 22 — Pilot</span></div>
+    <div class="body">
+      <span class="kicker">Tajzeer Pilot · تجربة</span>
+      <h2 class="title">قبل ما تصرف كثير، نجرّب.</h2>
+      <p class="lede">اختبار عملي في فرع أو اثنين لمدة 8 إلى 12 أسبوع. تجرّب الحل قبل ما تعمّمه على 30 فرع وتكتشف إنه ما ينفع.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card"><h3>ايش يصير</h3><p class="small">تصميم الحل، تدريب الفريق، دعم يومي، قياس أسبوعي.</p></div>
+        <div class="card"><h3>ايش يطلع منه</h3><p class="small">دليل يثبت إن الحل يشتغل، ومعرفة اللي يحتاج تعديل قبل التوسع.</p></div>
+      </div>
+      <p style="margin-block-start:16px;font-size:14px;color:#666">استثمار تقديري: {{ pilot_price }} — يعتمد على النطاق</p>
+    </div>
+    <div class="foot"><span>TAJZEER · Pilot</span><span>10 / 22</span></div>
+  </article>
+
+  <!-- ============ 11 · Tajzeer Academy ============ -->
+  <div class="page-hint">11 · Tajzeer Academy</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>11 / 22 — Academy</span></div>
+    <div class="body">
+      <span class="kicker">Tajzeer Academy · أكاديمية</span>
+      <h2 class="title">لما تبغى نظام يستمر بدون ما نتدخل كل مرة.</h2>
+      <p class="lede">اشتراك سنوي: نبني معك أكاديمية داخلية، تشغّلها فرقك، وتنتقل ملكيتها لكم بالكامل.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card"><h3>ايش يصير</h3><p class="small">بناء المحتوى، تشغيل المدربين الداخليين، لوحة قياس، مراجعة ربع سنوية.</p></div>
+        <div class="card"><h3>ايش يطلع منه</h3><p class="small">قدرة تدريبية داخلية، مدربون معتمدون، لوحات أداء متكاملة.</p></div>
+      </div>
+      <p style="margin-block-start:16px;font-size:14px;color:#666">استثمار تقديري: {{ academy_price }} سنوياً — يعتمد على عدد الفروع</p>
+    </div>
+    <div class="foot"><span>TAJZEER · Academy</span><span>11 / 22</span></div>
+  </article>
+
+  <!-- ============ 12 · خدمات مساندة ============ -->
+  <div class="page-hint">12 · خدمات إضافية</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>12 / 22 — إضافية</span></div>
+    <div class="body">
+      <span class="kicker">خدمات مساندة</span>
+      <h2 class="title">مكوّنات صغيرة، تركيبها معك يبني نظام.</h2>
+      <div class="three-col" style="margin-block-start:16px">
+        <div class="card"><h3>Field</h3><p class="small">دعم ميداني مباشر داخل الفروع.</p></div>
+        <div class="card"><h3>Leaders</h3><p class="small">تمكين مدير الفرع بأدوات Coaching يومية.</p></div>
+        <div class="card"><h3>Measure</h3><p class="small">تصميم لوحات مؤشرات تربط التطوير بالأرقام.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Add-ons</span><span>12 / 22</span></div>
+  </article>
+
+  <!-- ============ 13 · القطاعات ============ -->
+  <div class="page-hint">13 · القطاعات</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>13 / 22 — قطاعات</span></div>
+    <div class="body">
+      <span class="kicker">من نخدم</span>
+      <h2 class="title">حيث يظهر الفرق أسرع.</h2>
+      <div class="list" style="margin-block-start:16px;gap:10px">
+        <div class="sector-item"><strong>تجزئة متعددة الفروع</strong><p>توحيد البيع والخدمة والمعرفة عبر عشرات المتاجر.</p></div>
+        <div class="sector-item"><strong>ضيافة ومطاعم</strong><p>معايير خدمة قابلة للتكرار مع النمو والتوسع.</p></div>
+        <div class="sector-item"><strong>الصحية متعددة المواقع</strong><p>تجربة المراجع والمهارات غير السريرية.</p></div>
+        <div class="sector-item"><strong>مراكز الاتصال</strong><p>تحويل الجودة إلى Coaching يومي وأثر مقاس.</p></div>
+        <div class="sector-item"><strong>خدمات ميدانية</strong><p>توحيد الإجراءات ورفع جودة التنفيذ.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Sectors</span><span>13 / 22</span></div>
+  </article>
+
+  <!-- ============ 14 · قياس النتائج ============ -->
+  <div class="page-hint">14 · القياس</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>14 / 22 — قياس</span></div>
+    <div class="body">
+      <span class="kicker">القياس</span>
+      <h2 class="title">أرقام حقيقية، مو حضور دورات.</h2>
+      <p class="lede">لكل مشروع، نتفق معك قبل ما نبدأ على مؤشرات تقيس فيها الأثر. ما ننشر رقم إلا بمصدر.</p>
+      <div class="kpi-grid" style="margin-block-start:16px">
+        <div class="kpi"><div class="n ph">{{ kpi_1 }}</div><div class="l">تقليل زمن تأهيل الموظف الجديد</div></div>
+        <div class="kpi"><div class="n ph">{{ kpi_2 }}</div><div class="l">تقليل تفاوت الفروع بعد Pilot</div></div>
+        <div class="kpi"><div class="n ph">{{ kpi_3 }}</div><div class="l">تبنّي أدوات Coaching بعد 90 يوم</div></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Measurement</span><span>14 / 22</span></div>
+  </article>
+
+  <!-- ============ 15 · Divider ============ -->
+  <div class="page-hint">15 · قصة نجاح — Section Divider</div>
+  <article class="page divider dark">
+    <div class="head"><span></span><span>15 / 22</span></div>
+    <div class="body">
+      <div class="lbl">CHAPTER 04</div>
+      <h1>قصة نجاح.</h1>
+      <p>لما ينزل الحل الفرع، ويصير عادة بدل ما يكون مشروع.</p>
+    </div>
+    <div class="foot"><span></span><span></span></div>
+  </article>
+
+  <!-- ============ 16 · دراسة حالة ============ -->
+  <div class="page-hint">16 · دراسة حالة</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>16 / 22 — دراسة حالة</span></div>
+    <div class="body">
+      <span class="kicker">Case Study · Placeholder</span>
+      <h2 class="title">{{ case_client }} — تجزئة، {{ n_stores }} فرع.</h2>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card"><h3>التحدي</h3><p class="small">{{ challenge }}</p></div>
+        <div class="card"><h3>الحل</h3><p class="small">{{ solution }}</p></div>
+      </div>
+      <div class="kpi-grid" style="margin-block-start:16px">
+        <div class="kpi"><div class="n ph">{{ result_1 }}</div><div class="l">{{ result_1_label }}</div></div>
+        <div class="kpi"><div class="n ph">{{ result_2 }}</div><div class="l">{{ result_2_label }}</div></div>
+        <div class="kpi"><div class="n ph">{{ result_3 }}</div><div class="l">{{ result_3_label }}</div></div>
+      </div>
+      <p style="margin-block-start:12px;font-size:12px;color:#777">النشر بموافقة كتابية من العميل — التحقق: {{ consent_ref }}</p>
+    </div>
+    <div class="foot"><span>TAJZEER · Case</span><span>16 / 22</span></div>
+  </article>
+
+  <!-- ============ 17 · قيمنا ============ -->
+  <div class="page-hint">17 · قيمنا</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>17 / 22 — قيمنا</span></div>
+    <div class="body">
+      <span class="kicker">قيمنا والتزاماتنا</span>
+      <h2 class="title">4 وعود ما نتنازل عنها.</h2>
+      <ul class="list" style="margin-block-start:16px">
+        <li><strong style="color:var(--brand)">صراحة.</strong> نقول لك اللي شفناه، حتى لو ما يعجبك.</li>
+        <li><strong style="color:var(--brand)">أرقام صادقة.</strong> ما نضخّم، وما ننشر إلا بمصدر.</li>
+        <li><strong style="color:var(--brand)">بلا تعقيد.</strong> حل بسيط يشتغل، أفضل من حل ذكي ما يتنفّذ.</li>
+        <li><strong style="color:var(--brand)">خصوصية كاملة.</strong> بياناتك ما تخرج، وما تُستخدم في مكان ثاني.</li>
+      </ul>
+    </div>
+    <div class="foot"><span>TAJZEER · Values</span><span>17 / 22</span></div>
+  </article>
+
+  <!-- ============ 18 · PDPL ============ -->
+  <div class="page-hint">18 · الخصوصية</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>18 / 22 — خصوصية</span></div>
+    <div class="body">
+      <span class="kicker">الخصوصية والامتثال</span>
+      <h2 class="title">نظام حماية البيانات الشخصية (PDPL).</h2>
+      <p class="lede">نلتزم بنظام حماية البيانات الشخصية السعودي. بياناتك تحفظ داخل المملكة، تعامل بسرية، وتُحذف حسب الاتفاق.</p>
+      <div class="two-col" style="margin-block-start:16px">
+        <div class="card"><h3>ما نجمع</h3><p class="small">بيانات ضرورية للتشغيل فقط. لا نجمع بيانات لأغراض تسويقية بدون موافقتك.</p></div>
+        <div class="card"><h3>حقوقك</h3><p class="small">تقدر تطلب نسخة، تعديل، أو حذف بياناتك في أي وقت.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · PDPL</span><span>18 / 22</span></div>
+  </article>
+
+  <!-- ============ 19 · الفريق ============ -->
+  <div class="page-hint">19 · الفريق</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>19 / 22 — الفريق</span></div>
+    <div class="body">
+      <span class="kicker">الفريق</span>
+      <h2 class="title">ناس شغّلوا الفرع، مو بس درسوا عنه.</h2>
+      <div class="three-col" style="margin-block-start:16px">
+        <div class="card"><h3>{{ member_1 }}</h3><p class="small">{{ role_1 }} · {{ years_1 }}</p></div>
+        <div class="card"><h3>{{ member_2 }}</h3><p class="small">{{ role_2 }} · {{ years_2 }}</p></div>
+        <div class="card"><h3>{{ member_3 }}</h3><p class="small">{{ role_3 }} · {{ years_3 }}</p></div>
+      </div>
+      <p style="margin-block-start:16px;font-size:14px;color:#666">صور الفريق تُضاف بعد جلسة تصوير مهنية.</p>
+    </div>
+    <div class="foot"><span>TAJZEER · Team</span><span>19 / 22</span></div>
+  </article>
+
+  <!-- ============ 20 · الشركاء ============ -->
+  <div class="page-hint">20 · الشركاء والتقنيات</div>
+  <article class="page">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>20 / 22 — شركاء</span></div>
+    <div class="body">
+      <span class="kicker">الشركاء والتقنيات</span>
+      <h2 class="title">أدوات مختارة، مو حزم شاملة.</h2>
+      <p class="lede">نستخدم اللي يخدم شركتك، بدون ما نلزمك بأدوات ما تحتاجها.</p>
+      <div class="three-col" style="margin-block-start:16px">
+        <div class="card"><h3>Learning</h3><p class="small">{{ lms_partner }}</p></div>
+        <div class="card"><h3>Analytics</h3><p class="small">{{ analytics_partner }}</p></div>
+        <div class="card"><h3>Field ops</h3><p class="small">{{ field_partner }}</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Partners</span><span>20 / 22</span></div>
+  </article>
+
+  <!-- ============ 21 · كيف نبدأ معك ============ -->
+  <div class="page-hint">21 · كيف نبدأ</div>
+  <article class="page tan">
+    <div class="head"><img src="assets/brand/logo-mark.svg" alt=""><span>21 / 22 — كيف نبدأ</span></div>
+    <div class="body">
+      <span class="kicker">البداية</span>
+      <h2 class="title">مكالمة 30 دقيقة. بدون التزام.</h2>
+      <p class="lede">تخبرنا وين تعبان، نستمع، ونقول لك بصراحة إذا كنا الجهة المناسبة أو نحيلك لغيرنا.</p>
+      <div class="pull" style="margin-block-start:20px">
+        <div class="mark">“</div>
+        <div class="q">أفضل قرار سويناه هو أننا اتفقنا نجرّب صغير قبل ما نصرف كبير.</div>
+        <div class="attr">— {{ testimonial_role }} · {{ testimonial_company }}</div>
+      </div>
+    </div>
+    <div class="foot"><span>TAJZEER · Get Started</span><span>21 / 22</span></div>
+  </article>
+
+  <!-- ============ 22 · CTA + تواصل ============ -->
+  <div class="page-hint">22 · تواصل</div>
+  <article class="page cover dark">
+    <div class="head"><span>Contact</span><span>22 / 22</span></div>
+    <div class="body">
+      <span class="kicker">لنبدأ</span>
+      <h1 class="title" style="font-size:56px">احجز مكالمة تشخيص مجانية.</h1>
+      <p class="sub">30 دقيقة نستمع لك، ونتّفق سوا اذا كنّا الجهة الصح لك.</p>
+      <div class="cta-block" style="background:rgba(255,255,255,0.06);color:var(--paper);margin-block-start:8px">
+        <h3 style="color:var(--paper)">الخطوة التالية</h3>
+        <p style="color:rgba(245,239,230,0.85)">تواصل عبر النموذج على الموقع، أو مباشرة عبر البيانات أدناه.</p>
+        <a class="btn" href="#" style="background:var(--paper);color:var(--brand)">احجز الآن</a>
+      </div>
+      <div class="contact">
+        <div><strong>البريد</strong>hello@tajzeer.com</div>
+        <div><strong>الهاتف</strong>+966 {{ phone }}</div>
+        <div><strong>المقر</strong>الرياض · المملكة العربية السعودية</div>
+        <div><strong>الويب</strong>tajzeer.com</div>
+      </div>
+    </div>
+    <div class="foot"><span>© 2026 TAJZEER</span><span>End of Profile</span></div>
+  </article>
+
+</div>
+
+<footer>© 2026 TAJZEER · Preview build. Placeholders visible.</footer>
+
+<script>
+  // Reading progress
+  const progress = document.getElementById('progress');
+  const pageMeta = document.getElementById('pageMeta');
+  const pages = document.querySelectorAll('.page');
+  const pageLabels = document.querySelectorAll('.page-hint');
+  document.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    progress.style.width = (scrolled * 100) + '%';
+    // Detect visible page
+    let idx = 0;
+    pages.forEach((p, i) => {
+      const rect = p.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.2) idx = i;
+    });
+    pageMeta.textContent = String(idx + 1).padStart(2,'0') + ' / 22 · ' + (pageLabels[idx]?.textContent.split('·')[1]?.trim() || '');
+  }, { passive: true });
+</script>
+</body>
+</html>

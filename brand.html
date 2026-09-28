@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تجذير — الهوية البصرية</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--ink:#141414;--paper:#F5EFE6;--support:#8A5A2B;
+    --brand-2:#264a3a;--paper-2:#EFE7D9;--line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-ar);line-height:1.7}
+  header{padding:24px 40px;border-block-end:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;inset-block-start:0;z-index:10}
+  header img{height:32px}
+  header a.home{color:var(--brand);font-weight:600;font-size:14px}
+  main{max-width:1120px;margin:56px auto 120px;padding-inline:32px}
+  .kicker{font-size:13px;font-family:var(--font-en);color:#666;letter-spacing:2px;text-transform:uppercase;margin-block-end:12px}
+  h1{font-size:clamp(38px,5vw,60px);font-weight:700;letter-spacing:-0.02em;margin:0 0 12px;color:var(--brand)}
+  h2{font-size:28px;font-weight:700;color:var(--brand);margin:64px 0 20px;padding-block-end:12px;border-block-end:1px solid var(--line)}
+  h3{font-size:20px;font-weight:600;margin:24px 0 8px;color:var(--brand)}
+  p{margin:0 0 12px}
+  .lead{font-size:19px;color:#333;max-width:640px;margin:12px 0 32px}
+  section{margin-block-end:48px}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+
+  /* Colors */
+  .swatch{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
+  .swatch .fill{height:120px;display:flex;align-items:end;justify-content:flex-start;padding:16px}
+  .swatch .fill code{font-family:var(--font-en);font-size:13px;letter-spacing:.5px;background:rgba(255,255,255,0.85);padding:4px 8px;border-radius:6px;color:var(--ink)}
+  .swatch .fill.dark code{background:rgba(20,20,20,0.6);color:#fff}
+  .swatch .meta{padding:12px 16px 16px;display:flex;flex-direction:column;gap:2px;background:#fff}
+  .swatch .meta strong{font-size:15px}
+  .swatch .meta span{font-size:13px;color:#666;font-family:var(--font-en);letter-spacing:1px}
+
+  /* Typography specimens */
+  .type-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+  .type-card .label{font-size:12px;letter-spacing:2px;color:#666;font-family:var(--font-en);text-transform:uppercase;margin-block-end:12px}
+  .display-ar{font-size:52px;font-weight:700;letter-spacing:-0.02em;line-height:1.15;color:var(--brand)}
+  .display-en{font-size:44px;font-weight:700;letter-spacing:-0.01em;font-family:var(--font-en);color:var(--brand)}
+  .h-sample{font-size:28px;font-weight:600;color:var(--brand);margin:8px 0}
+  .body-sample{font-size:16px;color:var(--ink)}
+
+  /* Logo displays */
+  .logo-display{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px}
+  .logo-display img{max-height:64px;max-width:100%}
+  .logo-display.dark{background:var(--brand)}
+  .logo-display.dark img{filter:brightness(0) invert(1)}
+
+  /* Voice examples */
+  .voice{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .voice .head{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .voice .head > div{padding:14px 18px;font-family:var(--font-en);letter-spacing:1.5px;font-size:12px;font-weight:600;text-transform:uppercase}
+  .voice .head .good{background:#EAF2ED;color:#1F5A3F}
+  .voice .head .bad{background:#F7E9E5;color:#8A2C2C}
+  .voice .body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .voice .body > div{padding:20px 22px;font-size:15px;color:#333;border-block-start:1px solid var(--line)}
+  .voice .body > div:first-child{border-inline-end:1px solid var(--line)}
+
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-family:var(--font-en);letter-spacing:1px;font-weight:600;background:var(--paper-2);color:var(--brand);margin-inline-end:6px}
+  footer{padding:32px 40px;border-block-start:1px solid var(--line);text-align:center;color:#666;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/brand/logo-bilingual.svg" alt="تجذير" />
+  <a href="index.html" class="home">← رجوع للمعاينة</a>
+</header>
+
+<main>
+  <p class="kicker">01 · Brand Identity</p>
+  <h1>الهوية البصرية</h1>
+  <p class="lead">نظام هوية استشاري جاد يعبّر عن قصة تجذير: نبدأ من واقع الأداء، وننتهي بقدرة مؤسسية تبقى. كل عنصر هنا مستند إلى الملفات المعتمدة في <code>Design/</code>.</p>
+
+  <section>
+    <h2>الرسالة المركزية</h2>
+    <div class="row">
+      <div class="type-card">
+        <div class="label">Core Message · Arabic</div>
+        <div class="h-sample">من تدخّل يمرّ إلى قدرة تبقى.</div>
+        <p class="body-sample">نُجذّر ما يصنع الأداء. نحوّل فجوات الأداء الميداني إلى قدرة مؤسسية قابلة للقياس، لا إلى دورة تنتهي بشهادة.</p>
+      </div>
+      <div class="type-card">
+        <div class="label">Core Message · English</div>
+        <div class="h-sample" style="font-family:var(--font-en)">From temporary intervention to lasting capability.</div>
+        <p class="body-sample" style="font-family:var(--font-en)">We root what makes performance work — turning frontline gaps into measurable, transferable capability across your locations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>لوحة الألوان الأساسية</h2>
+    <div class="row">
+      <div class="swatch">
+        <div class="fill dark" style="background:var(--brand)"><code>#1F3B2E</code></div>
+        <div class="meta"><strong>Brand — الجذر</strong><span>PRIMARY</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill dark" style="background:var(--ink)"><code>#141414</code></div>
+        <div class="meta"><strong>Ink — الحبر</strong><span>TEXT</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:var(--paper)"><code>#F5EFE6</code></div>
+        <div class="meta"><strong>Paper — الورق</strong><span>SURFACE</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill dark" style="background:var(--support)"><code>#8A5A2B</code></div>
+        <div class="meta"><strong>Support — النحاسي</strong><span>ACCENT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>الطباعة</h2>
+    <div class="row" style="grid-template-columns:1fr 1fr">
+      <div class="type-card">
+        <div class="label">IBM Plex Sans Arabic · Display</div>
+        <div class="display-ar">قدرة تعمل. أثر يبقى.</div>
+        <div class="h-sample">من الفجوة إلى النتيجة.</div>
+        <p class="body-sample">نص المتن العربي: نبدأ من واقع الأداء الميداني، ونشخص الفجوة، ونختبر الحل في نطاق محدود، ثم نُجذّره داخل المؤسسة حتى يستمر.</p>
+      </div>
+      <div class="type-card">
+        <div class="label">Inter Tight · Display · لا نستخدم Inter الأصلي</div>
+        <div class="display-en">From gap to grip.</div>
+        <div class="h-sample" style="font-family:var(--font-en)">A steady operating standard, across every site.</div>
+        <p class="body-sample" style="font-family:var(--font-en)">Body copy: We start on the ground, isolate the gap, prove the fix in a controlled pilot, then root what works into the organisation — so it holds after we leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>الشعار على الخلفيات</h2>
+    <div class="row">
+      <div class="logo-display"><img src="assets/brand/logo-bilingual.svg" alt="Bilingual" /></div>
+      <div class="logo-display dark"><img src="assets/brand/logo-bilingual.svg" alt="Bilingual on dark" /></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>نبرة العلامة — نستخدم / نتجنب</h2>
+    <div class="voice">
+      <div class="head"><div class="good">نستخدم</div><div class="bad">نتجنب</div></div>
+      <div class="body">
+        <div>«نُجذّر الأداء داخل الفروع حتى يستمر بلا اعتمادنا.»</div>
+        <div>«نُحدث ثورة في مؤسستك خلال أيام.»</div>
+      </div>
+      <div class="body">
+        <div>«نبدأ بتشخيص، ونختبر قبل التوسع.»</div>
+        <div>«حل شامل ومتكامل بشكل سلس.»</div>
+      </div>
+      <div class="body">
+        <div>«نقيس ما تغيّر، لا ما تم حضوره فقط.»</div>
+        <div>«نتائج مضمونة 100%.»</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>مبادئ Do / Don't</h2>
+    <div class="row">
+      <div class="type-card"><div class="label" style="color:#1F5A3F">DO</div>
+        <p class="body-sample">استخدم الخصائص المنطقية <code>padding-inline-start</code> بدلاً من <code>padding-left</code>.</p>
+        <p class="body-sample">اعرض بيانات حقيقية موثّقة أو أظهر <span class="badge">placeholder</span>.</p>
+        <p class="body-sample">اجعل CTA الأساسي واضحاً: <strong>«احجز مكالمة تشخيص أولية — 30 دقيقة».</strong></p>
+      </div>
+      <div class="type-card"><div class="label" style="color:#8A2C2C">DON'T</div>
+        <p class="body-sample">لا تستخدم <code>Inter</code> أو <code>#000000</code> أو تأثيرات neon glow.</p>
+        <p class="body-sample">لا تنشر شعار عميل أو نسبة أداء بلا موافقة كتابية.</p>
+        <p class="body-sample">لا تستخدم كلمات: ثوري، سلس، متكامل، الأفضل، مضمون.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>© 2026 تجذير | TAJZEER — Preview</footer>
+</body>
+</html>

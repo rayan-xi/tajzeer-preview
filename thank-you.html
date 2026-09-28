@@ -1,0 +1,510 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<meta name="theme-color" content="#1F3B2E" />
+<title>استلمنا طلبك ✓ | تجزير</title>
+<meta name="description" content="استلمنا طلب حجز المكالمة. بنتواصل معك خلال يوم عمل واحد." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="assets/brand/logo-bilingual.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --earthy:#1F3B2E;
+  --earthy-2:#2A4E3E;
+  --coal:#141414;
+  --paper:#F5EFE6;
+  --paper-2:#EFE7D8;
+  --copper:#8A5A2B;
+  --copper-soft:#B98456;
+  --line:rgba(20,20,20,.10);
+  --line-strong:rgba(20,20,20,.18);
+  --muted:rgba(20,20,20,.62);
+
+  --radius:16px;
+  --radius-lg:24px;
+  --shadow-1:0 1px 2px rgba(20,20,20,.04), 0 2px 8px rgba(20,20,20,.04);
+  --shadow-2:0 20px 50px -20px rgba(20,20,20,.22), 0 4px 10px rgba(20,20,20,.06);
+
+  --font-ar:"IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-en:"Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-spring:cubic-bezier(.22,1,.36,1);
+  --dur-1:180ms;
+  --dur-2:520ms;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-ar);
+  background:var(--paper);
+  color:var(--coal);
+  line-height:1.55;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  min-block-size:100dvh;
+  overflow-x:hidden;
+}
+html[lang="en"] body{ font-family:var(--font-en); letter-spacing:-.005em; }
+img,svg{display:block;max-inline-size:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:where(a,button,[tabindex]):focus-visible{
+  outline:2px solid var(--earthy);outline-offset:3px;border-radius:8px;
+}
+
+/* Preview bar */
+.preview-bar{
+  background:var(--coal);color:var(--paper);
+  font-size:12px;padding:8px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.preview-bar .dot{
+  inline-size:6px;block-size:6px;border-radius:50%;
+  background:var(--copper-soft);display:inline-block;margin-inline-end:8px;
+}
+
+/* Nav */
+.nav{
+  position:sticky;inset-block-start:0;z-index:20;
+  background:color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter:saturate(1.2) blur(10px);
+  -webkit-backdrop-filter:saturate(1.2) blur(10px);
+  border-block-end:1px solid var(--line);
+}
+.nav-inner{
+  max-inline-size:1240px;margin-inline:auto;
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{block-size:28px;inline-size:auto}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-switch{
+  display:inline-flex;align-items:center;gap:2px;padding:4px;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:999px;
+}
+.lang-switch button{
+  border:0;background:transparent;padding:6px 12px;
+  font-size:13px;font-weight:500;border-radius:999px;color:var(--muted);
+  transition:background var(--dur-1) var(--ease-spring), color var(--dur-1);
+}
+.lang-switch button[aria-pressed="true"]{background:var(--coal);color:var(--paper)}
+.cta-mini{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;background:var(--earthy);color:var(--paper);
+  border-radius:999px;font-size:13.5px;font-weight:500;border:1px solid var(--earthy);
+  transition:transform var(--dur-1) var(--ease-spring), background var(--dur-1);
+}
+.cta-mini:hover{background:var(--earthy-2);transform:translateY(-1px)}
+.cta-mini svg{inline-size:14px;block-size:14px}
+
+/* Main */
+.wrap{
+  position:relative;
+  max-inline-size:900px;
+  margin-inline:auto;
+  padding:64px 24px 96px;
+  text-align:center;
+}
+@media (max-width:640px){ .wrap{padding:40px 18px 72px} }
+
+/* Success badge */
+.badge{
+  inline-size:88px;block-size:88px;
+  margin:0 auto 24px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--earthy) 12%, transparent) 0%, transparent 70%),
+    var(--paper);
+  border:1px solid var(--line);
+  display:grid;place-items:center;
+  box-shadow:var(--shadow-2);
+  position:relative;
+}
+.badge::before{
+  content:"";
+  position:absolute;
+  inset:6px;
+  border-radius:50%;
+  background:var(--earthy);
+  animation:pop var(--dur-2) var(--ease-spring) both;
+}
+.badge svg{
+  position:relative;z-index:1;
+  inline-size:34px;block-size:34px;
+  stroke:var(--paper);
+  stroke-width:2.5;
+  fill:none;
+  stroke-linecap:round;stroke-linejoin:round;
+  animation:draw var(--dur-2) var(--ease-spring) 120ms both;
+}
+@keyframes pop{ from{transform:scale(.6);opacity:0} to{transform:scale(1);opacity:1} }
+@keyframes draw{ from{stroke-dasharray:40;stroke-dashoffset:40} to{stroke-dashoffset:0} }
+
+h1.headline{
+  font-size:clamp(30px, 4vw, 44px);
+  line-height:1.15;
+  letter-spacing:-.02em;
+  font-weight:600;
+  margin:0 0 14px;
+}
+.subhead{
+  font-size:17px;color:var(--muted);
+  max-inline-size:52ch;margin:0 auto 40px;
+}
+
+/* Steps card */
+.steps{
+  text-align:start;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  box-shadow:var(--shadow-1);
+  max-inline-size:640px;
+  margin:0 auto 32px;
+}
+.steps h3{
+  margin:0 0 20px;
+  font-size:16px;font-weight:600;
+  letter-spacing:-.005em;
+  display:flex;align-items:center;gap:10px;
+}
+.steps h3::before{
+  content:"";
+  inline-size:24px;block-size:24px;
+  background:url('assets/icons/calendar.svg') center/60% no-repeat, var(--paper-2);
+  border-radius:6px;
+}
+.steps ol{
+  list-style:none;padding:0;margin:0;
+  display:grid;gap:14px;
+}
+.steps li{
+  display:grid;
+  grid-template-columns:36px 1fr auto;
+  gap:14px;align-items:center;
+  padding:14px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.steps li .n{
+  inline-size:32px;block-size:32px;
+  display:grid;place-items:center;
+  background:var(--earthy);color:var(--paper);
+  border-radius:8px;
+  font-family:var(--font-en);
+  font-weight:600;font-size:13.5px;
+}
+.steps li .t strong{display:block;font-size:14.5px;font-weight:600}
+.steps li .t small{display:block;font-size:12.5px;color:var(--muted);margin-block-start:2px}
+.steps li .st{
+  font-size:11.5px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--paper);
+  border:1px solid var(--line-strong);
+  color:var(--muted);
+  font-weight:500;
+  white-space:nowrap;
+}
+.steps li[data-current="true"] .st{
+  background:color-mix(in oklab, var(--copper) 15%, var(--paper));
+  color:var(--copper);
+  border-color:color-mix(in oklab, var(--copper) 30%, transparent);
+}
+@media (max-width:520px){
+  .steps li{grid-template-columns:32px 1fr}
+  .steps li .st{grid-column:1 / -1;justify-self:start}
+}
+
+/* Booking summary */
+.summary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:13px;color:var(--coal);
+  margin-block-end:32px;
+}
+.summary svg{inline-size:14px;block-size:14px;color:var(--earthy)}
+.summary .slot-value{font-family:var(--font-en);font-weight:600}
+
+/* CTAs */
+.ctas{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  margin-block-start:8px;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:12px;
+  font-size:14.5px;font-weight:500;
+  transition:transform var(--dur-1) var(--ease-spring), background var(--dur-1), border-color var(--dur-1);
+  border:1px solid transparent;
+}
+.btn-primary{
+  background:var(--coal);color:var(--paper);
+  border-color:var(--coal);
+}
+.btn-primary:hover{background:var(--earthy);border-color:var(--earthy);transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:var(--coal);
+  border-color:var(--line-strong);
+}
+.btn-ghost:hover{background:var(--paper-2);transform:translateY(-1px)}
+.btn svg{inline-size:14px;block-size:14px}
+html[dir="rtl"] .btn svg{transform:scaleX(-1)}
+
+/* Footer */
+.foot{
+  border-block-start:1px solid var(--line);
+  padding-block:22px;color:var(--muted);font-size:12.5px;
+}
+.foot-inner{
+  max-inline-size:1240px;margin-inline:auto;padding-inline:24px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+
+/* Confetti — SVG only, no continuous animation */
+.confetti{
+  position:absolute;inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.confetti svg{
+  position:absolute;
+  animation:fall var(--dur-2) var(--ease-spring) both;
+}
+.confetti svg:nth-child(1){inset-block-start:8%;inset-inline-start:10%;animation-delay:120ms}
+.confetti svg:nth-child(2){inset-block-start:14%;inset-inline-end:12%;animation-delay:180ms}
+.confetti svg:nth-child(3){inset-block-start:24%;inset-inline-start:22%;animation-delay:240ms}
+.confetti svg:nth-child(4){inset-block-start:6%;inset-inline-end:28%;animation-delay:300ms}
+.confetti svg:nth-child(5){inset-block-start:30%;inset-inline-end:6%;animation-delay:360ms}
+.confetti svg:nth-child(6){inset-block-start:20%;inset-inline-start:4%;animation-delay:420ms}
+.confetti svg:nth-child(7){inset-block-start:12%;inset-inline-start:44%;animation-delay:200ms}
+.confetti svg:nth-child(8){inset-block-start:28%;inset-inline-start:52%;animation-delay:260ms}
+@keyframes fall{
+  from{opacity:0;transform:translateY(-24px) rotate(-40deg)}
+  to{opacity:.9;transform:translateY(0) rotate(0)}
+}
+.wrap > *:not(.confetti){position:relative;z-index:1}
+
+/* Enter animations */
+.enter{opacity:0;transform:translateY(8px);animation:enter var(--dur-2) var(--ease-spring) forwards}
+.enter[data-d="1"]{animation-delay:80ms}
+.enter[data-d="2"]{animation-delay:180ms}
+.enter[data-d="3"]{animation-delay:280ms}
+.enter[data-d="4"]{animation-delay:380ms}
+@keyframes enter{to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .enter,.confetti svg,.badge::before,.badge svg{opacity:1;transform:none}
+}
+
+[data-lang-ar]{display:initial}
+[data-lang-en]{display:none}
+html[lang="en"] [data-lang-ar]{display:none}
+html[lang="en"] [data-lang-en]{display:initial}
+</style>
+</head>
+<body>
+
+<!-- Preview bar -->
+<div class="preview-bar" role="note" aria-label="Preview environment">
+  <span><span class="dot"></span><strong>Preview</strong> · Tajzeer / thank-you.html · v2026.09</span>
+  <span data-lang-ar>معاينة داخلية — ليست بيئة إنتاج</span>
+  <span data-lang-en>Internal preview — not production</span>
+</div>
+
+<!-- Nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Tajzeer">
+      <img src="assets/brand/logo-bilingual.svg" alt="Tajzeer" />
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="ar" aria-pressed="true">عربي</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a href="index.html" class="cta-mini">
+        <span data-lang-ar>الرئيسية</span>
+        <span data-lang-en>Home</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Confetti (SVG only, no continuous motion) -->
+  <div class="confetti" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 14 14"><rect width="14" height="4" rx="1" fill="#1F3B2E"/></svg>
+    <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#8A5A2B"/></svg>
+    <svg width="10" height="16" viewBox="0 0 10 16"><rect width="10" height="3" rx="1" fill="#B98456"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1l1.8 5H15l-4.2 3 1.6 5L8 11l-4.4 3 1.6-5L1 6h5.2z" fill="#1F3B2E"/></svg>
+    <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx="2" fill="#8A5A2B" transform="rotate(20 6 6)"/></svg>
+    <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="none" stroke="#1F3B2E" stroke-width="2"/></svg>
+    <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#B98456"/></svg>
+    <svg width="16" height="6" viewBox="0 0 16 6"><rect width="16" height="6" rx="2" fill="#1F3B2E"/></svg>
+  </div>
+
+  <!-- Success badge -->
+  <div class="badge enter" data-d="1" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg>
+  </div>
+
+  <h1 class="headline enter" data-d="1">
+    <span data-lang-ar>استلمنا طلبك ✓</span>
+    <span data-lang-en>Got it — we've received your request ✓</span>
+  </h1>
+
+  <p class="subhead enter" data-d="2" data-lang-ar>
+    بنتواصل معك خلال يوم عمل واحد لتأكيد الموعد. تحقّق من الواتساب والإيميل.
+  </p>
+  <p class="subhead enter" data-d="2" data-lang-en>
+    We'll reach out within one business day to confirm. Keep an eye on WhatsApp and email.
+  </p>
+
+  <!-- Booking summary (populated via JS if data available) -->
+  <div class="summary enter" data-d="2" id="summary" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    <span>
+      <span data-lang-ar>الوقت المختار:</span>
+      <span data-lang-en>Selected slot:</span>
+    </span>
+    <span class="slot-value" id="slotValue">—</span>
+  </div>
+
+  <!-- Steps card -->
+  <section class="steps enter" data-d="3" aria-labelledby="stepsTitle">
+    <h3 id="stepsTitle">
+      <span data-lang-ar>ايش راح يصير الحين؟</span>
+      <span data-lang-en>What happens now?</span>
+    </h3>
+    <ol>
+      <li data-current="true">
+        <span class="n">1</span>
+        <span class="t">
+          <span data-lang-ar><strong>تأكيد الموعد</strong><small>نراجع الوقت المتاح ونرسل لك رسالة تأكيد.</small></span>
+          <span data-lang-en><strong>Confirmation</strong><small>We review the slot and send you a confirmation.</small></span>
+        </span>
+        <span class="st">
+          <span data-lang-ar>الآن</span>
+          <span data-lang-en>Now</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <span class="t">
+          <span data-lang-ar><strong>مكالمة التشخيص</strong><small>30 دقيقة عبر Google Meet — نستمع ونشخّص.</small></span>
+          <span data-lang-en><strong>Diagnostic call</strong><small>30 minutes on Google Meet — we listen and diagnose.</small></span>
+        </span>
+        <span class="st">
+          <span data-lang-ar>خلال أيام</span>
+          <span data-lang-en>Within days</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <span class="t">
+          <span data-lang-ar><strong>قرار صريح</strong><small>نعطيك رأينا: نكمل سوا، أو نرشّح جهة أنسب.</small></span>
+          <span data-lang-en><strong>Straight decision</strong><small>Our verdict: work together, or a referral.</small></span>
+        </span>
+        <span class="st">
+          <span data-lang-ar>بعد المكالمة</span>
+          <span data-lang-en>Post-call</span>
+        </span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Secondary CTAs -->
+  <div class="ctas enter" data-d="4">
+    <a href="blog.html" class="btn btn-primary">
+      <span data-lang-ar>شوف مقالاتنا</span>
+      <span data-lang-en>Read our articles</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <a href="index.html" class="btn btn-ghost">
+      <span data-lang-ar>زور موقعنا</span>
+      <span data-lang-en>Visit our site</span>
+    </a>
+  </div>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <span>© 2026 Tajzeer · <span data-lang-ar>جميع الحقوق محفوظة</span><span data-lang-en>All rights reserved</span></span>
+    <span data-lang-ar>الرياض، المملكة العربية السعودية</span>
+    <span data-lang-en>Riyadh, Saudi Arabia</span>
+  </div>
+</footer>
+
+<script>
+/* Language switcher (shared) */
+(function(){
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll('[data-set-lang]');
+  function setLang(lang){
+    root.setAttribute('lang', lang);
+    root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    root.setAttribute('data-lang', lang);
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang ? 'true' : 'false'));
+    try{ localStorage.setItem('tajzeer.lang', lang); }catch(e){}
+  }
+  try{ const s = localStorage.getItem('tajzeer.lang'); if(s) setLang(s); }catch(e){}
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+})();
+
+/* Booking summary — reads sessionStorage payload if present */
+(function(){
+  try{
+    const raw = sessionStorage.getItem('tajzeer.booking');
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(!data || !data.slot) return;
+
+    // Human-readable label map (mirrors book.html)
+    const labels = {
+      'slot-1':'Sun · 10:00',
+      'slot-2':'Sun · 14:30',
+      'slot-3':'Mon · 09:30',
+      'slot-4':'Mon · 16:00',
+      'slot-5':'Tue · 11:00',
+      'slot-6':'Tue · 15:30'
+    };
+    const val = labels[data.slot] || data.slot;
+    const el = document.getElementById('summary');
+    const slotEl = document.getElementById('slotValue');
+    if(el && slotEl){
+      slotEl.textContent = val;
+      el.hidden = false;
+    }
+  }catch(e){}
+})();
+
+/* Analytics placeholders — consent-gated upstream. Not active by default. */
+// window.gtag && window.gtag('event','book_call_success');
+// window.plausible && window.plausible('BookCallSuccess');
+</script>
+
+</body>
+</html>

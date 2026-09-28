@@ -1,0 +1,715 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<meta name="theme-color" content="#1F3B2E" />
+<title>احجز مكالمة تشخيص مجانية — 30 دقيقة | تجزير</title>
+<meta name="description" content="مكالمة تشخيص مجانية 30 دقيقة مع فريق تجزير. نستمع لمشكلتك، ونخبرك بصراحة إن كنّا الجهة المناسبة أو لا." />
+<link rel="icon" type="image/svg+xml" href="assets/brand/logo-bilingual.svg" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   Tajzeer — Book a Call (v2026)
+   Design tokens, logical props only, RTL-first.
+   ============================================================ */
+:root{
+  --earthy:#1F3B2E;
+  --earthy-2:#2A4E3E;
+  --coal:#141414;
+  --paper:#F5EFE6;
+  --paper-2:#EFE7D8;
+  --copper:#8A5A2B;
+  --copper-soft:#B98456;
+  --line:rgba(20,20,20,.10);
+  --line-strong:rgba(20,20,20,.18);
+  --muted:rgba(20,20,20,.62);
+
+  --radius-sm:10px;
+  --radius:16px;
+  --radius-lg:24px;
+
+  --shadow-1:0 1px 2px rgba(20,20,20,.04), 0 2px 8px rgba(20,20,20,.04);
+  --shadow-2:0 10px 30px -12px rgba(20,20,20,.18), 0 2px 6px rgba(20,20,20,.06);
+
+  --font-ar:"IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-en:"Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-spring:cubic-bezier(.22,1,.36,1);
+  --dur-1:180ms;
+  --dur-2:420ms;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{
+  font-family:var(--font-ar);
+  background:var(--paper);
+  color:var(--coal);
+  line-height:1.55;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-block-size:100dvh;
+}
+html[lang="en"] body{ font-family:var(--font-en); letter-spacing:-.005em; }
+
+img,svg{display:block;max-inline-size:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+
+/* Focus rings — always visible */
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2px solid var(--earthy);
+  outline-offset:3px;
+  border-radius:8px;
+}
+
+/* Preview bar */
+.preview-bar{
+  background:var(--coal);
+  color:var(--paper);
+  font-size:12px;
+  letter-spacing:.02em;
+  padding-block:8px;
+  padding-inline:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.preview-bar strong{font-weight:600}
+.preview-bar .dot{
+  inline-size:6px;block-size:6px;border-radius:50%;
+  background:var(--copper-soft);
+  display:inline-block;
+  margin-inline-end:8px;
+}
+
+/* Header / Nav */
+.nav{
+  position:sticky;
+  inset-block-start:0;
+  z-index:20;
+  background:color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter:saturate(1.2) blur(10px);
+  -webkit-backdrop-filter:saturate(1.2) blur(10px);
+  border-block-end:1px solid var(--line);
+}
+.nav-inner{
+  max-inline-size:1240px;
+  margin-inline:auto;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{block-size:28px;inline-size:auto}
+.brand-name{font-weight:600;font-size:15px;letter-spacing:.01em}
+
+.nav-right{display:flex;align-items:center;gap:10px}
+
+.lang-switch{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+  padding:4px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:999px;
+}
+.lang-switch button{
+  border:0;background:transparent;
+  padding:6px 12px;
+  font-size:13px;
+  font-weight:500;
+  border-radius:999px;
+  color:var(--muted);
+  transition:background var(--dur-1) var(--ease-spring), color var(--dur-1) var(--ease-spring);
+}
+.lang-switch button[aria-pressed="true"]{
+  background:var(--coal);color:var(--paper);
+}
+
+.cta-mini{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;
+  background:var(--earthy);
+  color:var(--paper);
+  border-radius:999px;
+  font-size:13.5px;font-weight:500;
+  border:1px solid var(--earthy);
+  transition:transform var(--dur-1) var(--ease-spring), background var(--dur-1);
+}
+.cta-mini:hover{background:var(--earthy-2);transform:translateY(-1px)}
+.cta-mini svg{inline-size:14px;block-size:14px}
+
+/* Main split layout */
+.wrap{
+  max-inline-size:1240px;
+  margin-inline:auto;
+  padding:40px 24px 80px;
+}
+.split{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:48px;
+  align-items:start;
+}
+@media (max-width:960px){
+  .split{grid-template-columns:1fr;gap:32px}
+  .wrap{padding:24px 18px 56px}
+}
+
+/* Left column — story */
+.story{
+  padding-block-start:12px;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:12.5px;
+  color:var(--coal);
+  font-weight:500;
+}
+.eyebrow .pulse{
+  inline-size:7px;block-size:7px;border-radius:50%;
+  background:var(--copper);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--copper) 20%, transparent);
+}
+h1.headline{
+  font-size:clamp(30px, 4.2vw, 46px);
+  line-height:1.15;
+  letter-spacing:-.02em;
+  font-weight:600;
+  margin:20px 0 14px;
+  color:var(--coal);
+}
+h1.headline em{
+  font-style:normal;
+  color:var(--earthy);
+  background:linear-gradient(180deg, transparent 62%, color-mix(in oklab, var(--copper) 22%, transparent) 62%);
+  padding-inline:2px;
+}
+.subhead{
+  font-size:17px;
+  color:var(--muted);
+  max-inline-size:52ch;
+  margin:0 0 28px;
+}
+
+/* Trust bullets */
+.trust{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-block:28px 32px;
+  padding:20px;
+  background:linear-gradient(180deg, var(--paper-2), transparent);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+}
+.trust-item{
+  display:flex;align-items:center;gap:12px;
+  font-size:14.5px;
+  color:var(--coal);
+}
+.trust-item .ico{
+  inline-size:22px;block-size:22px;
+  display:grid;place-items:center;
+  background:var(--earthy);
+  color:var(--paper);
+  border-radius:6px;
+  flex-shrink:0;
+}
+.trust-item .ico svg{inline-size:13px;block-size:13px;stroke:currentColor}
+
+/* Expectations card */
+.expect{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  background:var(--paper);
+  box-shadow:var(--shadow-1);
+}
+.expect h3{
+  margin:0 0 16px;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:-.005em;
+  display:flex;align-items:center;gap:8px;
+}
+.expect h3::before{
+  content:"";
+  inline-size:22px;block-size:22px;
+  background:url('assets/icons/calendar.svg') center/60% no-repeat, var(--paper-2);
+  border-radius:6px;
+}
+.expect ol{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:14px;
+}
+.expect li{
+  display:grid;
+  grid-template-columns:28px 1fr;
+  gap:12px;
+  align-items:start;
+}
+.expect li .n{
+  inline-size:26px;block-size:26px;
+  display:grid;place-items:center;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--earthy);
+  font-family:var(--font-en);
+}
+.expect li .t{font-size:14px;color:var(--coal)}
+.expect li .t small{display:block;color:var(--muted);margin-block-start:2px;font-size:12.5px}
+
+/* Right column — form card */
+.card-form{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  box-shadow:var(--shadow-2);
+  position:sticky;
+  inset-block-start:88px;
+}
+@media (max-width:960px){ .card-form{position:static} }
+
+.card-form h2{
+  margin:0 0 6px;
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.card-form .lede{
+  margin:0 0 22px;
+  font-size:13.5px;
+  color:var(--muted);
+}
+
+.field{
+  display:flex;flex-direction:column;gap:6px;
+  margin-block-end:16px;
+}
+.field label{
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--coal);
+  letter-spacing:.005em;
+}
+.field label .opt{color:var(--muted);font-weight:400}
+.field input,
+.field select,
+.field textarea{
+  inline-size:100%;
+  padding:12px 14px;
+  border:1px solid var(--line-strong);
+  border-radius:12px;
+  background:var(--paper);
+  font-size:14.5px;
+  transition:border-color var(--dur-1), box-shadow var(--dur-1);
+}
+.field input::placeholder{color:rgba(20,20,20,.38)}
+.field input:hover,
+.field select:hover{border-color:var(--coal)}
+.field input:focus,
+.field select:focus{
+  outline:none;
+  border-color:var(--earthy);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--earthy) 15%, transparent);
+}
+
+/* Time slot picker */
+.slots-label{
+  font-size:12.5px;
+  font-weight:500;
+  margin-block-end:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.slots-label .hint{color:var(--muted);font-weight:400;font-size:12px}
+.slots{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+  margin-block-end:20px;
+}
+@media (max-width:420px){ .slots{grid-template-columns:repeat(2,1fr)} }
+.slot{
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:10px 12px;
+  border:1px solid var(--line-strong);
+  border-radius:12px;
+  background:var(--paper);
+  text-align:start;
+  transition:transform var(--dur-1) var(--ease-spring), border-color var(--dur-1), background var(--dur-1);
+}
+.slot:hover{border-color:var(--coal);transform:translateY(-1px)}
+.slot .day{font-size:11.5px;color:var(--muted);font-weight:500}
+.slot .time{font-size:14px;font-weight:600;letter-spacing:-.005em;margin-block-start:2px;font-family:var(--font-en)}
+.slot input{position:absolute;opacity:0;pointer-events:none}
+.slot:has(input:checked){
+  border-color:var(--earthy);
+  background:color-mix(in oklab, var(--earthy) 8%, var(--paper));
+  box-shadow:0 0 0 3px color-mix(in oklab, var(--earthy) 12%, transparent);
+}
+.slot:has(input:checked) .day{color:var(--earthy)}
+
+/* Submit */
+.submit{
+  inline-size:100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 20px;
+  background:var(--coal);
+  color:var(--paper);
+  border:1px solid var(--coal);
+  border-radius:12px;
+  font-size:15px;
+  font-weight:500;
+  letter-spacing:.005em;
+  transition:transform var(--dur-1) var(--ease-spring), background var(--dur-1);
+}
+.submit:hover{background:var(--earthy);border-color:var(--earthy);transform:translateY(-1px)}
+.submit svg{inline-size:16px;block-size:16px;transition:transform var(--dur-1) var(--ease-spring)}
+html[dir="rtl"] .submit svg{transform:scaleX(-1)}
+.submit:hover svg{transform:translateX(3px)}
+html[dir="rtl"] .submit:hover svg{transform:scaleX(-1) translateX(3px)}
+
+.fineprint{
+  margin-block-start:12px;
+  font-size:11.5px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* Footer */
+.foot{
+  border-block-start:1px solid var(--line);
+  padding-block:22px;
+  color:var(--muted);
+  font-size:12.5px;
+}
+.foot-inner{
+  max-inline-size:1240px;margin-inline:auto;
+  padding-inline:24px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+
+/* Motion enter */
+.enter{
+  opacity:0;
+  transform:translateY(8px);
+  animation:enter var(--dur-2) var(--ease-spring) forwards;
+}
+.enter[data-d="1"]{animation-delay:60ms}
+.enter[data-d="2"]{animation-delay:140ms}
+.enter[data-d="3"]{animation-delay:220ms}
+.enter[data-d="4"]{animation-delay:300ms}
+@keyframes enter{
+  to{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .enter{opacity:1;transform:none}
+}
+
+/* Language visibility */
+[data-lang-ar]{display:initial}
+[data-lang-en]{display:none}
+html[lang="en"] [data-lang-ar]{display:none}
+html[lang="en"] [data-lang-en]{display:initial}
+html[lang="en"] .headline em{background-position:0 60%}
+</style>
+</head>
+<body>
+
+<!-- Preview bar -->
+<div class="preview-bar" role="note" aria-label="Preview environment">
+  <span><span class="dot"></span><strong>Preview</strong> · Tajzeer / book.html · v2026.09</strong></span>
+  <span data-lang-ar>معاينة داخلية — ليست بيئة إنتاج</span>
+  <span data-lang-en>Internal preview — not production</span>
+</div>
+
+<!-- Nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Tajzeer">
+      <img src="assets/brand/logo-bilingual.svg" alt="Tajzeer" />
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="ar" aria-pressed="true">عربي</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a href="#book" class="cta-mini">
+        <span data-lang-ar>احجز الآن</span>
+        <span data-lang-en>Book now</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="split">
+
+    <!-- LEFT: story -->
+    <section class="story">
+      <span class="eyebrow enter" data-d="1">
+        <span class="pulse" aria-hidden="true"></span>
+        <span data-lang-ar>مكالمة تشخيص · 30 دقيقة · مجانية</span>
+        <span data-lang-en>Diagnostic call · 30 min · free</span>
+      </span>
+
+      <h1 class="headline enter" data-d="2">
+        <span data-lang-ar>عندك مشروع واقف؟ خلّنا <em>نشخّصه معك</em> — بصراحة.</span>
+        <span data-lang-en>Stuck on a project? Let's <em>diagnose it</em> — honestly.</span>
+      </h1>
+
+      <p class="subhead enter" data-d="2" data-lang-ar>
+        نستمع لك، ونخبرك بصراحة إذا كنّا الجهة المناسبة أو لا. بدون عرض بيع، وبدون كلام معلّب.
+      </p>
+      <p class="subhead enter" data-d="2" data-lang-en>
+        We listen, then tell you plainly whether we're the right team — or not. No pitch, no filler.
+      </p>
+
+      <!-- Trust radial -->
+      <div class="trust enter" data-d="3" role="list">
+        <div class="trust-item" role="listitem">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span data-lang-ar>المكالمة مجانية — ما فيه أي رسوم مخفية.</span>
+          <span data-lang-en>The call is free — no hidden charges.</span>
+        </div>
+        <div class="trust-item" role="listitem">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span data-lang-ar>بدون بيع — ما نضغط عليك ولا نلحّ.</span>
+          <span data-lang-en>No selling — we won't push or chase you.</span>
+        </div>
+        <div class="trust-item" role="listitem">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span data-lang-ar>بس تشخيص صريح — تطلع بخطة واضحة، حتى لو ما اشتغلنا سوا.</span>
+          <span data-lang-en>Just a candid diagnosis — you leave with a plan, either way.</span>
+        </div>
+      </div>
+
+      <!-- Expectations -->
+      <aside class="expect enter" data-d="4">
+        <h3>
+          <span data-lang-ar>ايش يصير في الـ 30 دقيقة؟</span>
+          <span data-lang-en>What happens in 30 minutes?</span>
+        </h3>
+        <ol>
+          <li>
+            <span class="n">1</span>
+            <span class="t">
+              <span data-lang-ar><strong>نسمعك (10 د)</strong><small>وين المشروع، وين علق، وايش جربت.</small></span>
+              <span data-lang-en><strong>We listen (10 min)</strong><small>Where the project is, where it's stuck, what you've tried.</small></span>
+            </span>
+          </li>
+          <li>
+            <span class="n">2</span>
+            <span class="t">
+              <span data-lang-ar><strong>نشخّص (15 د)</strong><small>نطرح أسئلة، ونفكّك المشكلة لعناصرها الحقيقية.</small></span>
+              <span data-lang-en><strong>We diagnose (15 min)</strong><small>We ask, we break the problem into its real parts.</small></span>
+            </span>
+          </li>
+          <li>
+            <span class="n">3</span>
+            <span class="t">
+              <span data-lang-ar><strong>نعطيك رأي صريح (5 د)</strong><small>هل نقدر نساعد؟ أو نرشّح لك جهة أنسب.</small></span>
+              <span data-lang-en><strong>Straight answer (5 min)</strong><small>Can we help? Or we refer you to someone better suited.</small></span>
+            </span>
+          </li>
+        </ol>
+      </aside>
+    </section>
+
+    <!-- RIGHT: form -->
+    <section class="card-form enter" data-d="3" id="book" aria-labelledby="formTitle">
+      <h2 id="formTitle">
+        <span data-lang-ar>احجز مكالمة تشخيص مجانية</span>
+        <span data-lang-en>Book a free diagnostic call</span>
+      </h2>
+      <p class="lede">
+        <span data-lang-ar>3 حقول فقط. نعاود تأكيد الموعد خلال يوم عمل.</span>
+        <span data-lang-en>Just 3 fields. We confirm within one business day.</span>
+      </p>
+
+      <form id="bookForm" novalidate autocomplete="on">
+        <div class="field">
+          <label for="fullName">
+            <span data-lang-ar>الاسم</span>
+            <span data-lang-en>Full name</span>
+          </label>
+          <input id="fullName" name="fullName" type="text" required
+                 placeholder="—" autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="contact">
+            <span data-lang-ar>واتساب أو إيميل</span>
+            <span data-lang-en>WhatsApp or email</span>
+          </label>
+          <input id="contact" name="contact" type="text" required
+                 placeholder="—" inputmode="email" autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="context">
+            <span data-lang-ar>وصف سريع للمشروع <span class="opt">(اختياري)</span></span>
+            <span data-lang-en>Quick project context <span class="opt">(optional)</span></span>
+          </label>
+          <input id="context" name="context" type="text"
+                 placeholder="—" />
+        </div>
+
+        <div class="slots-label">
+          <span>
+            <span data-lang-ar>اختر وقتاً مناسباً</span>
+            <span data-lang-en>Pick a time</span>
+          </span>
+          <span class="hint">
+            <span data-lang-ar>بتوقيت الرياض</span>
+            <span data-lang-en>Riyadh time</span>
+          </span>
+        </div>
+
+        <div class="slots" role="radiogroup" aria-label="Available times">
+          <label class="slot"><input type="radio" name="slot" value="slot-1" required />
+            <span class="day" data-lang-ar>الأحد</span><span class="day" data-lang-en>Sun</span>
+            <span class="time">10:00</span></label>
+          <label class="slot"><input type="radio" name="slot" value="slot-2" />
+            <span class="day" data-lang-ar>الأحد</span><span class="day" data-lang-en>Sun</span>
+            <span class="time">14:30</span></label>
+          <label class="slot"><input type="radio" name="slot" value="slot-3" />
+            <span class="day" data-lang-ar>الإثنين</span><span class="day" data-lang-en>Mon</span>
+            <span class="time">09:30</span></label>
+          <label class="slot"><input type="radio" name="slot" value="slot-4" />
+            <span class="day" data-lang-ar>الإثنين</span><span class="day" data-lang-en>Mon</span>
+            <span class="time">16:00</span></label>
+          <label class="slot"><input type="radio" name="slot" value="slot-5" />
+            <span class="day" data-lang-ar>الثلاثاء</span><span class="day" data-lang-en>Tue</span>
+            <span class="time">11:00</span></label>
+          <label class="slot"><input type="radio" name="slot" value="slot-6" />
+            <span class="day" data-lang-ar>الثلاثاء</span><span class="day" data-lang-en>Tue</span>
+            <span class="time">15:30</span></label>
+        </div>
+
+        <button type="submit" class="submit">
+          <span data-lang-ar>احجز المكالمة</span>
+          <span data-lang-en>Book the call</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+
+        <p class="fineprint">
+          <span data-lang-ar>بحجزك، توافق على تواصلنا معك لتأكيد الموعد فقط.</span>
+          <span data-lang-en>By booking, you agree we'll contact you to confirm — nothing more.</span>
+        </p>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <span>© 2026 Tajzeer · <span data-lang-ar>جميع الحقوق محفوظة</span><span data-lang-en>All rights reserved</span></span>
+    <span data-lang-ar>الرياض، المملكة العربية السعودية</span>
+    <span data-lang-en>Riyadh, Saudi Arabia</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Language switcher — persists to localStorage
+   ============================================================ */
+(function(){
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll('[data-set-lang]');
+
+  function setLang(lang){
+    root.setAttribute('lang', lang);
+    root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    root.setAttribute('data-lang', lang);
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang ? 'true' : 'false'));
+    try{ localStorage.setItem('tajzeer.lang', lang); }catch(e){}
+  }
+
+  try{
+    const saved = localStorage.getItem('tajzeer.lang');
+    if(saved) setLang(saved);
+  }catch(e){}
+
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+})();
+
+/* ============================================================
+   Form submit — placeholder (consent-gated analytics)
+   ============================================================ */
+(function(){
+  const form = document.getElementById('bookForm');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+
+    // Analytics placeholders — only fire if consent has been granted upstream.
+    // window.gtag && window.gtag('event','book_call_submit',{slot:data.get('slot')});
+    // window.plausible && window.plausible('BookCallSubmit',{props:{slot:data.get('slot')}});
+
+    // Store minimal payload for thank-you page (no PII persisted beyond session)
+    try{
+      sessionStorage.setItem('tajzeer.booking', JSON.stringify({
+        slot: data.get('slot'),
+        ts: Date.now()
+      }));
+    }catch(e){}
+
+    window.location.href = 'thank-you.html';
+  });
+})();
+</script>
+
+</body>
+</html>
