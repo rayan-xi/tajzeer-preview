@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>توقيع البريد — تجذير · مولّد التوقيع</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#1F3B2E;--brand-2:#264a3a;--ink:#141414;--paper:#F5EFE6;
+    --paper-2:#EDE5D5;--support:#8A5A2B;--support-2:#A56B33;
+    --line:rgba(20,20,20,0.10);
+    --font-ar:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --font-en:'Inter Tight',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-ar);line-height:1.7}
+  ::selection{background:var(--support);color:var(--paper)}
+
+  .preview-bar{background:var(--brand);color:var(--paper);text-align:center;font-size:12px;padding:10px;letter-spacing:1px;font-family:var(--font-en)}
+  .preview-bar a{color:var(--paper);text-decoration:underline}
+
+  header{padding:20px 32px;border-block-end:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+  header img{height:28px}
+  header a.home{color:var(--brand);font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--line);padding:8px 16px;border-radius:8px}
+
+  .hero{max-width:1200px;margin:0 auto;padding:56px 32px 24px}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-family:var(--font-en);color:var(--support);letter-spacing:3px;text-transform:uppercase;font-weight:700}
+  .kicker::before{content:"";width:24px;height:2px;background:var(--support)}
+  h1{font-size:clamp(36px,5vw,58px);font-weight:700;color:var(--brand);letter-spacing:-0.02em;line-height:1.1;margin:14px 0 12px;max-width:16ch}
+  .lead{font-size:18px;color:#333;max-width:640px;margin:0 0 32px}
+
+  main{max-width:1200px;margin:0 auto;padding:0 32px 120px}
+
+  .layout{display:grid;grid-template-columns:360px 1fr;gap:32px;align-items:start}
+  @media(max-width:960px){.layout{grid-template-columns:1fr}}
+
+  /* Form */
+  .form{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;position:sticky;top:90px;box-shadow:0 4px 12px rgba(20,20,20,0.04)}
+  .form h3{margin:0 0 8px;font-size:18px;color:var(--brand)}
+  .form p.small{margin:0 0 16px;font-size:13px;color:#666}
+  .field{margin-block-end:14px}
+  .field label{display:block;font-size:12px;font-weight:700;color:#444;margin-block-end:6px;letter-spacing:.3px}
+  .field input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:var(--font-ar);font-size:14px;background:var(--paper);transition:border-color .15s, box-shadow .15s}
+  .field input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(31,59,46,0.12)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:var(--paper);padding:12px 18px;border-radius:10px;font-family:var(--font-ar);font-weight:700;font-size:14px;text-decoration:none;border:none;cursor:pointer;transition:background .18s}
+  .btn:hover{background:var(--brand-2)}
+  .btn.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+  .btn.ghost:hover{background:var(--brand);color:var(--paper)}
+
+  .tabs{display:flex;gap:8px;margin-block-end:16px;border-block-end:1px solid var(--line);padding-block-end:0}
+  .tab{padding:10px 16px;background:transparent;border:none;font-family:var(--font-ar);font-weight:600;font-size:14px;color:#666;cursor:pointer;border-block-end:3px solid transparent;margin-block-end:-1px;transition:all .18s}
+  .tab.active{color:var(--brand);border-block-end-color:var(--brand)}
+
+  /* Preview panels */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-block-end:24px}
+  .panel-head{padding:16px 22px;border-block-end:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--paper-2)}
+  .panel-head h3{margin:0;font-size:16px;color:var(--brand);font-weight:700}
+  .panel-head .actions{display:flex;gap:8px}
+  .panel-head .btn{padding:8px 14px;font-size:12px}
+  .panel-body{padding:32px;background:#fff}
+  .panel-body.email-preview{background:linear-gradient(#f7f7f5,#fff);min-height:200px}
+
+  .code-box{background:#141414;color:#e8e4d8;padding:20px;border-radius:12px;overflow-x:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.6;max-height:300px}
+  .code-box::-webkit-scrollbar{width:10px}
+  .code-box::-webkit-scrollbar-thumb{background:#333;border-radius:5px}
+
+  .install-guide{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-block-start:32px}
+  .install-guide h2{margin:0 0 20px;font-size:22px;color:var(--brand)}
+  .install-guide details{padding:14px 18px;background:var(--paper-2);border-radius:10px;margin-block-end:10px;cursor:pointer}
+  .install-guide summary{font-weight:700;color:var(--brand);list-style:none;display:flex;align-items:center;justify-content:space-between;font-size:15px}
+  .install-guide summary::after{content:"+";font-family:var(--font-en);font-size:20px;color:var(--support);font-weight:700}
+  .install-guide details[open] summary::after{content:"−"}
+  .install-guide details[open]{background:#fff;border:1px solid var(--line)}
+  .install-guide details ol{padding-inline-start:20px;color:#333;margin:12px 0 0}
+  .install-guide details ol li{margin-block-end:8px;font-size:14px;line-height:1.7}
+  .install-guide code{background:#141414;color:#a8d4b3;padding:2px 6px;border-radius:4px;font-size:12px;font-family:'Courier New',monospace}
+
+  .toast{position:fixed;bottom:24px;inset-inline-start:50%;transform:translateX(50%);background:var(--brand);color:var(--paper);padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(20,20,20,0.2);opacity:0;pointer-events:none;transition:opacity .3s;z-index:100}
+  .toast.show{opacity:1}
+
+  footer{padding:32px;text-align:center;color:#666;font-size:13px;font-family:var(--font-en);letter-spacing:.5px;border-block-start:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">مولّد توقيع البريد لتجذير · <a href="../index.html">رجوع للمعاينة</a></div>
+
+<header>
+  <img src="../assets/brand/logo-bilingual.svg" alt="تجذير" />
+  <a href="../index.html" class="home">← رجوع</a>
+</header>
+
+<div class="hero">
+  <span class="kicker">Email Signature Generator</span>
+  <h1>صمّم توقيع البريد لكل موظف بضغطة.</h1>
+  <p class="lead">عبّي بياناتك، نسخ الكود، وحطه في Outlook أو Gmail أو Apple Mail. 3 قوالب جاهزة — بيلينجوال، مضغوط، ومختصر.</p>
+</div>
+
+<main>
+
+<div class="layout">
+
+  <!-- FORM -->
+  <aside class="form">
+    <h3>بيانات الموظف</h3>
+    <p class="small">أي حقل تعبّيه ينعكس فوراً في المعاينة على اليمين.</p>
+
+    <div class="field">
+      <label>الاسم بالعربي</label>
+      <input id="f_name_ar" type="text" value="محمد بن عبدالله السالم" oninput="render()" />
+    </div>
+    <div class="field">
+      <label>Full name (English)</label>
+      <input id="f_name_en" type="text" value="Mohammed Al-Salim" oninput="render()" dir="ltr" />
+    </div>
+    <div class="field">
+      <label>المسمى الوظيفي بالعربي</label>
+      <input id="f_role_ar" type="text" value="مؤسس ورئيس تنفيذي" oninput="render()" />
+    </div>
+    <div class="field">
+      <label>Title (English)</label>
+      <input id="f_role_en" type="text" value="Founder & CEO" oninput="render()" dir="ltr" />
+    </div>
+    <div class="field">
+      <label>البريد الإلكتروني</label>
+      <input id="f_email" type="email" value="mohammed@tajzeer.com" oninput="render()" dir="ltr" />
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>الجوال (للاتصال)</label>
+        <input id="f_phone_tel" type="text" value="+966501234567" oninput="render()" dir="ltr" />
+      </div>
+      <div class="field">
+        <label>الجوال (للعرض)</label>
+        <input id="f_phone_display" type="text" value="+966 50 123 4567" oninput="render()" dir="ltr" />
+      </div>
+    </div>
+
+    <button class="btn" onclick="copyActive()" style="width:100%;justify-content:center">
+      نسخ التوقيع الظاهر
+    </button>
+  </aside>
+
+  <!-- PREVIEW -->
+  <section>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="v2" onclick="switchTab('v2')">v2 · Bilingual (كامل)</button>
+      <button class="tab" data-tab="v1" onclick="switchTab('v1')">v1 · Compact (مضغوط)</button>
+      <button class="tab" data-tab="v3" onclick="switchTab('v3')">v3 · Minimal (مختصر)</button>
+    </div>
+
+    <!-- ================= v2 BILINGUAL ================= -->
+    <div class="tab-content" data-content="v2">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>المعاينة · كما ستظهر في البريد</h3>
+          <div class="actions">
+            <button class="btn ghost" onclick="copyCode('v2')">نسخ HTML</button>
+            <a class="btn" href="v2-bilingual.html" target="_blank">فتح HTML خام</a>
+          </div>
+        </div>
+        <div class="panel-body email-preview" id="preview_v2"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>كود HTML</h3><div class="actions"><button class="btn ghost" onclick="copyCode('v2')">نسخ</button></div></div>
+        <div class="panel-body"><pre class="code-box" id="code_v2"></pre></div>
+      </div>
+    </div>
+
+    <!-- ================= v1 COMPACT ================= -->
+    <div class="tab-content" data-content="v1" style="display:none">
+      <div class="panel">
+        <div class="panel-head"><h3>المعاينة · Compact</h3><div class="actions"><button class="btn ghost" onclick="copyCode('v1')">نسخ HTML</button><a class="btn" href="v1-compact.html" target="_blank">HTML خام</a></div></div>
+        <div class="panel-body email-preview" id="preview_v1"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>كود HTML</h3><div class="actions"><button class="btn ghost" onclick="copyCode('v1')">نسخ</button></div></div>
+        <div class="panel-body"><pre class="code-box" id="code_v1"></pre></div>
+      </div>
+    </div>
+
+    <!-- ================= v3 MINIMAL ================= -->
+    <div class="tab-content" data-content="v3" style="display:none">
+      <div class="panel">
+        <div class="panel-head"><h3>المعاينة · Minimal</h3><div class="actions"><button class="btn ghost" onclick="copyCode('v3')">نسخ HTML</button><a class="btn" href="v3-minimal.html" target="_blank">HTML خام</a></div></div>
+        <div class="panel-body email-preview" id="preview_v3"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>كود HTML</h3><div class="actions"><button class="btn ghost" onclick="copyCode('v3')">نسخ</button></div></div>
+        <div class="panel-body"><pre class="code-box" id="code_v3"></pre></div>
+      </div>
+    </div>
+
+    <!-- INSTALL GUIDE -->
+    <div class="install-guide">
+      <h2>كيف تركّب التوقيع في بريدك</h2>
+
+      <details>
+        <summary>Outlook 365 / Outlook Web (M365)</summary>
+        <ol>
+          <li>افتح Outlook Web على <code>outlook.office.com</code>.</li>
+          <li>اضغط الترس أعلى اليمين (⚙) ثم <strong>عرض جميع إعدادات Outlook</strong>.</li>
+          <li>من القائمة: <strong>البريد ← إنشاء والرد ← التوقيعات</strong>.</li>
+          <li>اضغط <strong>+ توقيع جديد</strong>، سمّه "تجذير".</li>
+          <li>افتح تبويب <strong>HTML</strong> في المحرر (زر Source).</li>
+          <li>الصق كود HTML اللي نسخته من الصفحة.</li>
+          <li>خلي التوقيع افتراضي للرسائل الجديدة والردود.</li>
+          <li>احفظ ← اختبر برسالة لنفسك.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Outlook Desktop (Windows)</summary>
+        <ol>
+          <li>افتح Outlook ← <strong>File ← Options ← Mail ← Signatures</strong>.</li>
+          <li>اضغط <strong>New</strong> وسمّه "تجذير".</li>
+          <li>Outlook Desktop <strong>ما يدعم لصق HTML مباشر</strong> — استخدم الحل التالي:</li>
+          <li>افتح الرابط <code>signature/v2-bilingual.html</code> في Chrome/Edge.</li>
+          <li>اختر التوقيع بالمؤشر (Ctrl+A داخل جسم التوقيع) ونسخه (Ctrl+C).</li>
+          <li>ارجع إلى محرر التوقيع في Outlook والصق (Ctrl+V).</li>
+          <li>احفظ.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Gmail</summary>
+        <ol>
+          <li>افتح Gmail واضغط الترس (⚙) ← <strong>See all settings</strong>.</li>
+          <li>مرّر إلى قسم <strong>Signature</strong>.</li>
+          <li>اضغط <strong>Create new</strong> وسمّه "تجذير".</li>
+          <li>افتح <code>signature/v2-bilingual.html</code> في تبويب جديد.</li>
+          <li>اختر التوقيع كاملاً (Ctrl+A داخل جسم التوقيع) ونسخ (Ctrl+C).</li>
+          <li>الصق في محرر التوقيع في Gmail (Ctrl+V).</li>
+          <li>في الأسفل: عيّن التوقيع كافتراضي للرسائل الجديدة والردود.</li>
+          <li><strong>Save Changes</strong>.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Apple Mail (macOS)</summary>
+        <ol>
+          <li>افتح Mail ← <strong>Mail ← Preferences ← Signatures</strong>.</li>
+          <li>اختر حساب البريد على اليسار واضغط <strong>+</strong> لإضافة توقيع.</li>
+          <li>سمّه "تجذير".</li>
+          <li>في متصفح Safari، افتح <code>signature/v2-bilingual.html</code> واختر التوقيع كاملاً.</li>
+          <li>اسحبه (Drag) وأفلته في محرر التوقيع في Mail.</li>
+          <li>اضغط <strong>Always match my default message font</strong> لإلغاء تفعيلها (مهم).</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>iPhone / iPad Mail</summary>
+        <ol>
+          <li>افتح Safari وادخل الرابط <code>rayan-xi.github.io/tajzeer-preview/signature/v2-bilingual.html</code>.</li>
+          <li>اختر التوقيع باللمس المطوّل حتى تنسخه.</li>
+          <li>الإعدادات ← Mail ← Signature ← Per Account.</li>
+          <li>الصق التوقيع.</li>
+          <li>ملاحظة: iOS يفقد بعض التنسيقات — استخدم النسخة Minimal (v3) للحصول على أفضل نتيجة.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Microsoft 365 — إدارة التوقيعات مركزياً لكل الموظفين</summary>
+        <ol>
+          <li>يمكن للـ Admin نشر توقيع موحّد على كل الحسابات عبر <strong>Exchange Admin Center</strong>.</li>
+          <li>ادخل <code>admin.exchange.microsoft.com</code>.</li>
+          <li><strong>Mail flow ← Rules ← + Add a rule ← Apply disclaimers</strong>.</li>
+          <li>اختر <strong>Apply to all messages</strong> أو حدد المرسلين.</li>
+          <li>الصق كود HTML للتوقيع في Disclaimer text.</li>
+          <li>حدد <strong>Fallback action: Wrap</strong>.</li>
+          <li>احفظ ← فعّل بعد ما تختبر على حساب واحد.</li>
+        </ol>
+      </details>
+    </div>
+
+  </section>
+</div>
+
+</main>
+
+<footer>
+  © 2026 تجذير | TAJZEER · Signature Generator · v1.0
+</footer>
+
+<div class="toast" id="toast">تم النسخ ✓</div>
+
+<script>
+const TEMPLATES = {
+v2: (d) => `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#141414;line-height:1.45;max-width:520px;"><tr><td width="4" style="width:4px;background-color:#1F3B2E;padding:0;font-size:0;line-height:0;">&nbsp;</td><td width="20" style="width:20px;padding:0;font-size:0;line-height:0;">&nbsp;</td><td style="padding:8px 0 8px 0;vertical-align:top;"><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;"><tr><td style="padding-bottom:1px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:18px;font-weight:700;color:#1F3B2E;line-height:1.2;">${esc(d.name_ar)}</td></tr><tr><td style="padding-bottom:6px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:500;color:#666666;line-height:1.3;letter-spacing:.5px;" dir="ltr">${esc(d.name_en)}</td></tr><tr><td style="padding-bottom:3px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:13px;color:#333333;font-weight:600;line-height:1.3;">${esc(d.role_ar)}</td></tr><tr><td style="padding-bottom:10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8A5A2B;font-weight:600;line-height:1.3;letter-spacing:1.5px;text-transform:uppercase;" dir="ltr">${esc(d.role_en)}</td></tr><tr><td style="border-top:1px solid #D8CFBD;font-size:0;line-height:0;padding:0;">&nbsp;</td></tr><tr><td style="padding-top:10px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333333;line-height:1.9;"><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;"><tr><td style="padding-inline-end:8px;font-weight:700;color:#8A5A2B;font-size:11px;letter-spacing:.5px;">M</td><td><a href="mailto:${esc(d.email)}" style="color:#1F3B2E;text-decoration:none;font-weight:500;">${esc(d.email)}</a></td></tr><tr><td style="padding-inline-end:8px;font-weight:700;color:#8A5A2B;font-size:11px;letter-spacing:.5px;">T</td><td dir="ltr"><a href="tel:${esc(d.phone_tel)}" style="color:#1F3B2E;text-decoration:none;font-weight:500;">${esc(d.phone_display)}</a></td></tr><tr><td style="padding-inline-end:8px;font-weight:700;color:#8A5A2B;font-size:11px;letter-spacing:.5px;">W</td><td><a href="https://tajzeer.com" style="color:#1F3B2E;text-decoration:none;font-weight:500;">tajzeer.com</a></td></tr><tr><td style="padding-inline-end:8px;font-weight:700;color:#8A5A2B;font-size:11px;letter-spacing:.5px;">A</td><td style="font-size:12px;color:#555555;">الرياض · المملكة العربية السعودية</td></tr></table></td></tr><tr><td style="padding-top:12px;"><table cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="padding-inline-end:8px;"><a href="https://www.linkedin.com/company/tajzeer" style="text-decoration:none;"><img src="https://rayan-xi.github.io/tajzeer-preview/signature/icon-linkedin.png" alt="LinkedIn" width="20" height="20" style="display:block;border:0;" /></a></td><td style="padding-inline-end:8px;"><a href="https://x.com/tajzeer" style="text-decoration:none;"><img src="https://rayan-xi.github.io/tajzeer-preview/signature/icon-x.png" alt="X" width="20" height="20" style="display:block;border:0;" /></a></td><td><a href="https://www.instagram.com/tajzeer" style="text-decoration:none;"><img src="https://rayan-xi.github.io/tajzeer-preview/signature/icon-instagram.png" alt="Instagram" width="20" height="20" style="display:block;border:0;" /></a></td></tr></table></td></tr><tr><td style="padding-top:14px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:12px;color:#1F3B2E;font-weight:600;line-height:1.4;">نبني قدرة تبقى في فروعك.<br /><span style="color:#8A5A2B;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;font-weight:600;" dir="ltr">FROM INTERVENTION TO LASTING CAPABILITY</span></td></tr><tr><td style="padding-top:14px;font-family:Arial,Helvetica,sans-serif;font-size:9.5px;color:#999999;line-height:1.5;max-width:400px;">هذه الرسالة وجميع مرفقاتها سرية للمرسل إليه فقط. لو استلمتها بالخطأ، الرجاء إبلاغ المرسل وحذف الرسالة. تلتزم تجذير بنظام حماية البيانات الشخصية السعودي (PDPL).</td></tr></table></td><td width="24" style="width:24px;padding:0;font-size:0;line-height:0;">&nbsp;</td><td style="vertical-align:top;padding:6px 0 0 0;"><img src="https://rayan-xi.github.io/tajzeer-preview/signature/logo-tajzeer-signature.png" alt="تجذير TAJZEER" width="88" height="88" style="display:block;border:0;width:88px;height:88px;" /></td></tr></table>`,
+
+v1: (d) => `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#141414;line-height:1.4;"><tr><td width="4" style="width:4px;background-color:#1F3B2E;padding:0;font-size:0;line-height:0;">&nbsp;</td><td width="18" style="width:18px;padding:0;font-size:0;line-height:0;">&nbsp;</td><td style="padding:6px 0 6px 0;vertical-align:top;"><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;"><tr><td style="padding-bottom:2px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:17px;font-weight:700;color:#1F3B2E;line-height:1.25;">${esc(d.name_ar)}</td></tr><tr><td style="padding-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:600;color:#8A5A2B;letter-spacing:1px;text-transform:uppercase;line-height:1.3;">${esc(d.role_en)}</td></tr><tr><td style="border-top:1px solid #E0D7C5;font-size:0;line-height:0;padding:0;">&nbsp;</td></tr><tr><td style="padding-top:8px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:13px;color:#333333;line-height:1.8;"><span style="color:#8A5A2B;font-weight:700;">م</span> <span style="color:#666666;">·</span> <a href="mailto:${esc(d.email)}" style="color:#1F3B2E;text-decoration:none;">${esc(d.email)}</a><br /><span style="color:#8A5A2B;font-weight:700;">ج</span> <span style="color:#666666;">·</span> <a href="tel:${esc(d.phone_tel)}" style="color:#1F3B2E;text-decoration:none;" dir="ltr">${esc(d.phone_display)}</a><br /><span style="color:#8A5A2B;font-weight:700;">و</span> <span style="color:#666666;">·</span> <a href="https://tajzeer.com" style="color:#1F3B2E;text-decoration:none;">tajzeer.com</a></td></tr><tr><td style="padding-top:10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8A5A2B;letter-spacing:1.5px;font-weight:600;">نبني قدرة تبقى في فروعك.</td></tr></table></td><td width="28" style="width:28px;padding:0;font-size:0;line-height:0;">&nbsp;</td><td style="vertical-align:top;padding:4px 0 0 0;"><img src="https://rayan-xi.github.io/tajzeer-preview/signature/logo-tajzeer-signature.png" alt="تجذير TAJZEER" width="72" height="72" style="display:block;border:0;width:72px;height:72px;" /></td></tr></table>`,
+
+v3: (d) => `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#141414;line-height:1.5;"><tr><td style="vertical-align:top;padding:0;"><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;"><tr><td style="font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:15px;font-weight:700;color:#1F3B2E;padding-bottom:2px;line-height:1.3;">${esc(d.name_ar)}</td></tr><tr><td style="font-family:'Segoe UI',Tahoma,Arial,sans-serif;font-size:12px;color:#555555;padding-bottom:8px;line-height:1.3;">${esc(d.role_ar)} <span style="color:#8A5A2B;">·</span> <strong style="color:#1F3B2E;">تجذير</strong></td></tr><tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#333333;line-height:1.7;"><a href="mailto:${esc(d.email)}" style="color:#1F3B2E;text-decoration:none;">${esc(d.email)}</a> <span style="color:#8A5A2B;">·</span> <a href="tel:${esc(d.phone_tel)}" style="color:#1F3B2E;text-decoration:none;" dir="ltr">${esc(d.phone_display)}</a> <span style="color:#8A5A2B;">·</span> <a href="https://tajzeer.com" style="color:#1F3B2E;text-decoration:none;">tajzeer.com</a></td></tr></table></td></tr></table>`
+};
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function getData(){
+  return {
+    name_ar: document.getElementById('f_name_ar').value,
+    name_en: document.getElementById('f_name_en').value,
+    role_ar: document.getElementById('f_role_ar').value,
+    role_en: document.getElementById('f_role_en').value,
+    email: document.getElementById('f_email').value,
+    phone_tel: document.getElementById('f_phone_tel').value,
+    phone_display: document.getElementById('f_phone_display').value
+  };
+}
+
+let activeTab='v2';
+
+function render(){
+  const d=getData();
+  for(const v of ['v1','v2','v3']){
+    const html=TEMPLATES[v](d);
+    document.getElementById('preview_'+v).innerHTML=html;
+    document.getElementById('code_'+v).textContent=formatHtml(html);
+  }
+}
+
+function formatHtml(html){
+  // Simple indent for display purposes
+  return html.replace(/></g,'>\n<').replace(/(&nbsp;)/g,'&nbsp;');
+}
+
+function switchTab(v){
+  activeTab=v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===v));
+  document.querySelectorAll('.tab-content').forEach(c=>c.style.display=c.dataset.content===v?'block':'none');
+}
+
+function copyCode(v){
+  const html=TEMPLATES[v](getData());
+  navigator.clipboard.writeText(html).then(showToast);
+}
+
+function copyActive(){
+  copyCode(activeTab);
+}
+
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+render();
+</script>
+
+</body>
+</html>
