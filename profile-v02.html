@@ -1,0 +1,594 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>تجذير — الملف التعريفي V02</title>
+  <meta name="description" content="الملف التعريفي لتجذير: من تشخيص فجوة الأداء إلى تثبيت طريقة عمل قابلة للتكرار.">
+  <style>
+    @font-face{font-family:"IBM Plex Sans Arabic";src:url("fonts/ibm-plex-arabic-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"IBM Plex Sans Arabic";src:url("fonts/ibm-plex-arabic-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+    @font-face{font-family:"IBM Plex Sans Arabic";src:url("fonts/ibm-plex-arabic-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+    @font-face{font-family:"IBM Plex Sans Arabic";src:url("fonts/ibm-plex-arabic-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+    @font-face{font-family:"Geist";src:url("fonts/geist-variable.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Geist";src:url("fonts/geist-variable.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+    @font-face{font-family:"Geist";src:url("fonts/geist-variable.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+    @font-face{font-family:"Geist";src:url("fonts/geist-variable.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+    :root{
+      --green:#1f3b2e;
+      --green-2:#2b5140;
+      --green-3:#dce8df;
+      --ink:#141414;
+      --ink-2:#44423d;
+      --paper:#f5efe6;
+      --paper-2:#ebe2d3;
+      --copper:#8a5a2b;
+      --white:#fffdf8;
+      --line:rgba(20,20,20,.14);
+      --shadow:0 4mm 12mm rgba(20,20,20,.12);
+      --font-ar:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+      --font-en:"IBM Plex Sans Arabic","Segoe UI",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{background:#d8d3ca}
+    body{margin:0;color:var(--ink);font-family:var(--font-ar);line-height:1.7;background:#d8d3ca}
+    svg{display:block}
+    a{color:inherit}
+    a:focus-visible{outline:.7mm solid var(--copper);outline-offset:1.2mm}
+    a:hover{color:var(--copper)}
+    a:active{opacity:.78}
+    .skip-link{position:fixed;z-index:100;inset-block-start:3mm;inset-inline-start:3mm;transform:translateY(-200%);padding:2mm 4mm;border-radius:2mm;background:var(--paper);color:var(--green);font-weight:700}
+    .skip-link:focus{transform:translateY(0)}
+    .screen-nav{
+      position:sticky;inset-block-start:0;z-index:20;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 24px;background:rgba(245,239,230,.94);
+      border-block-end:1px solid var(--line);backdrop-filter:blur(12px)
+    }
+    .screen-nav img{block-size:30px}
+    .screen-nav p{margin:0;font:600 12px/1 var(--font-en);letter-spacing:.08em;color:var(--ink-2)}
+    .document{display:grid;gap:18px;justify-content:center;padding:24px 0 80px}
+    .page{
+      position:relative;overflow:hidden;
+      inline-size:297mm;block-size:210mm;
+      padding:14mm 14mm 16mm 18mm;
+      background:var(--paper);box-shadow:var(--shadow);
+      break-after:page;page-break-after:always
+    }
+    .page.dark{background:var(--green);color:var(--paper)}
+    .page.paper2{background:var(--paper-2)}
+    .page:last-child{break-after:auto;page-break-after:auto}
+    .header,.footer{position:absolute;inset-inline:14mm 14mm;display:flex;align-items:center;justify-content:space-between}
+    .header{inset-block-start:8mm}
+    .footer{inset-block-end:7mm;padding-block-start:2.5mm;border-block-start:.25mm solid var(--line)}
+    .dark .footer{border-color:rgba(255,255,255,.18)}
+    .header img{block-size:7mm;inline-size:auto}
+    .dark .header img{filter:brightness(0) invert(1)}
+    .folio,.section-name{font:600 8.5pt/1 var(--font-en);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+    .dark .folio,.dark .section-name{color:rgba(245,239,230,.66)}
+    .content{block-size:100%;display:grid;align-content:center}
+    .grid12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4mm}
+    .eyebrow{
+      display:flex;align-items:center;gap:2.5mm;
+      margin:0;color:var(--copper);
+      font:700 9pt/1.2 var(--font-en);letter-spacing:.12em;text-transform:uppercase
+    }
+    .eyebrow::before{content:"";inline-size:8mm;block-size:.6mm;background:currentColor}
+    .display{
+      margin:4mm 0 0;max-inline-size:230mm;
+      font-size:34pt;line-height:1.13;letter-spacing:-.025em;font-weight:700;text-wrap:balance
+    }
+    .display-xl{font-size:46pt;line-height:1.05}
+    .display-sm{font-size:27pt}
+    .dark .display{color:var(--paper)}
+    .lede{margin:5mm 0 0;max-inline-size:185mm;font-size:15pt;line-height:1.75;color:var(--ink-2)}
+    .dark .lede{color:rgba(245,239,230,.86)}
+    .body{font-size:11.2pt;line-height:1.8;color:var(--ink-2)}
+    .dark .body{color:rgba(245,239,230,.82)}
+    .pull{
+      margin:0;padding-inline-start:5mm;border-inline-start:1mm solid var(--copper);
+      font-size:21pt;line-height:1.5;font-weight:600;text-wrap:balance
+    }
+    .card{
+      padding:5mm;border:.25mm solid var(--line);border-radius:3mm;background:rgba(255,255,255,.68)
+    }
+    .dark .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18)}
+    .card h3{margin:0 0 2mm;font-size:14pt;line-height:1.35;color:var(--green)}
+    .dark .card h3{color:var(--paper)}
+    .card p{margin:0;font-size:10.5pt;line-height:1.72;color:var(--ink-2)}
+    .dark .card p{color:rgba(245,239,230,.8)}
+    .number{font:700 28pt/1 var(--font-en);letter-spacing:-.03em;color:var(--copper)}
+    .step{
+      min-block-size:42mm;padding:5mm;border-radius:3mm;background:var(--white);border:.25mm solid var(--line)
+    }
+    .step h3{margin:3mm 0 1.5mm;font-size:14pt;color:var(--green)}
+    .step p{margin:0;font-size:10pt;line-height:1.65;color:var(--ink-2)}
+    .list{display:grid;gap:2.5mm;margin:0;padding:0;list-style:none}
+    .list li{position:relative;padding-inline-start:5mm;font-size:11pt;line-height:1.65}
+    .list li::before{content:"";position:absolute;inset-inline-start:0;inset-block-start:.65em;inline-size:2mm;block-size:2mm;border-radius:50%;background:var(--copper)}
+    .pill{display:inline-flex;align-items:center;min-block-size:9mm;padding:1.5mm 3.5mm;border-radius:99px;background:var(--green-3);color:var(--green);font-size:9pt;font-weight:700}
+    .dark .pill{background:rgba(255,255,255,.1);color:var(--paper)}
+    .metric{padding:5mm;border-block-start:.8mm solid var(--green)}
+    .metric b{display:block;font:700 24pt/1 var(--font-en);color:var(--green)}
+    .metric span{display:block;margin-block-start:2mm;font-size:9.5pt;color:var(--ink-2)}
+    .dark .metric{border-color:var(--copper)}
+    .dark .metric b,.dark .metric span{color:var(--paper)}
+    .stage-line{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;margin-block-start:10mm}
+    .stage-line::before{content:"";position:absolute;inset-inline:11%;inset-block-start:12mm;block-size:.6mm;background:var(--copper);z-index:0}
+    .stage-node{position:relative;z-index:1;text-align:center}
+    .stage-node .circle{
+      display:grid;place-items:center;margin:auto;inline-size:24mm;block-size:24mm;
+      border-radius:50%;background:var(--green);color:var(--paper);font:700 18pt/1 var(--font-en)
+    }
+    .stage-node h3{margin:3mm 0 1mm;color:var(--green);font-size:14pt}
+    .stage-node p{margin:0;font-size:9.5pt;line-height:1.6;color:var(--ink-2)}
+    .capability-wheel{position:relative;display:grid;place-items:center;block-size:112mm}
+    .capability-wheel .hub{display:grid;place-items:center;inline-size:40mm;block-size:40mm;border-radius:50%;background:var(--green);color:var(--paper);text-align:center;font-weight:700;z-index:2}
+    .capability-wheel .orbit{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);inline-size:94mm;block-size:94mm;border:.4mm dashed var(--copper);border-radius:50%}
+    .capability-wheel .item{position:absolute;inline-size:42mm;padding:3mm;border-radius:2.5mm;background:var(--white);border:.25mm solid var(--line);font-size:9pt;font-weight:700;text-align:center}
+    .capability-wheel .i1{inset-block-start:0;inset-inline-start:50%;transform:translateX(50%)}
+    .capability-wheel .i2{inset-block-start:23mm;inset-inline-end:0}
+    .capability-wheel .i3{inset-block-end:10mm;inset-inline-end:8mm}
+    .capability-wheel .i4{inset-block-end:10mm;inset-inline-start:8mm}
+    .capability-wheel .i5{inset-block-start:23mm;inset-inline-start:0}
+    .capability-wheel .i6{inset-block-end:0;inset-inline-start:50%;transform:translateX(50%)}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:center}
+    .flow .box{min-block-size:29mm;padding:4mm;border:.25mm solid var(--line);background:var(--white);font-size:10pt}
+    .flow .arrow{display:grid;place-items:center;color:var(--copper);font:700 18pt/1 var(--font-en)}
+    .matrix{inline-size:100%;border-collapse:collapse;font-size:9.8pt}
+    .matrix th,.matrix td{padding:3mm;border-block-end:.25mm solid var(--line);text-align:start;vertical-align:top}
+    .matrix th{color:var(--green);font-weight:700;background:rgba(255,255,255,.45)}
+    .matrix td:first-child{font-weight:700;color:var(--green)}
+    .gate{
+      display:grid;grid-template-columns:auto 1fr auto;gap:4mm;align-items:center;
+      padding:4mm 0;border-block-end:.25mm solid var(--line)
+    }
+    .gate:last-child{border:0}
+    .gate .gate-no{font:700 11pt/1 var(--font-en);color:var(--copper)}
+    .gate strong{font-size:11pt;color:var(--green)}
+    .gate span{font-size:9.5pt;color:var(--ink-2)}
+    .dark .gate{border-color:rgba(245,239,230,.22)}
+    .dark .gate .gate-no{color:#d6a66b}
+    .dark .gate strong{color:var(--paper)}
+    .dark .gate span{color:rgba(245,239,230,.86)}
+    .proof-ladder{display:grid;gap:3mm}
+    .proof-step{display:grid;grid-template-columns:35mm 1fr;align-items:center;gap:5mm;padding:3mm 4mm;border-radius:2.5mm;background:var(--white);border:.25mm solid var(--line)}
+    .proof-step strong{font-size:10pt;color:var(--green)}
+    .proof-step span{font-size:9.5pt;color:var(--ink-2)}
+    .contact-card{padding:6mm;border-radius:3mm;background:rgba(255,255,255,.07);border:.25mm solid rgba(255,255,255,.18)}
+    .contact-card a{display:block;margin-block:1.5mm;color:var(--paper);font:600 13pt/1.4 var(--font-en);text-decoration:underline;text-decoration-color:rgba(245,239,230,.35);text-underline-offset:1mm}
+    .root-mesh{position:absolute;inset-inline-start:-10mm;inset-block-end:-12mm;inline-size:135mm;opacity:.16}
+    .page-label{position:absolute;inset-inline-end:14mm;inset-block-start:14mm;font:600 8pt/1 var(--font-en);letter-spacing:.12em;color:var(--support)}
+    @media screen{
+      .page{animation:page-enter .45s cubic-bezier(.22,1,.36,1) both;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s cubic-bezier(.22,1,.36,1)}
+      .page:hover{transform:translateY(-2px);box-shadow:0 5mm 15mm rgba(20,20,20,.16)}
+    }
+    @keyframes page-enter{from{opacity:0;transform:translateY(6mm)}to{opacity:1;transform:none}}
+    @media screen and (max-width:1100px){
+      body{overflow-x:auto}.document{min-inline-size:1040px;padding-inline:12px}.page{inline-size:1000px;block-size:707px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}.page{animation:none;transition:none}.page:hover{transform:none}
+    }
+    @media print{
+      @page{size:A4 landscape;margin:0}
+      html,body{background:#fff}
+      .screen-nav,.skip-link{display:none}
+      .document{display:block;padding:0}
+      .page{inline-size:297mm;block-size:210mm;box-shadow:none;margin:0}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#profile-document">انتقل إلى البروفايل</a>
+  <nav class="screen-nav" aria-label="معاينة البروفايل">
+    <img src="assets/brand/logo-bilingual.svg" alt="تجذير">
+    <p><a href="#page-01">البداية</a> · <a href="#page-06">الطريقة</a> · <a href="#page-16">القطاعات</a> · <a href="#page-20">التواصل</a></p>
+  </nav>
+
+  <main id="profile-document" class="document">
+    <section id="page-01" class="page dark">
+      <span class="page-label">TAJZEER · 2026</span>
+      <div class="content grid12">
+        <div style="grid-column:1/9;align-self:end">
+          <p class="eyebrow">تجذير · TAJZEER</p>
+          <h1 class="display display-xl">نبني قدرة تبقى في فروعك.</h1>
+          <p class="lede">نساعد الشركات متعددة الفروع على تحويل القرار إلى طريقة عمل واضحة، قابلة للتطبيق والقياس والتكرار.</p>
+          <p class="pull" style="margin-block-start:12mm">من تدخّل يمرّ إلى قدرة تبقى.</p>
+        </div>
+        <div style="grid-column:10/13;align-self:start;justify-self:end">
+          <img src="assets/brand/logo-mark.svg" alt="" style="inline-size:26mm;filter:brightness(0) invert(1)">
+        </div>
+      </div>
+      <svg class="root-mesh" viewBox="0 0 600 360" aria-hidden="true">
+        <g fill="none" stroke="#f5efe6" stroke-width="3">
+          <path d="M300 20v80M150 100h300M150 100v80M450 100v80M60 180h180M360 180h180M60 180v80M240 180v80M360 180v80M540 180v80"/>
+          <path d="M20 260h80M200 260h80M320 260h80M500 260h80"/>
+        </g>
+        <g fill="#f5efe6"><circle cx="300" cy="20" r="8"/><circle cx="150" cy="180" r="7"/><circle cx="450" cy="180" r="7"/><circle cx="20" cy="260" r="6"/><circle cx="100" cy="260" r="6"/><circle cx="200" cy="260" r="6"/><circle cx="280" cy="260" r="6"/><circle cx="320" cy="260" r="6"/><circle cx="400" cy="260" r="6"/><circle cx="500" cy="260" r="6"/><circle cx="580" cy="260" r="6"/></g>
+      </svg>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">الفكرة</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/8">
+          <p class="eyebrow">الفكرة في دقيقة</p>
+          <h2 class="display">الخطة واضحة في المقر. التنفيذ يختلف في الفروع.</h2>
+          <p class="lede">التدريب يحدث، والمنصات موجودة، والتقارير تصل. ومع ذلك يبقى التفاوت. يقرأ فريق تجذير الواقع، ويختبر حلًا محدودًا، ثم يساعد فريقك على تثبيت ما نجح.</p>
+        </div>
+        <div style="grid-column:9/13;display:grid;gap:3mm;align-content:center">
+          <div class="card"><h3>وضوح قبل الاستثمار</h3><p>نعرف أين تتعطل النتيجة قبل اختيار الحل.</p></div>
+          <div class="card"><h3>تجربة قبل التوسع</h3><p>نختبر في نطاق يكشف الحقيقة دون التزام كبير.</p></div>
+          <div class="card"><h3>طريقة عمل يملكها فريقك</h3><p>ننقل الأداة والمتابعة والقرار إلى الداخل.</p></div>
+          <div class="card"><h3>قياس يساعد على القرار</h3><p>نقيس ما يكفي للتوسع أو التعديل أو التوقف.</p></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">الفكرة في دقيقة</span><span class="folio">02 / 20</span></div>
+    </section>
+
+    <section class="page paper2">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">المشكلة</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">المشكلة التي نحلها</p>
+          <h2 class="display">فرع يحقق النتيجة. وفرع مشابه يتعثر.</h2>
+          <p class="lede">هذا التفاوت لا يعني دائمًا أن الموظف لا يعرف. قد تكون المشكلة في الأداة أو المدير أو الصلاحية أو التسليم بين الفرق.</p>
+        </div>
+        <div style="grid-column:8/13">
+          <svg viewBox="0 0 520 340" role="img" aria-label="سلسلة أسباب تفاوت الأداء">
+            <g font-family="IBM Plex Sans Arabic" font-size="20" fill="#1f3b2e">
+              <rect x="300" y="15" width="200" height="70" rx="14" fill="#fffdf8" stroke="#1f3b2e"/>
+              <text x="400" y="57" text-anchor="middle">نتيجة مختلفة</text>
+              <rect x="300" y="135" width="200" height="70" rx="14" fill="#fffdf8" stroke="#8a5a2b"/>
+              <text x="400" y="177" text-anchor="middle">ممارسة غير ثابتة</text>
+              <rect x="20" y="15" width="200" height="70" rx="14" fill="#fffdf8" stroke="#1f3b2e"/>
+              <text x="120" y="57" text-anchor="middle">قرار واضح</text>
+              <rect x="20" y="135" width="200" height="70" rx="14" fill="#fffdf8" stroke="#8a5a2b"/>
+              <text x="120" y="177" text-anchor="middle">أداة أو متابعة ناقصة</text>
+              <rect x="160" y="255" width="200" height="70" rx="14" fill="#1f3b2e"/>
+              <text x="260" y="297" text-anchor="middle" fill="#f5efe6">فجوة الميدان</text>
+              <path d="M120 85v50M400 85v50M120 205q0 45 70 50M400 205q0 45-70 50" fill="none" stroke="#8a5a2b" stroke-width="4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">المشكلة التي نحلها</span><span class="folio">03 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">التعلم والعمل</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">لماذا لا يكفي التدريب وحده؟</p>
+          <h2 class="display">المعرفة لا تتحول تلقائيًا إلى ممارسة.</h2>
+          <p class="lede">التدريب مفيد عندما تكون المشكلة مهارة. لكنه لا يعالج إجراءً معقدًا أو مديرًا لا يتابع أو مؤشرًا يقيس الشيء الخطأ.</p>
+        </div>
+        <div style="grid-column:8/13;display:grid;gap:3mm">
+          <div class="card"><h3>قد يعرف الموظف الخطوة</h3><p>لكن النظام يصعّب تنفيذها في وقتها.</p></div>
+          <div class="card"><h3>قد تكون السياسة واضحة</h3><p>لكن المدير لا يملك طريقة للملاحظة والتوجيه.</p></div>
+          <div class="card"><h3>قد تكتمل الدورة</h3><p>لكن القياس لا يوضح ما تغيّر في العمل.</p></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">لماذا لا يكفي التدريب؟</span><span class="folio">04 / 20</span></div>
+    </section>
+
+    <section class="page dark">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">التحول</span></div>
+      <div class="content">
+        <p class="eyebrow">ماذا يتغير عندما نعمل معًا؟</p>
+        <h2 class="display" style="max-inline-size:210mm">من تدخل يعتمد على الأشخاص إلى طريقة عمل يمكن تكرارها.</h2>
+        <div class="grid12" style="margin-block-start:10mm">
+          <div style="grid-column:1/6">
+            <p class="pill">قبل</p>
+            <ul class="list" style="margin-block-start:5mm">
+              <li>آراء متعارضة عن السبب.</li>
+              <li>برنامج كبير قبل فهم المشكلة.</li>
+              <li>نجاح يعتمد على شخص محدد.</li>
+              <li>تقارير نشاط لا تقود إلى قرار.</li>
+            </ul>
+          </div>
+          <div style="grid-column:7/13">
+            <p class="pill">بعد</p>
+            <ul class="list" style="margin-block-start:5mm">
+              <li>سؤال واضح وخط أساس.</li>
+              <li>تجربة محدودة يمكن مراجعتها.</li>
+              <li>أداة وروتين يملكهما الفريق.</li>
+              <li>قرار بالتوسع أو التعديل أو التوقف.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">ماذا يتغير؟</span><span class="folio">05 / 20</span></div>
+    </section>
+
+    <section id="page-06" class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">طريقة الشراء</span></div>
+      <div class="content">
+        <p class="eyebrow">ثلاث مراحل تقلل مخاطر القرار</p>
+        <h2 class="display display-sm">لا تحتاج إلى شراء الحل كاملًا من البداية.</h2>
+        <div class="stage-line">
+          <div class="stage-node"><div class="circle">01</div><h3>نشخّص</h3><p>نعرف أين تتعطل النتيجة ولماذا.</p></div>
+          <div class="stage-node"><div class="circle">02</div><h3>نجرّب</h3><p>نختبر حلًا محدودًا داخل العمل.</p></div>
+          <div class="stage-node"><div class="circle">03</div><h3>نثبّت ونوسّع</h3><p>ننقل ما نجح إلى فريقك.</p></div>
+        </div>
+        <p class="pull" style="margin:12mm auto 0;max-inline-size:170mm">بين كل مرحلتين بوابة قرار. لا انتقال تلقائي.</p>
+      </div>
+      <div class="footer"><span class="section-name">المراحل الثلاث</span><span class="folio">06 / 20</span></div>
+    </section>
+
+    <section class="page dark">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">نشخّص</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">01 — نشخّص معك</p>
+          <h2 class="display">عندما ترى المشكلة، لكن السبب غير واضح.</h2>
+          <p class="lede">نراجع البيانات ونتحدث مع أصحاب العمل ونلاحظ المواقع المختارة، ثم نفصل بين السبب المهاري والتشغيلي والإداري.</p>
+        </div>
+        <div style="grid-column:8/13;display:grid;gap:3mm">
+          <div class="card"><h3>تستلم</h3><p>خريطة فجوات، خط أساس، أولويات، وتوصية قرار.</p></div>
+          <div class="card"><h3>بوابة القرار</h3><p>نجرّب، نستكمل الفهم، أو نتوقف.</p></div>
+          <div class="card"><h3>لا نفعل</h3><p>لا نثبت افتراضًا مسبقًا ولا نبيع برنامجًا قبل الفهم.</p></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">نشخّص معك</span><span class="folio">07 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">نجرّب</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">02 — نجرّب معك</p>
+          <h2 class="display">اختبر قبل ما تغيّر كل الفروع.</h2>
+          <p class="lede">نكتب فرضية واحدة، نختار نطاقًا محدودًا، نطبق مع الفريق، ثم نقرأ الانتظام والمؤشر والعوامل المؤثرة.</p>
+        </div>
+        <div style="grid-column:8/13">
+          <div class="flow" style="grid-template-columns:1fr auto 1fr auto 1fr">
+            <div class="box"><b>فرضية</b><br><span>ما الذي نريد تغييره؟</span></div>
+            <div class="arrow">←</div>
+            <div class="box"><b>تطبيق</b><br><span>موقع أو دور محدد</span></div>
+            <div class="arrow">←</div>
+            <div class="box"><b>قرار</b><br><span>نوسّع أو نعدّل أو نتوقف</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">نجرّب معك</span><span class="folio">08 / 20</span></div>
+    </section>
+
+    <section class="page paper2">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">نثبّت ونوسّع</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/6">
+          <p class="eyebrow">03 — نثبّت ونوسّع معك</p>
+          <h2 class="display">حوّل ما نجح إلى طريقة عمل.</h2>
+          <p class="lede">نبني الأدوار والأدوات والتدريب والمتابعة، ثم ننقل الملكية إلى فريقك على موجات.</p>
+        </div>
+        <div style="grid-column:7/13;display:grid;grid-template-columns:repeat(2,1fr);gap:3mm">
+          <div class="card"><h3>الأدوار</h3><p>من يلاحظ؟ من يوجه؟ من يقرر؟</p></div>
+          <div class="card"><h3>الأدوات</h3><p>قوائم قصيرة وقوالب تناسب لحظة العمل.</p></div>
+          <div class="card"><h3>التدريب</h3><p>مرتبط بمواقف العمل ودور المدير.</p></div>
+          <div class="card"><h3>المتابعة</h3><p>إيقاع واضح ومؤشر وبوابة قرار.</p></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">نثبّت ونوسّع معك</span><span class="folio">09 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">القيادة</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">القيادة والفرق</p>
+          <h2 class="display">المدير هو أقرب نقطة للتنفيذ.</h2>
+          <p class="lede">نساعده يعرف ماذا يلاحظ، وما السؤال الذي يطرحه، ومتى يتدخل، وكيف يتابع دون أن يحول التوجيه إلى عبء.</p>
+        </div>
+        <div style="grid-column:8/13">
+          <svg viewBox="0 0 520 350" role="img" aria-label="حلقة قيادة الأداء">
+            <g fill="none" stroke="#8a5a2b" stroke-width="5">
+              <path d="M260 40a130 130 0 1 1-92 38"/>
+              <path d="M152 58l17 20-25 9"/>
+            </g>
+            <circle cx="260" cy="175" r="70" fill="#1f3b2e"/>
+            <text x="260" y="168" text-anchor="middle" fill="#f5efe6" font-family="IBM Plex Sans Arabic" font-size="24">المدير</text>
+            <text x="260" y="200" text-anchor="middle" fill="#f5efe6" font-family="IBM Plex Sans Arabic" font-size="18">يلاحظ · يوجه · يتابع</text>
+            <g fill="#1f3b2e" font-family="IBM Plex Sans Arabic" font-size="18" text-anchor="middle">
+              <text x="260" y="24">معيار واضح</text><text x="468" y="180">أداة بسيطة</text><text x="260" y="345">مراجعة منتظمة</text><text x="52" y="180">قرار قريب</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">القيادة والفرق</span><span class="folio">10 / 20</span></div>
+    </section>
+
+    <section class="page dark">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">المواهب</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">المواهب والجاهزية</p>
+          <h2 class="display">كم يحتاج الموظف حتى يصبح جاهزًا؟</h2>
+          <p class="lede">نبني رحلة جاهزية تقلل الاعتماد على ذاكرة الأشخاص، وتربط المعرفة بالموقف والمدير ومعيار واضح للجاهزية.</p>
+        </div>
+        <div style="grid-column:8/13">
+          <div class="proof-ladder">
+            <div class="proof-step"><strong>01 · يعرف</strong><span>ما المطلوب في دوره؟</span></div>
+            <div class="proof-step"><strong>02 · يطبّق</strong><span>هل يستطيع تنفيذ الموقف الأساسي؟</span></div>
+            <div class="proof-step"><strong>03 · يُلاحظ</strong><span>هل يملك المدير معيارًا للتوجيه؟</span></div>
+            <div class="proof-step"><strong>04 · يصبح جاهزًا</strong><span>هل يمكن الاعتماد عليه دون دعم إضافي؟</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">المواهب والجاهزية</span><span class="folio">11 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">تجربة العميل</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/6">
+          <p class="eyebrow">تجربة العميل</p>
+          <h2 class="display">التجربة نتيجة سلسلة من التسليمات.</h2>
+          <p class="lede">نرسم اللحظات التي تشكل التجربة، نوحد تعريف الجودة، ونربط صوت العميل بممارسة يستطيع المدير متابعتها.</p>
+        </div>
+        <div style="grid-column:7/13">
+          <div class="flow">
+            <div class="box"><b>وعد</b><br>ما يتوقعه العميل</div><div class="arrow">←</div>
+            <div class="box"><b>لحظة</b><br>ما يراه ويشعر به</div><div class="arrow">←</div>
+            <div class="box"><b>ممارسة</b><br>ما يفعله الفريق</div><div class="arrow">←</div>
+            <div class="box"><b>قياس</b><br>ما نراجعه</div><div class="arrow">←</div>
+            <div class="box"><b>قرار</b><br>ما نعدّله</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">تجربة العميل</span><span class="folio">12 / 20</span></div>
+    </section>
+
+    <section class="page paper2">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">التشغيل</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/7">
+          <p class="eyebrow">التشغيل والربحية</p>
+          <h2 class="display">أحيانًا المشكلة ليست مهارة.</h2>
+          <p class="lede">نراجع الاختناقات وإعادة العمل وتوزيع الأدوار والتسليم بين الفرق والأدوات والصلاحيات.</p>
+        </div>
+        <div style="grid-column:8/13;display:grid;gap:3mm">
+          <div class="card"><h3>وقت يضيع</h3><p>خطوات وانتظار وتسليمات لا تضيف قيمة.</p></div>
+          <div class="card"><h3>خطأ يتكرر</h3><p>السبب معروف محليًا لكنه لا يصل إلى القرار.</p></div>
+          <div class="card"><h3>مؤشر لا يحرك قرارًا</h3><p>يصف الماضي ولا يوضح ما يجب تغييره.</p></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">التشغيل والربحية</span><span class="folio">13 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">التعلم والرقمنة</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/6">
+          <p class="eyebrow">التعلم والرقمنة</p>
+          <h2 class="display">نبدأ بالاستخدام، لا بالمنصة.</h2>
+          <p class="lede">نحدد ما يحتاج الفريق أن يعرفه ويطبقه، ثم نختار المحتوى أو الأداة التي تساعده.</p>
+        </div>
+        <div style="grid-column:7/13">
+          <div class="flow">
+            <div class="box"><b>موقف عمل</b></div><div class="arrow">←</div>
+            <div class="box"><b>معرفة لازمة</b></div><div class="arrow">←</div>
+            <div class="box"><b>أداة تطبيق</b></div><div class="arrow">←</div>
+            <div class="box"><b>تقنية مناسبة</b></div><div class="arrow">←</div>
+            <div class="box"><b>قياس استخدام</b></div>
+          </div>
+          <p class="body" style="margin-block-start:6mm">أي استخدام للذكاء الاصطناعي يخضع لمراجعة بشرية وضوابط خصوصية وإقامة بيانات واضحة قبل التفعيل.</p>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">التعلم والرقمنة</span><span class="folio">14 / 20</span></div>
+    </section>
+
+    <section class="page dark">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">القياس</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/6">
+          <p class="eyebrow">القياس والحوكمة</p>
+          <h2 class="display">نقيس ما يكفي لاتخاذ القرار.</h2>
+          <p class="lede">قبل التنفيذ نتفق على خط الأساس والمؤشر والمصدر ومالك القرار وشرط التوسع أو التوقف.</p>
+        </div>
+        <div style="grid-column:7/13">
+          <div class="gate"><b class="gate-no">01</b><div><strong>التطبيق</strong><br><span>هل نُفذت الممارسة؟</span></div><span>←</span></div>
+          <div class="gate"><b class="gate-no">02</b><div><strong>السلوك</strong><br><span>هل تغير القرار أو السلوك؟</span></div><span>←</span></div>
+          <div class="gate"><b class="gate-no">03</b><div><strong>الإشارة</strong><br><span>هل ظهر تغير يمكن تفسيره؟</span></div><span>←</span></div>
+          <div class="gate"><b class="gate-no">04</b><div><strong>القرار</strong><br><span>نوسّع أو نعدّل أو نتوقف؟</span></div><span>✓</span></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">القياس والحوكمة</span><span class="folio">15 / 20</span></div>
+    </section>
+
+    <section id="page-16" class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">القطاعات</span></div>
+      <div class="content">
+        <p class="eyebrow">القطاعات</p>
+        <h2 class="display display-sm">مبدأ واحد. تطبيق يحترم واقع كل قطاع.</h2>
+        <table class="matrix" style="margin-block-start:7mm">
+          <thead><tr><th>القطاع</th><th>الألم المتكرر</th><th>نقطة البداية</th></tr></thead>
+          <tbody>
+            <tr><td>التجزئة</td><td>تفاوت الخدمة والبيع بين الفروع</td><td>وردية أو ممارسة يمكن للمدير ملاحظتها</td></tr>
+            <tr><td>الضيافة والمطاعم</td><td>تفاوت التجربة بين المناوبات</td><td>لحظات التسليم في رحلة الضيف</td></tr>
+            <tr><td>الصحة متعددة المواقع</td><td>اختلاف المسار غير السريري</td><td>مسار محدود مع الجودة والعمليات</td></tr>
+            <tr><td>مراكز الاتصال</td><td>معايرة غير متسقة وتوجيه عام</td><td>سلوك واحد في عينة مصرح بها</td></tr>
+            <tr><td>الخدمات الميدانية</td><td>تكرار الزيارة وتفاوت الممارسة</td><td>نقطة قرار قبل الزيارة أو خلالها</td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="margin-block-start:5mm">يمكن تكييف الطريقة للخدمات المالية والتقنية والطيران واللوجستيات والجهات العامة بعد التحقق من الملاءمة والتنظيم والأدلة.</p>
+      </div>
+      <div class="footer"><span class="section-name">القطاعات</span><span class="folio">16 / 20</span></div>
+    </section>
+
+    <section class="page paper2">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">نموذج القياس</span></div>
+      <div class="content">
+        <p class="eyebrow">نموذج قياس واضح</p>
+        <h2 class="display display-sm">كل مؤشر يقود إلى سؤال وقرار.</h2>
+        <div class="flow" style="margin-block-start:9mm">
+          <div class="box"><b>خط أساس</b><br>ما الذي يحدث الآن؟</div><div class="arrow">←</div>
+          <div class="box"><b>ممارسة</b><br>ما الذي سيتغير؟</div><div class="arrow">←</div>
+          <div class="box"><b>انتظام</b><br>هل استمر التطبيق؟</div><div class="arrow">←</div>
+          <div class="box"><b>إشارة</b><br>هل تغير المؤشر؟</div><div class="arrow">←</div>
+          <div class="box"><b>قرار</b><br>ما الخطوة التالية؟</div>
+        </div>
+        <div class="grid12" style="margin-block-start:12mm">
+          <div class="metric" style="grid-column:1/5"><b>مؤشر</b><span>يُتفق عليه قبل التنفيذ</span></div>
+          <div class="metric" style="grid-column:5/9"><b>فترة</b><span>تُحدد بحسب القرار المطلوب</span></div>
+          <div class="metric" style="grid-column:9/13"><b>مصدر</b><span>يُوثق داخل بطاقة المؤشر</span></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">نموذج القياس</span><span class="folio">17 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">الثقة</span></div>
+      <div class="content grid12">
+        <div style="grid-column:1/6">
+          <p class="eyebrow">الثقة تبدأ من الإثبات</p>
+          <h2 class="display">نقول ما نستطيع إثباته فقط.</h2>
+          <p class="lede">الخبرة مهمة. وطريقة إثباتها أهم.</p>
+        </div>
+        <div style="grid-column:7/13" class="proof-ladder">
+          <div class="proof-step"><strong>اسم أو شعار</strong><span>موافقة مكتوبة وقناة استخدام محددة</span></div>
+          <div class="proof-step"><strong>رقم أو نسبة</strong><span>مصدر وطريقة حساب وفترة واضحة</span></div>
+          <div class="proof-step"><strong>نتيجة مشروع</strong><span>خط أساس وقياس وحدود للنسب</span></div>
+          <div class="proof-step"><strong>منهجية أو تقييم</strong><span>ملكية أو ترخيص ونطاق استخدام</span></div>
+        </div>
+      </div>
+      <div class="footer"><span class="section-name">الثقة والأدلة</span><span class="folio">18 / 20</span></div>
+    </section>
+
+    <section class="page">
+      <div class="header"><img src="assets/brand/logo-mark.svg" alt=""><span class="section-name">البداية</span></div>
+      <div class="content">
+        <p class="eyebrow">كيف نبدأ؟</p>
+        <h2 class="display display-sm">بداية صغيرة تكشف ما يستحق الاستثمار.</h2>
+        <div class="stage-line" style="margin-block-start:12mm">
+          <div class="stage-node"><div class="circle">01</div><h3>مكالمة 30 دقيقة</h3><p>نفهم التحدي والقرار المطلوب وما جربتموه.</p></div>
+          <div class="stage-node"><div class="circle">02</div><h3>مذكرة نطاق</h3><p>نوضح السؤال والمدخلات والمخرج وبوابة القرار.</p></div>
+          <div class="stage-node"><div class="circle">03</div><h3>بداية محدودة</h3><p>نبدأ بالحجم الذي يكشف النمط دون تعطيل العمل.</p></div>
+        </div>
+        <p class="pull" style="margin:14mm auto 0;max-inline-size:180mm">إذا لم نكن الجهة المناسبة، نقول ذلك بوضوح.</p>
+      </div>
+      <div class="footer"><span class="section-name">كيف نبدأ؟</span><span class="folio">19 / 20</span></div>
+    </section>
+
+    <section id="page-20" class="page dark">
+      <div class="content grid12">
+        <div style="grid-column:1/8;align-self:center">
+          <p class="eyebrow">الخطوة التالية</p>
+          <h2 class="display display-xl">احجز مكالمة تشخيص — 30 دقيقة.</h2>
+          <p class="lede">نستمع للتحدي ونخبرك بوضوح هل التشخيص هو الخطوة المناسبة.</p>
+          <div class="contact-card" style="margin-block-start:10mm">
+            <a href="mailto:hello@tajzeer.com">hello@tajzeer.com</a>
+            <a href="https://tajzeer.com">tajzeer.com</a>
+            <p class="body" style="margin:2mm 0 0">الرياض · المملكة العربية السعودية</p>
+          </div>
+        </div>
+        <div style="grid-column:10/13;align-self:center;justify-self:end;text-align:center">
+          <img src="assets/brand/logo-mark.svg" alt="" style="inline-size:40mm;filter:brightness(0) invert(1)">
+          <p style="margin:5mm 0 0;font:700 18pt/1 var(--font-en);letter-spacing:.16em">TAJZEER</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

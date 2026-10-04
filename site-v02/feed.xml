@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>تجذير | TAJZEER</title>
+        <link>https://rayan-xi.github.io/tajzeer-preview/site-v02</link>
+        <description>نساعد الشركات متعددة الفروع تعرف لماذا يختلف الأداء، تجرّب حلًا محدودًا، ثم تحوّل ما نجح إلى طريقة عمل يملكها الفريق</description>
+        <language>ar-SA</language>
+        
+      <item>
+        <title>لماذا التشخيص الميداني ليس تدقيقًا؟</title>
+        <link>https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/diagnose-vs-audit</link>
+        <guid isPermaLink="true">https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/diagnose-vs-audit</guid>
+        <description>التدقيق يقيس الالتزام بالمعيار المكتوب، والتشخيص يقرأ الفجوة بين ما يُقرَّر في المقر وما يحدث فعلًا في الفرع، والفرق ليس لغويًا بل تشغيلي</description>
+        <pubDate>Wed, 05 Nov 2025 00:00:00 GMT</pubDate>
+        <category>المنهجية</category>
+      </item>
+      <item>
+        <title>تجربة قدرة تصلح للتوسّع: خمسة شروط أساسية</title>
+        <link>https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/pilot-that-scales</link>
+        <guid isPermaLink="true">https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/pilot-that-scales</guid>
+        <description>قد تنجح التجربة في نطاقها المحدود من دون أن تكون قابلة للتكرار، وهنا نوضح شروط الانتقال إلى التوسعة</description>
+        <pubDate>Tue, 14 Oct 2025 00:00:00 GMT</pubDate>
+        <category>التنفيذ</category>
+      </item>
+      <item>
+        <title>مؤشرات تشغيلية واضحة لأصحاب القرار</title>
+        <link>https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/kpi-cfo-reads</link>
+        <guid isPermaLink="true">https://rayan-xi.github.io/tajzeer-preview/site-v02/insights/kpi-cfo-reads</guid>
+        <description>كيف تختار مؤشرًا يوضح علاقته بالتكلفة أو الإيراد أو الكفاءة من دون شرح طويل؟</description>
+        <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+        <category>القياس</category>
+      </item>
+      </channel>
+    </rss>

@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Allow: /llms.txt
+Disallow: /api/
+Disallow: /actions/
+
+Host: https://rayan-xi.github.io/tajzeer-preview/site-v02
+Sitemap: https://rayan-xi.github.io/tajzeer-preview/site-v02/sitemap.xml
