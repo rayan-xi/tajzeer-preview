@@ -62,8 +62,23 @@
     .header{inset-block-start:8mm}
     .footer{inset-block-end:7mm;padding-block-start:2.5mm;border-block-start:.25mm solid var(--line)}
     .dark .footer{border-color:rgba(255,255,255,.18)}
-    .header img{block-size:7mm;inline-size:auto}
-    .dark .header img{filter:brightness(0) invert(1)}
+    .brand-lockup{
+      display:inline-flex;direction:rtl;align-items:center;gap:2.4mm;
+      color:var(--ink);white-space:nowrap
+    }
+    .brand-lockup .brand-mark{inline-size:11mm;block-size:11mm}
+    .brand-lockup .brand-ar{font:700 12pt/1 var(--font-ar)}
+    .brand-lockup .brand-divider{inline-size:.3mm;block-size:6mm;background:currentColor;opacity:.28}
+    .brand-lockup .brand-en{font:700 9.5pt/1 var(--font-en);letter-spacing:.12em}
+    .dark .brand-lockup{color:var(--paper)}
+    .dark .brand-lockup .brand-mark{filter:brightness(0) invert(1)}
+    .cover .content .brand-lockup,#page-20 .content .brand-lockup{
+      position:absolute;inset-block-start:14mm;inset-inline-start:14mm
+    }
+    .cover .brand-lockup .brand-mark,#page-20 .brand-lockup .brand-mark{inline-size:16mm;block-size:16mm}
+    .cover .brand-lockup .brand-ar,#page-20 .brand-lockup .brand-ar{font-size:16pt}
+    .cover .brand-lockup .brand-en,#page-20 .brand-lockup .brand-en{font-size:11pt}
+    .cover .brand-lockup .brand-divider,#page-20 .brand-lockup .brand-divider{block-size:8mm}
     .folio,.section-name{font:600 8.5pt/1 var(--font-en);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
     .dark .folio,.dark .section-name{color:rgba(245,239,230,.66)}
     .content{block-size:100%;display:grid;align-content:center}
@@ -190,7 +205,7 @@
   </nav>
 
   <main id="profile-document" class="document">
-    <section id="page-01" class="page dark">
+    <section id="page-01" class="page dark cover">
       <span class="page-label">TAJZEER · 2026</span>
       <div class="content grid12">
         <div style="grid-column:1/9;align-self:end">
@@ -200,7 +215,7 @@
           <p class="pull" style="margin-block-start:12mm">من تدخّل يمرّ إلى قدرة تبقى</p>
         </div>
         <div style="grid-column:10/13;align-self:start;justify-self:end">
-          <img src="assets/logo-profile.svg" alt="" style="inline-size:50mm;filter:brightness(0) invert(1)">
+          <span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span>
         </div>
       </div>
       <svg class="root-mesh" viewBox="0 0 600 360" aria-hidden="true">
@@ -213,7 +228,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">الفكرة</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">الفكرة</span></div>
       <div class="content grid12">
         <div style="grid-column:1/8">
           <p class="eyebrow">الفكرة في دقيقة</p>
@@ -231,7 +246,7 @@
     </section>
 
     <section class="page paper2">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">المشكلة</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">المشكلة</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">المشكلة التي نحلها</p>
@@ -260,7 +275,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">التعلم والعمل</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">التعلم والعمل</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">لماذا لا يكفي التدريب وحده؟</p>
@@ -277,7 +292,7 @@
     </section>
 
     <section class="page dark">
-      <div class="header"><img src="assets/logo-profile.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">التحول</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">التحول</span></div>
       <div class="content">
         <p class="eyebrow">ماذا يتغير عندما نعمل معًا؟</p>
         <h2 class="display" style="max-inline-size:210mm">من تدخل يعتمد على الأشخاص إلى طريقة عمل يمكن تكرارها</h2>
@@ -306,7 +321,7 @@
     </section>
 
     <section id="page-06" class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">طريقة الشراء</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">طريقة الشراء</span></div>
       <div class="content">
         <p class="eyebrow">ثلاث مراحل تقلل مخاطر القرار</p>
         <h2 class="display display-sm">لا تحتاج إلى شراء الحل كاملًا من البداية</h2>
@@ -321,7 +336,7 @@
     </section>
 
     <section class="page dark">
-      <div class="header"><img src="assets/logo-profile.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">نشخّص</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">نشخّص</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">01 — نشخّص معك</p>
@@ -338,7 +353,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">نجرّب</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">نجرّب</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">02 — نجرّب معك</p>
@@ -359,7 +374,7 @@
     </section>
 
     <section class="page paper2">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">نثبّت ونوسّع</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">نثبّت ونوسّع</span></div>
       <div class="content grid12">
         <div style="grid-column:1/6">
           <p class="eyebrow">03 — نثبّت ونوسّع معك</p>
@@ -377,7 +392,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">القيادة</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">القيادة</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">القيادة والفرق</p>
@@ -403,7 +418,7 @@
     </section>
 
     <section class="page dark">
-      <div class="header"><img src="assets/logo-profile.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">المواهب</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">المواهب</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">المواهب والجاهزية</p>
@@ -423,7 +438,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">تجربة العميل</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">تجربة العميل</span></div>
       <div class="content grid12">
         <div style="grid-column:1/6">
           <p class="eyebrow">تجربة العميل</p>
@@ -444,7 +459,7 @@
     </section>
 
     <section class="page paper2">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">التشغيل</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">التشغيل</span></div>
       <div class="content grid12">
         <div style="grid-column:1/7">
           <p class="eyebrow">التشغيل والربحية</p>
@@ -461,7 +476,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">التعلم والرقمنة</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">التعلم والرقمنة</span></div>
       <div class="content grid12">
         <div style="grid-column:1/6">
           <p class="eyebrow">التعلم والرقمنة</p>
@@ -483,7 +498,7 @@
     </section>
 
     <section class="page dark">
-      <div class="header"><img src="assets/logo-profile.svg" alt="" style="filter:brightness(0) invert(1)"><span class="section-name">القياس</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">القياس</span></div>
       <div class="content grid12">
         <div style="grid-column:1/6">
           <p class="eyebrow">القياس والحوكمة</p>
@@ -501,7 +516,7 @@
     </section>
 
     <section id="page-16" class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">القطاعات</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">القطاعات</span></div>
       <div class="content">
         <p class="eyebrow">القطاعات</p>
         <h2 class="display display-sm">مبدأ واحد تطبيق يحترم واقع كل قطاع</h2>
@@ -521,7 +536,7 @@
     </section>
 
     <section class="page paper2">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">نموذج القياس</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">نموذج القياس</span></div>
       <div class="content">
         <p class="eyebrow">نموذج قياس واضح</p>
         <h2 class="display display-sm">كل مؤشر يقود إلى سؤال وقرار</h2>
@@ -542,7 +557,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">الثقة</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">الثقة</span></div>
       <div class="content grid12">
         <div style="grid-column:1/6">
           <p class="eyebrow">الثقة تبدأ من الإثبات</p>
@@ -560,7 +575,7 @@
     </section>
 
     <section class="page">
-      <div class="header"><img src="assets/logo-profile.svg" alt=""><span class="section-name">البداية</span></div>
+      <div class="header"><span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span><span class="section-name">البداية</span></div>
       <div class="content">
         <p class="eyebrow">كيف نبدأ؟</p>
         <h2 class="display display-sm">بداية صغيرة تكشف ما يستحق الاستثمار</h2>
@@ -587,7 +602,7 @@
           </div>
         </div>
         <div style="grid-column:10/13;align-self:center;justify-self:end;text-align:center">
-          <img src="assets/logo-profile.svg" alt="" style="inline-size:50mm;filter:brightness(0) invert(1)">
+          <span class="brand-lockup" aria-label="TAJZEER | تجذير"><img class="brand-mark" src="assets/brand/logo-mark.svg" alt=""><strong class="brand-ar">تجذير</strong><span class="brand-divider" aria-hidden="true"></span><bdi class="brand-en" lang="en" dir="ltr">TAJZEER</bdi></span>
           <p style="margin:5mm 0 0;font:700 18pt/1 var(--font-en);letter-spacing:.16em">TAJZEER</p>
         </div>
       </div>
